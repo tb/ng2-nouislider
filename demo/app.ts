@@ -11,6 +11,21 @@ import {Nouislider} from 'ng2nouislider';
 export class App {
   public someValue: any = 5;
   public someRange: any = [3,7];
+  public someRange2: any = [10,15];
+  public someRange2config: any = {
+    behaviour: 'drag',
+    connect: true,
+    margin: 1,
+    limit: 5,
+    range: {
+      min: 0,
+      max: 20
+    },
+    pips: {
+      mode: 'steps',
+      density: 5
+    }
+  };
 
   changeSomeValue(value: number) {
     this.someValue = this.someValue + value;

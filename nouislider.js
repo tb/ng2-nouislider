@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -31,24 +30,21 @@ var Nouislider = (function () {
     function Nouislider(el) {
         this.onChange = Function.prototype;
         this.onTouched = Function.prototype;
-        this.connect = false;
-        this.min = 0;
-        this.max = 10;
-        this.step = 1;
+        this.config = {};
         this.ngModelChange = new core_1.EventEmitter();
         this.el = el;
     }
     Nouislider.prototype.ngOnInit = function () {
         var _this = this;
-        this.slider = noUiSlider.create(this.el.nativeElement, {
-            start: this.value || 0,
-            step: this.step,
+        var inputsConfig = JSON.parse(JSON.stringify({
+            behaviour: this.behaviour,
             connect: this.connect,
-            range: {
-                min: this.min,
-                max: this.max
-            }
-        });
+            limit: this.limit,
+            start: this.value,
+            step: this.step,
+            range: this.config.range || { min: this.min, max: this.max }
+        }));
+        this.slider = noUiSlider.create(this.el.nativeElement, Object.assign(this.config, inputsConfig));
         this.slider.on('set', function (value) {
             _this.writeValue(toValue(value));
         });
@@ -70,8 +66,16 @@ var Nouislider = (function () {
     };
     __decorate([
         core_1.Input(), 
+        __metadata('design:type', String)
+    ], Nouislider.prototype, "behaviour", void 0);
+    __decorate([
+        core_1.Input(), 
         __metadata('design:type', Boolean)
     ], Nouislider.prototype, "connect", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Nouislider.prototype, "limit", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Number)
@@ -85,6 +89,10 @@ var Nouislider = (function () {
         __metadata('design:type', Number)
     ], Nouislider.prototype, "step", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Nouislider.prototype, "config", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], Nouislider.prototype, "ngModelChange", void 0);
@@ -96,6 +104,6 @@ var Nouislider = (function () {
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], Nouislider);
     return Nouislider;
-}());
+})();
 exports.Nouislider = Nouislider;
 //# sourceMappingURL=nouislider.js.map

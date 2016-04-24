@@ -1,5 +1,14 @@
 import * as noUiSlider from 'nouislider';
-import {Directive, OnInit, ElementRef, forwardRef, Provider, Input, Output, EventEmitter} from 'angular2/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+  Output,
+  Provider
+} from 'angular2/core';
 import {ControlValueAccessor} from 'angular2/common';
 
 import {NG_VALUE_ACCESSOR} from 'angular2/src/common/forms/directives/control_value_accessor';
@@ -31,10 +40,13 @@ export class Nouislider implements ControlValueAccessor, OnInit {
   public onChange: any = Function.prototype;
   public onTouched: any = Function.prototype;
 
-  @Input() connect: boolean = false;
-  @Input() min: number = 0;
-  @Input() max: number = 10;
-  @Input() step: number = 1;
+  @Input() behaviour: string;
+  @Input() connect: boolean;
+  @Input() limit: number;
+  @Input() min: number;
+  @Input() max: number;
+  @Input() step: number;
+  @Input() config: any = {};
   @Output() ngModelChange: EventEmitter<any> = new EventEmitter();
 
   public constructor(el:ElementRef) {
@@ -42,15 +54,19 @@ export class Nouislider implements ControlValueAccessor, OnInit {
   }
 
   ngOnInit(): void {
-    this.slider = noUiSlider.create(this.el.nativeElement, {
-      start: this.value || 0,
-      step: this.step,
+    let inputsConfig = JSON.parse(JSON.stringify({
+      behaviour: this.behaviour,
       connect: this.connect,
-      range: {
-        min: this.min,
-        max: this.max
-      }
-    });
+      limit: this.limit,
+      start: this.value,
+      step: this.step,
+      range: this.config.range || {min: this.min, max: this.max}
+    }));
+
+    this.slider = noUiSlider.create(
+      this.el.nativeElement,
+      Object.assign(this.config, inputsConfig)
+    );
 
     this.slider.on('set', (value) => {
       this.writeValue(toValue(value));

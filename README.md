@@ -2,7 +2,7 @@
 
 Angular2 nouislider directive
 
-See [demo](http://tb.github.io/ng2-nouislider/)
+See [demos](http://tb.github.io/ng2-nouislider/)
 
 ## Install
 
