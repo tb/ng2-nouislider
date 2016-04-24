@@ -1,5 +1,5 @@
 <div class="page-header">
-	<h3>Example 1</h3>
+	<h3>Single value</h3>
 </div>
 
 <pre>&lt;div nouislider [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someValue&quot;&gt;&lt;/div&gt;</pre>
@@ -14,7 +14,7 @@
 </div>
 
 <div class="page-header">
-	<h3>Example 2</h3>
+	<h3>Range</h3>
 </div>
 
 <pre>&lt;div nouislider [connect]=&quot;true&quot; [min]=&quot;0&quot; [max]=&quot;15&quot; [step]=&quot;1&quot; [(ngModel)]=&quot;someRange&quot;&gt;&lt;/div&gt;</pre>
@@ -32,3 +32,28 @@
 	<button type="button" class="btn btn-primary" (click)="changeSomeRange(1,-1)">-</button>
 	<button type="button" class="btn btn-primary" (click)="changeSomeRange(1,1)">+</button>
 </div>
+
+<div class="page-header">
+	<h3>Range with config</h3>
+</div>
+
+<pre>someRange2config: any = {
+  behaviour: 'drag',
+  connect: true,
+  margin: 1,
+  limit: 5, // NOTE: overwritten by [limit]="10"
+  range: {
+    min: 0,
+    max: 20
+  },
+  pips: {
+    mode: 'steps',
+    density: 5
+  }
+};</pre>
+
+<pre>&lt;div nouislider [config]=&quot;someRange2config&quot; [limit]=&quot;10&quot; [(ngModel)]=&quot;someRange2&quot;&gt;&lt;/div&gt;</pre>
+
+<code>someRange2: {{ someRange2 | json }}</code>
+
+<div nouislider [config]="someRange2config" [limit]="10" [(ngModel)]="someRange2"></div>
