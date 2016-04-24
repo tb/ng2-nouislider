@@ -1,0 +1,35 @@
+{
+  "name": "ng2-nouislider",
+  "version": "0.1.0",
+  "description": "Angular2 noUiSlider directive",
+  "main": "nouislider.js",
+  "typings": "nouislider.d.ts",
+  "scripts": {
+    "prepublish": "typings install && tsc",
+    "start": "lite-server start"
+  },
+  "keywords": [
+    "angular2",
+    "ng2",
+    "nouislider",
+    "slider",
+    "range",
+    "directive"
+  ],
+  "author": "Tomasz Bak <t.bak@selleo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.12.3",
+    "es6-shim": "^0.35.0",
+    "lite-server": "^2.2.0",
+    "reflect-metadata": "^0.1.2",
+    "rxjs": "^5.0.0-beta.2",
+    "typescript": "^1.8.10",
+    "typings": "^0.8.1",
+    "zone.js": "^0.6.12"
+  },
+  "peerDependencies": {
+    "angular2": "^2.0.0-beta.10",
+    "nouislider": "^8.4.0"
+  }
+}
