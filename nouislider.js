@@ -30,6 +30,10 @@ var Nouislider = (function () {
     function Nouislider(el) {
         this.onChange = Function.prototype;
         this.onTouched = Function.prototype;
+        this.connect = false;
+        this.min = 0;
+        this.max = 10;
+        this.step = 1;
         this.ngModelChange = new core_1.EventEmitter();
         this.el = el;
     }
@@ -37,9 +41,11 @@ var Nouislider = (function () {
         var _this = this;
         this.slider = noUiSlider.create(this.el.nativeElement, {
             start: this.value || 0,
+            step: this.step,
+            connect: this.connect,
             range: {
-                min: 0,
-                max: 10
+                min: this.min,
+                max: this.max
             }
         });
         this.slider.on('set', function (value) {
@@ -61,6 +67,22 @@ var Nouislider = (function () {
     Nouislider.prototype.registerOnTouched = function (fn) {
         this.onTouched = fn;
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], Nouislider.prototype, "connect", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Nouislider.prototype, "min", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Nouislider.prototype, "max", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Nouislider.prototype, "step", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)

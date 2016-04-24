@@ -31,18 +31,24 @@ export class Nouislider implements ControlValueAccessor, OnInit {
   public onChange: any = Function.prototype;
   public onTouched: any = Function.prototype;
 
+  @Input() connect: boolean = false;
+  @Input() min: number = 0;
+  @Input() max: number = 10;
+  @Input() step: number = 1;
   @Output() ngModelChange: EventEmitter<any> = new EventEmitter();
 
   public constructor(el:ElementRef) {
     this.el = el;
   }
 
-  public ngOnInit():void {
+  ngOnInit(): void {
     this.slider = noUiSlider.create(this.el.nativeElement, {
       start: this.value || 0,
+      step: this.step,
+      connect: this.connect,
       range: {
-        min: 0,
-        max: 10
+        min: this.min,
+        max: this.max
       }
     });
 

@@ -10,9 +10,13 @@ Angular2 nouislider directive
 
     import {Nouislider} from 'ng2-nouislider';
 
+Styles
+
+    @import "~nouislider/distribute/nouislider.min.css";
+
 ## Usage
 
-    <div nouislider [(ngModel)]="someValue"></div>
+    <div nouislider [connect]="true" [min]="0" [max]="15" [(ngModel)]="someRange"></div>
     
 ## License
 

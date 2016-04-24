@@ -7,6 +7,10 @@ export declare class Nouislider implements ControlValueAccessor, OnInit {
     value: any;
     onChange: any;
     onTouched: any;
+    connect: boolean;
+    min: number;
+    max: number;
+    step: number;
     ngModelChange: EventEmitter<any>;
     constructor(el: ElementRef);
     ngOnInit(): void;
