@@ -1,7 +1,19 @@
+body {
+	padding-bottom: 100px;
+}
+
+code {
+	font-size: 1.5rem;
+}
+
 pre, [nouislider] {
 	margin: 15px 0;
 }
 
-.container {
-	margin-bottom: 100px;
+.jumbotron {
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 15px;
+	color: #fff;
+	background: #2980b9;
 }

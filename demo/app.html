@@ -1,13 +1,10 @@
 <div class="page-header">
-	<h1>ng2-nouislider</h1>
-	<p class="lead">Angular2 nouislider directive</p>
+	<h3>Example 1</h3>
 </div>
-
-<h3>Example 1</h3>
 
 <pre>&lt;div nouislider [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someValue&quot;&gt;&lt;/div&gt;</pre>
 
-<p>someValue: {{ someValue | json }}</p>
+<code>someValue: {{ someValue | json }}</code>
 
 <div nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="someValue"></div>
 
@@ -16,11 +13,13 @@
 	<button type="button" class="btn btn-primary" (click)="changeSomeValue(1)">+1</button>
 </div>
 
-<h3>Example 2</h3>
+<div class="page-header">
+	<h3>Example 2</h3>
+</div>
 
 <pre>&lt;div nouislider [connect]=&quot;true&quot; [min]=&quot;0&quot; [max]=&quot;15&quot; [step]=&quot;1&quot; [(ngModel)]=&quot;someRange&quot;&gt;&lt;/div&gt;</pre>
 
-<p>someRange: {{ someRange | json }}</p>
+<code>someRange: {{ someRange | json }}</code>
 
 <div nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange"></div>
 

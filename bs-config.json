@@ -3,8 +3,5 @@
   "files": [
     "./nouislider.ts",
     "./demo/*.*"
-  ],
-  "server": {
-    "baseDir": ["./demo", "./"]
-  }
+  ]
 }
