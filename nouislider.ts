@@ -8,10 +8,10 @@ import {
   OnInit,
   Output,
   Provider
-} from 'angular2/core';
-import {ControlValueAccessor} from 'angular2/common';
+} from '@angular/core';
+import {ControlValueAccessor} from '@angular/common';
 
-import {NG_VALUE_ACCESSOR} from 'angular2/src/common/forms/directives/control_value_accessor';
+import {NG_VALUE_ACCESSOR} from '@angular/common/src/forms/directives/control_value_accessor';
 
 export function toValue(value: string[]): number|number[] {
   if (value.length == 1) {

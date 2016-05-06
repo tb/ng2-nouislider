@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var noUiSlider = require('nouislider');
-var core_1 = require('angular2/core');
-var control_value_accessor_1 = require('angular2/src/common/forms/directives/control_value_accessor');
+var core_1 = require('@angular/core');
+var control_value_accessor_1 = require('@angular/common/src/forms/directives/control_value_accessor');
 function toValue(value) {
     if (value.length == 1) {
         return parseFloat(value[0]);
@@ -104,6 +105,6 @@ var Nouislider = (function () {
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], Nouislider);
     return Nouislider;
-})();
+}());
 exports.Nouislider = Nouislider;
 //# sourceMappingURL=nouislider.js.map

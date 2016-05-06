@@ -5,7 +5,9 @@
   "main": "nouislider.js",
   "typings": "nouislider.d.ts",
   "scripts": {
-    "prepublish": "typings install && tsc",
+    "build": "typings install && npm run lint && tsc",
+    "lint": "tslint src/*.ts",
+    "prepublish": "npm run build",
     "start": "lite-server start"
   },
   "keywords": [
@@ -18,18 +20,33 @@
   ],
   "author": "Tomasz Bak <t.bak@selleo.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tb/ng2-nouislider"
+  },
+  "bugs": {
+    "url": "https://github.com/tb/ng2-nouislider/issues"
+  },
   "devDependencies": {
+    "@angular/common": "^2.0.0-rc.1",
+    "@angular/compiler":  "^2.0.0-rc.1",
+    "@angular/core": "^2.0.0-rc.1",
+    "@angular/platform-browser":  "^2.0.0-rc.1",
+    "@angular/platform-browser-dynamic":  "^2.0.0-rc.1",
     "browser-sync": "^2.12.3",
     "es6-shim": "^0.35.0",
     "lite-server": "^2.2.0",
+    "nouislider": "^8.4.0",
     "reflect-metadata": "^0.1.2",
-    "rxjs": "^5.0.0-beta.2",
+    "rxjs": "^5.0.0-beta.7",
+    "tslint": "^3.9.0",
     "typescript": "^1.8.10",
     "typings": "^0.8.1",
     "zone.js": "^0.6.12"
   },
   "peerDependencies": {
-    "angular2": "^2.0.0-beta.10",
+    "@angular/common": "^2.0.0-rc.1",
+    "@angular/core": "^2.0.0-rc.1",
     "nouislider": "^8.4.0"
   }
 }
