@@ -1,17 +1,17 @@
 //our root app component
-import {Component} from 'angular2/core';
-import {Control} from 'angular2/common'
+import {Component} from '@angular/core';
 import {Nouislider} from 'ng2nouislider';
+import './app.scss';
 
 @Component({
-  selector: 'my-app',
+  selector: 'app',
   directives: [Nouislider],
-  templateUrl: 'demo/app.html'
+  template: require('./app.html')
 })
 export class App {
-  public someValue: any = 5;
-  public someRange: any = [3,7];
-  public someRange2: any = [10,15];
+  public someValue: number = 2;
+  public someRange: number[] = [3, 7];
+  public someRange2: number[] = [10, 15];
   public someRange2config: any = {
     behaviour: 'drag',
     connect: true,
