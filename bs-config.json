@@ -1,7 +1,0 @@
-{
-  "port": 3000,
-  "files": [
-    "./nouislider.ts",
-    "./demo/*.*"
-  ]
-}

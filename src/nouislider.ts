@@ -47,9 +47,10 @@ export class Nouislider implements ControlValueAccessor, OnInit {
   @Input() max: number;
   @Input() step: number;
   @Input() config: any = {};
+  @Input() ngModel: number | number[];
   @Output() ngModelChange: EventEmitter<any> = new EventEmitter();
 
-  public constructor(el:ElementRef) {
+  public constructor(el: ElementRef) {
     this.el = el;
   }
 
@@ -58,7 +59,7 @@ export class Nouislider implements ControlValueAccessor, OnInit {
       behaviour: this.behaviour,
       connect: this.connect,
       limit: this.limit,
-      start: this.value,
+      start: this.ngModel,
       step: this.step,
       range: this.config.range || {min: this.min, max: this.max}
     }));
@@ -68,14 +69,15 @@ export class Nouislider implements ControlValueAccessor, OnInit {
       Object.assign(this.config, inputsConfig)
     );
 
-    this.slider.on('set', (value) => {
+    this.slider.on('set', (value: any) => {
       this.writeValue(toValue(value));
     });
   }
 
   public writeValue(value: any): void {
-    if (this.value == value || String(this.value) == String(value))
+    if (this.value == value || String(this.value) == String(value)) {
       return;
+    }
 
     this.ngModelChange.emit(value);
     this.value = value;
@@ -84,11 +86,11 @@ export class Nouislider implements ControlValueAccessor, OnInit {
     }
   }
 
-  public registerOnChange(fn:(_:any) => {}):void {
+  public registerOnChange(fn: (_: any) => {}): void {
     this.onTouched = fn;
   }
 
-  public registerOnTouched(fn:() => {}):void {
+  public registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
   }
 }
