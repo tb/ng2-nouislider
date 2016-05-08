@@ -2,8 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 
 var ENV = process.env.npm_lifecycle_event;
-var isTest = ENV === 'test';
-var isProd = ENV === 'build:demo';
+var isTest = /test/.test(ENV);
+var isProd = /demo$/.test(ENV);
 
 module.exports = function makeWebpackConfig() {
   var config = {};
