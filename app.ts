@@ -9,7 +9,7 @@ import './app.scss';
   template: require('./app.html')
 })
 export class App {
-  public someValue: number = 2;
+  public someValue: number = 5;
   public someRange: number[] = [3, 7];
   public someRange2: number[] = [10, 15];
   public someRange2config: any = {
