@@ -15,6 +15,6 @@
   ],
   "files": [
     "src/nouislider.ts",
-    "typings/main.d.ts"
+    "typings/index.d.ts"
   ]
 }

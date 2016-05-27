@@ -1,6 +1,6 @@
 {
   "name": "ng2-nouislider",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Angular2 noUiSlider directive",
   "main": "src/nouislider.js",
   "typings": "src/nouislider.d.ts",
@@ -39,14 +39,14 @@
     "nouislider": "^8.4.0",
     "raw-loader": "^0.5.1",
     "reflect-metadata": "^0.1.3",
-    "rxjs": "^5.0.0-beta.6",
+    "rxjs": "^5.0.0-beta.7",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
     "tslint": "^3.9.0",
     "tslint-loader": "^2.1.4",
     "typescript": "^1.8.10",
-    "typings": "^0.8.1",
+    "typings": "^1.0.4",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
     "zone.js": "^0.6.12"
@@ -54,7 +54,6 @@
   "peerDependencies": {
     "@angular/common": "^2.0.0-rc.1",
     "@angular/core": "^2.0.0-rc.1",
-    "nouislider": "^8.4.0",
-    "rxjs": "^5.0.0-beta.6"
+    "nouislider": "^8.4.0"
   }
 }
