@@ -9,9 +9,10 @@ import {
   Output,
   Provider
 } from '@angular/core';
-import {ControlValueAccessor} from '@angular/common';
-
-import {NG_VALUE_ACCESSOR} from '@angular/common/src/forms/directives/control_value_accessor';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR
+} from '@angular/common';
 
 export function toValue(value: string[]): number|number[] {
   if (value.length == 1) {
@@ -48,7 +49,7 @@ export class Nouislider implements ControlValueAccessor, OnInit {
   @Input() step: number;
   @Input() config: any = {};
   @Input() ngModel: number | number[];
-  @Output() ngModelChange: EventEmitter<any> = new EventEmitter();
+  @Output() ngModelChange: EventEmitter<any> = new EventEmitter(true);
 
   public constructor(el: ElementRef) {
     this.el = el;

@@ -1,6 +1,6 @@
 {
   "name": "ng2-nouislider",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Angular2 noUiSlider directive",
   "main": "src/nouislider.js",
   "typings": "src/nouislider.d.ts",
@@ -27,11 +27,11 @@
     "url": "https://github.com/tb/ng2-nouislider/issues"
   },
   "devDependencies": {
-    "@angular/common": "^2.0.0-rc.1",
-    "@angular/compiler": "^2.0.0-rc.1",
-    "@angular/core": "^2.0.0-rc.1",
-    "@angular/platform-browser": "^2.0.0-rc.1",
-    "@angular/platform-browser-dynamic": "^2.0.0-rc.1",
+    "@angular/common": "^2.0.0-rc.3",
+    "@angular/compiler": "^2.0.0-rc.3",
+    "@angular/core": "^2.0.0-rc.3",
+    "@angular/platform-browser": "^2.0.0-rc.3",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.3",
     "css-loader": "^0.23.1",
     "es6-shim": "^0.35.0",
     "http-server": "^0.9.0",
@@ -39,7 +39,7 @@
     "nouislider": "^8.4.0",
     "raw-loader": "^0.5.1",
     "reflect-metadata": "^0.1.3",
-    "rxjs": "^5.0.0-beta.7",
+    "rxjs": "^5.0.0-beta.9",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
@@ -52,8 +52,8 @@
     "zone.js": "^0.6.12"
   },
   "peerDependencies": {
-    "@angular/common": "^2.0.0-rc.1",
-    "@angular/core": "^2.0.0-rc.1",
+    "@angular/common": "^2.0.0-rc.3",
+    "@angular/core": "^2.0.0-rc.3",
     "nouislider": "^8.4.0"
   }
 }
