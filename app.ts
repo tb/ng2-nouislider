@@ -10,6 +10,7 @@ import './app.scss';
 })
 export class App {
   public someValue: number = 5;
+  public someFormValue: number = 7;
   public someRange: number[] = [3, 7];
   public someRange2: number[] = [10, 15];
   public someRange2config: any = {
@@ -29,6 +30,10 @@ export class App {
 
   changeSomeValue(value: number) {
     this.someValue = this.someValue + value;
+  }
+
+  changeSomeFormValue(value: number) {
+    this.someFormValue = this.someFormValue + value;
   }
 
   changeSomeRange(index: number, value: number) {
