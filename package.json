@@ -6,11 +6,9 @@
   "typings": "src/nouislider.d.ts",
   "scripts": {
     "typings": "typings",
-    "build": "tslint src/*.ts && tsc",
+    "build": "typings install && tslint src/*.ts && tsc",
     "start": "webpack-dev-server --host 0.0.0.0",
-    "start:demo": "webpack && http-server ./demo",
-
-    "postinstall": "npm run typings -- install"
+    "start:demo": "webpack && http-server ./demo"
   },
   "keywords": [
     "angular2",
