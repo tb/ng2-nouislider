@@ -4,6 +4,8 @@ Angular2 nouislider directive
 
 See [demos](http://tb.github.io/ng2-nouislider/)
 
+Note: `ng2-nouislider` is RC3 compatible using the new Forms API (@angular/forms)
+
 ## Install
 
     npm i --save nouislider ng2-nouislider

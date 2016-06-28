@@ -12,7 +12,7 @@ import {
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR
-} from '@angular/common';
+} from '@angular/forms';
 
 export function toValue(value: string[]): number|number[] {
   if (value.length == 1) {
@@ -40,6 +40,8 @@ export class Nouislider implements ControlValueAccessor, OnInit {
   public value: any;
   public onChange: any = Function.prototype;
   public onTouched: any = Function.prototype;
+
+  @Input() name: string;
 
   @Input() behaviour: string;
   @Input() connect: boolean;

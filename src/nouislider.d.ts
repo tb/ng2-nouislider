@@ -1,5 +1,5 @@
 import { ElementRef, EventEmitter, OnInit } from '@angular/core';
-import { ControlValueAccessor } from '@angular/common';
+import { ControlValueAccessor } from '@angular/forms';
 export declare function toValue(value: string[]): number | number[];
 export declare class Nouislider implements ControlValueAccessor, OnInit {
     el: ElementRef;
@@ -7,6 +7,7 @@ export declare class Nouislider implements ControlValueAccessor, OnInit {
     value: any;
     onChange: any;
     onTouched: any;
+    name: string;
     behaviour: string;
     connect: boolean;
     limit: number;
