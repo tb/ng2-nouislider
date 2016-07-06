@@ -25,9 +25,10 @@ Styles
 ## Start development
 
     git clone --recursive https://github.com/tb/ng2-nouislider.git
+    cd ng2-nouislider
     npm install
-    npm build
-    npm start # check http://localhost:8080 in browser
+    npm start
+    # check http://localhost:8080 in browser
 
 ## License
 
