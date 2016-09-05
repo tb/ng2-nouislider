@@ -1,13 +1,15 @@
 {
   "name": "ng2-nouislider",
-  "version": "0.6.0",
-  "description": "Angular2 noUiSlider directive",
+  "version": "0.7.0",
+  "description": "Angular2 noUiSlider component",
   "main": "src/nouislider.js",
   "typings": "src/nouislider.d.ts",
   "scripts": {
     "lint": "tslint src/nouislider.ts",
     "build": "typings install && npm run lint && tsc",
-    "start": "npm run build && webpack-dev-server --host 0.0.0.0"
+    "start": "npm run build && webpack-dev-server --host 0.0.0.0",
+    "test": "karma start",
+    "test:ci": "karma start --singleRun"
   },
   "keywords": [
     "angular2",
@@ -15,6 +17,7 @@
     "nouislider",
     "slider",
     "range",
+    "component",
     "directive"
   ],
   "author": "Tomasz Bak <t.bak@selleo.com>",
@@ -36,6 +39,12 @@
     "css-loader": "^0.23.1",
     "es6-shim": "^0.35.0",
     "http-server": "^0.9.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "1.1.2",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "1.7.0",
     "node-sass": "^3.7.0",
     "nouislider": "^8.4.0",
     "raw-loader": "^0.5.1",
@@ -43,6 +52,7 @@
     "rxjs": "5.0.0-beta.11",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
+    "ts-helpers": "^1.1.1",
     "ts-loader": "^0.8.2",
     "tslint": "^3.9.0",
     "tslint-loader": "^2.1.4",

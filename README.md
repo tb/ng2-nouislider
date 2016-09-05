@@ -1,10 +1,12 @@
 # ng2-nouislider
 
-Angular2 nouislider directive
+Angular2 nouislider component
 
 See [demos](http://tb.github.io/ng2-nouislider/)
 
 Note: `ng2-nouislider` is RC6 compatible using the new Forms API (@angular/forms)
+
+BREAKING CHANGE: from release 0.7 nouislider is component
 
 ## Install
 
@@ -20,7 +22,7 @@ Styles
 
 ## Usage
 
-    <div nouislider [connect]="true" [min]="0" [max]="15" [(ngModel)]="someRange"></div>
+    <nouislider [connect]="true" [min]="0" [max]="15" [(ngModel)]="someRange"></nouislider>
 
 ## Start development
 

@@ -1,6 +1,6 @@
 import * as noUiSlider from 'nouislider';
 import {
-  Directive,
+  Component,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -29,8 +29,17 @@ const NOUISLIDER_CONTROL_VALUE_ACCESSOR: any = {
   multi: true
 };
 
-@Directive({
-  selector: '[nouislider]',
+@Component({
+  selector: 'nouislider',
+  host: { '[class.ng2-nouislider]': 'true' },
+  template: '<div></div>',
+  styles: [`
+    :host {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  `],
   providers: [NOUISLIDER_CONTROL_VALUE_ACCESSOR]
 })
 export class Nouislider implements ControlValueAccessor, OnInit {
@@ -65,7 +74,7 @@ export class Nouislider implements ControlValueAccessor, OnInit {
     }));
 
     this.slider = noUiSlider.create(
-      this.el.nativeElement,
+      this.el.nativeElement.querySelector('div'),
       Object.assign(this.config, inputsConfig)
     );
 
