@@ -6,8 +6,7 @@ import {
   forwardRef,
   Input,
   OnInit,
-  Output,
-  Provider
+  Output
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -24,37 +23,35 @@ export function toValue(value: string[]): number|number[] {
   }
 }
 
-const NOUISLIDER_CONTROL_VALUE_ACCESSOR = new Provider(
-  NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => Nouislider),
-    multi: true
-  });
+const NOUISLIDER_CONTROL_VALUE_ACCESSOR: any = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => Nouislider),
+  multi: true
+};
 
 @Directive({
   selector: '[nouislider]',
   providers: [NOUISLIDER_CONTROL_VALUE_ACCESSOR]
 })
 export class Nouislider implements ControlValueAccessor, OnInit {
-  public el: ElementRef;
-  public slider: any;
-  public value: any;
-  public onChange: any = Function.prototype;
-  public onTouched: any = Function.prototype;
+  @Input() private behaviour: string;
+  @Input() private connect: boolean;
+  @Input() private limit: number;
+  @Input() private min: number;
+  @Input() private max: number;
+  @Input() private step: number;
+  @Input() private config: any = {};
+  @Input() private ngModel: number | number[];
+  @Output() private ngModelChange: EventEmitter<any> = new EventEmitter(true);
+  @Output() private change: EventEmitter<any>;
 
-  @Input() name: string;
+  private slider: any;
+  private value: any;
+  private onChange: any = Function.prototype;
+  private onTouched: any = Function.prototype;
 
-  @Input() behaviour: string;
-  @Input() connect: boolean;
-  @Input() limit: number;
-  @Input() min: number;
-  @Input() max: number;
-  @Input() step: number;
-  @Input() config: any = {};
-  @Input() ngModel: number | number[];
-  @Output() ngModelChange: EventEmitter<any> = new EventEmitter(true);
-
-  public constructor(el: ElementRef) {
-    this.el = el;
+  constructor(private el: ElementRef) {
+    this.change = this.ngModelChange;
   }
 
   ngOnInit(): void {
@@ -77,23 +74,28 @@ export class Nouislider implements ControlValueAccessor, OnInit {
     });
   }
 
-  public writeValue(value: any): void {
+  writeValue(value: any): void {
     if (this.value == value || String(this.value) == String(value)) {
       return;
     }
 
-    this.ngModelChange.emit(value);
+    // avoid triggering change event on slider initialization
+    if (!!this.value) {
+      this.ngModelChange.emit(value);
+    }
+
     this.value = value;
+
     if (this.slider) {
       this.slider.set(value);
     }
   }
 
-  public registerOnChange(fn: (_: any) => {}): void {
-    this.onTouched = fn;
+  registerOnChange(fn: (value: any) => void) {
+    this.onChange = fn;
   }
 
-  public registerOnTouched(fn: () => {}): void {
+  registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
   }
 }
