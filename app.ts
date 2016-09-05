@@ -1,11 +1,9 @@
 //our root app component
 import {Component} from '@angular/core';
-import {Nouislider} from 'ng2nouislider';
 import './app.scss';
 
 @Component({
   selector: 'app',
-  directives: [Nouislider],
   template: require('./app.html')
 })
 export class App {

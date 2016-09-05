@@ -54,20 +54,20 @@
 	<h3>Range with config</h3>
 </div>
 
-<pre>someRange2config: any = {
+<pre>someRange2config: any = &#123;
   behaviour: 'drag',
   connect: true,
   margin: 1,
   limit: 5, // NOTE: overwritten by [limit]="10"
-  range: {
+  range: &#123;
     min: 0,
     max: 20
-  },
-  pips: {
+  &#125;,
+  pips: &#123;
     mode: 'steps',
     density: 5
-  }
-};</pre>
+  &#125;
+&#125;;</pre>
 
 <pre>&lt;div nouislider [config]=&quot;someRange2config&quot; [limit]=&quot;10&quot; [(ngModel)]=&quot;someRange2&quot;&gt;&lt;/div&gt;</pre>
 
