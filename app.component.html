@@ -2,11 +2,11 @@
 	<h3>Single value</h3>
 </div>
 
-<pre>&lt;div nouislider [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someValue&quot; (change)=&quot;onChange($event)&quot;&gt;&lt;/div&gt;"</pre>
+<pre>&lt;nouislider [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someValue&quot; (change)=&quot;onChange($event)&quot;&gt;&lt;/nouislider&gt;</pre>
 
 <code>someValue: {{ someValue | json }}</code>
 
-<div nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="someValue" (change)="onChange($event)"></div>
+<nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="someValue" (change)="onChange($event)"></nouislider>
 
 <div class="btn-group">
 	<button type="button" class="btn btn-primary" (click)="changeSomeValue(-1)">-1</button>
@@ -17,12 +17,12 @@
 	<h3>Single value (in &lt;form&gt;)</h3>
 </div>
 
-<pre>&lt;form&gt;&lt;div nouislider name="form_value" [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.5&quot; [(ngModel)]=&quot;someFormValue&quot;&gt;&lt;/div&gt;&lt;/form&gt;</pre>
+<pre>&lt;form&gt;&lt;nouislider name="form_value" [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.5&quot; [(ngModel)]=&quot;someFormValue&quot;&gt;&lt;/nouislider&gt;&lt;/form&gt;</pre>
 
 <code>someFormValue: {{ someFormValue | json }}</code>
 
 <form>
-  <div nouislider name="form_value" [min]="0" [max]="10" [step]="0.5" [(ngModel)]="someFormValue"></div>
+  <nouislider name="form_value" [min]="0" [max]="10" [step]="0.5" [(ngModel)]="someFormValue"></nouislider>
 </form>
 
 <div class="btn-group">
@@ -34,11 +34,11 @@
 	<h3>Range</h3>
 </div>
 
-<pre>&lt;div nouislider [connect]=&quot;true&quot; [min]=&quot;0&quot; [max]=&quot;15&quot; [step]=&quot;1&quot; [(ngModel)]=&quot;someRange&quot; (change)=&quot;onChange($event)&quot;&gt;&lt;/div&gt;</pre>
+<pre>&lt;nouislider [connect]=&quot;true&quot; [min]=&quot;0&quot; [max]=&quot;15&quot; [step]=&quot;1&quot; [(ngModel)]=&quot;someRange&quot; (change)=&quot;onChange($event)&quot;&gt;&lt;/nouislider&gt;</pre>
 
 <code>someRange: {{ someRange | json }}</code>
 
-<div nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (change)="onChange($event)"></div>
+<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (change)="onChange($event)"></nouislider>
 
 <div class="btn-group">
 	<button type="button" class="btn btn-primary" (click)="changeSomeRange(0,-1)">-</button>
@@ -69,8 +69,8 @@
   &#125;
 &#125;;</pre>
 
-<pre>&lt;div nouislider [config]=&quot;someRange2config&quot; [limit]=&quot;10&quot; [(ngModel)]=&quot;someRange2&quot;&gt;&lt;/div&gt;</pre>
+<pre>&lt;nouislider [config]=&quot;someRange2config&quot; [limit]=&quot;10&quot; [(ngModel)]=&quot;someRange2&quot;&gt;&lt;/nouislider&gt;</pre>
 
 <code>someRange2: {{ someRange2 | json }}</code>
 
-<div nouislider [config]="someRange2config" [limit]="10" [(ngModel)]="someRange2"></div>
+<nouislider [config]="someRange2config" [limit]="10" [(ngModel)]="someRange2"></nouislider>
