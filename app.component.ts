@@ -1,12 +1,11 @@
-//our root app component
-import {Component} from '@angular/core';
-import './app.scss';
+import { Component } from '@angular/core';
+import './app.component.scss';
 
 @Component({
   selector: 'app',
-  template: require('./app.html')
+  template: require('./app.component.html')
 })
-export class App {
+export class AppComponent {
   public someValue: number = 5;
   public someFormValue: number = 7;
   public someRange: number[] = [3, 7];
@@ -38,5 +37,9 @@ export class App {
     let newRange = [this.someRange[0], this.someRange[1]];
     newRange[index] = newRange[index] + value;
     this.someRange = newRange;
+  }
+
+  onChange(value: any) {
+    console.log('Value changed to', value);
   }
 }

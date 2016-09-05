@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
-import { App } from './app';
+import { AppComponent } from './app.component';
 import { Nouislider } from 'ng2nouislider';
 
 @NgModule({
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
   ],
   declarations: [
-    App,
-    Nouislider
+    AppComponent,
+    Nouislider,
   ],
   providers: [],
-  bootstrap: [App]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
