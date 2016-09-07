@@ -89,7 +89,7 @@ export class Nouislider implements ControlValueAccessor, OnInit {
     }
 
     // avoid triggering change event on slider initialization
-    if (!!this.value) {
+    if (this.value !== undefined) {
       this.ngModelChange.emit(value);
     }
 
