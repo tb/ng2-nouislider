@@ -52,7 +52,12 @@ export class Nouislider implements ControlValueAccessor, OnInit {
   @Input() private config: any = {};
   @Input() private ngModel: number | number[];
   @Output() private ngModelChange: EventEmitter<any> = new EventEmitter(true);
-  @Output() private change: EventEmitter<any>;
+  @Output() private change: EventEmitter<any> = new EventEmitter(true);
+  @Output() private update: EventEmitter<any> = new EventEmitter(true);
+  @Output() private slide: EventEmitter<any> = new EventEmitter(true);
+  @Output() private set: EventEmitter<any> = new EventEmitter(true);
+  @Output() private start: EventEmitter<any> = new EventEmitter(true);
+  @Output() private end: EventEmitter<any> = new EventEmitter(true);
 
   private slider: any;
   private value: any;
@@ -80,6 +85,23 @@ export class Nouislider implements ControlValueAccessor, OnInit {
 
     this.slider.on('set', (value: any) => {
       this.writeValue(toValue(value));
+      this.set.emit();
+    });
+
+    this.slider.on('update', () => {
+      this.update.emit();
+    });
+
+    this.slider.on('slide', () => {
+      this.slide.emit();
+    });
+
+    this.slider.on('start', () => {
+      this.start.emit();
+    });
+
+    this.slider.on('end', () => {
+      this.end.emit();
     });
   }
 
