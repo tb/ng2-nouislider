@@ -44,7 +44,7 @@ const NOUISLIDER_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class Nouislider implements ControlValueAccessor, OnInit {
   @Input() private behaviour: string;
-  @Input() private connect: boolean;
+  @Input() private connect: boolean[];
   @Input() private limit: number;
   @Input() private min: number;
   @Input() private max: number;

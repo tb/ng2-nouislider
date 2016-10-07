@@ -65,6 +65,6 @@
   "peerDependencies": {
     "@angular/common": "^2.0.0",
     "@angular/core": "^2.0.0",
-    "nouislider": "^8.4.0"
+    "nouislider": "^9.0.0"
   }
 }
