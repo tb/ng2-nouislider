@@ -59,7 +59,7 @@ export class Nouislider implements ControlValueAccessor, OnInit {
   @Output() private start: EventEmitter<any> = new EventEmitter(true);
   @Output() private end: EventEmitter<any> = new EventEmitter(true);
 
-  private slider: any;
+  public slider: any;
   private value: any;
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;

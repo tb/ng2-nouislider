@@ -18,7 +18,7 @@ export declare class Nouislider implements ControlValueAccessor, OnInit {
     private set;
     private start;
     private end;
-    private slider;
+    public slider: any;
     private value;
     private onChange;
     private onTouched;
