@@ -1,12 +1,12 @@
 # ng2-nouislider
 
+[![Build Status](https://travis-ci.org/tb/ng2-nouislider.svg?branch=master)](https://travis-ci.org/tb/ng2-nouislider)
+[![npm version](https://badge.fury.io/js/ng2-nouislider.svg)](http://badge.fury.io/js/ng2-nouislider)
+[![Downloads](http://img.shields.io/npm/dm/ng2-nouislider.svg)](https://npmjs.org/package/ng2-nouislider)
+
 Angular2 nouislider component
 
 See [demos](http://tb.github.io/ng2-nouislider/)
-
-Note: `ng2-nouislider` is RC6 compatible using the new Forms API (@angular/forms)
-
-BREAKING CHANGE: from release 0.7 nouislider is component
 
 ## Install
 
