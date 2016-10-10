@@ -12,4 +12,5 @@ before_install:
  - npm install -g typings
 
 script:
+  - typings install
   - npm test
