@@ -44,7 +44,7 @@ const NOUISLIDER_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class Nouislider implements ControlValueAccessor, OnInit {
   @Input() private behaviour: string;
-  @Input() private connect: boolean;
+  @Input() private connect: boolean[];
   @Input() private limit: number;
   @Input() private min: number;
   @Input() private max: number;
@@ -59,7 +59,7 @@ export class Nouislider implements ControlValueAccessor, OnInit {
   @Output() private start: EventEmitter<any> = new EventEmitter(true);
   @Output() private end: EventEmitter<any> = new EventEmitter(true);
 
-  private slider: any;
+  public slider: any;
   private value: any;
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
