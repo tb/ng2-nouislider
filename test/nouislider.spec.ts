@@ -39,13 +39,15 @@ describe('Nouislider Component', () => {
     });
 
     it('should set config', () => {
-      expect(sliderInstance['config']).toEqual({
+      const defaultOptions = {
         start: 5,
         step: 0.05,
         range: {
           min: 0,
           max: 10}
-      });
+      };
+      expect(sliderInstance['config']).toEqual(defaultOptions);
+      expect(sliderInstance.slider.options).toEqual(defaultOptions);
     });
 
     it('should update model and trigger change event', async(() => {
