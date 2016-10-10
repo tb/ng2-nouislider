@@ -13,4 +13,4 @@ before_install:
 
 script:
   - typings install
-  - npm test
+  - npm run test:ci
