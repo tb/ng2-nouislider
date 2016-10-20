@@ -73,4 +73,35 @@
 
 <code>someRange2: {{ someRange2 | json }}</code>
 
-<nouislider [config]="someRange2config" [limit]="10" [(ngModel)]="someRange2"></nouislider>
+<nouislider [config]="someRange2config" [limit]="10" [(ngModel)]="someRange2" style="margin-bottom: 5rem"></nouislider>
+
+<div class="page-header">
+    <h3>Keyboard support</h3>
+</div>
+<pre>
+someKeyboardConfig: any = &#123;
+  behaviour: 'drag',
+  connect: true,
+  start: [0, 5],
+  step: 0.1,
+  keyboard: true,  // same as keyboard="true"
+  range: &#123;
+    min: 0,
+    max: 5
+  &#125;,
+  pips: &#123;
+    mode: 'count',
+    density: 2,
+    values: 6,
+    stepped: true
+  &#125;
+&#125;;
+</pre>
+<pre>&lt;nouislider [config]=&quot;someKeyboardConfig&quot; [(ngModel)]=&quot;someKeyboard&quot;&gt;&lt;/nouislider&gt;</pre>
+Select a handle and use arrow keys or page up / page down.
+<div class="event-logger">
+    Keboard events (handle key up, handle key down):
+    <span id="hkeyup-label" class="h6 label label-default">hkeyup</span>
+    <span id="hkeydown-label" class="h6 label label-default">hkeydown</span>
+</div>
+<nouislider [config]="someKeyboardConfig" [(ngModel)]="someKeyboard" (hkeyup)="addClassFor('hkeyup-label', 'label-info', 450)" (hkeydown)="addClassFor('hkeydown-label', 'label-info', 450)"></nouislider>

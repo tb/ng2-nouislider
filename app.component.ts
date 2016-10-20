@@ -24,6 +24,25 @@ export class AppComponent {
       density: 5
     }
   };
+  public someKeyboard: number[] = [1, 3];
+
+  public someKeyboardConfig: any = {
+    behaviour: 'drag',
+    connect: true,
+    start: [0, 5],
+    step: 0.1,
+    keyboard: true,
+    range: {
+      min: 0,
+      max: 5
+    },
+    pips: {
+      mode: 'count',
+      density: 2,
+      values: 6,
+      stepped: true
+    }
+  };
 
   changeSomeValue(value: number) {
     this.someValue = this.someValue + value;
@@ -41,5 +60,13 @@ export class AppComponent {
 
   onChange(value: any) {
     console.log('Value changed to', value);
+  }
+
+  addClassFor ( elementId, className, duration ) {
+    let element = document.getElementById(elementId);
+    element.classList.add(className);
+    setTimeout(function(){
+      element.classList.remove(className);
+    }, duration);
   }
 }
