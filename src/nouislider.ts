@@ -47,6 +47,7 @@ export function toValue(value: string[]): number|number[] {
 })
 export class NouisliderComponent implements ControlValueAccessor, OnInit {
   public slider: any;
+  public handles: any[];
   @Input() private behaviour: string;
   @Input() private connect: boolean[];
   @Input() private limit: number;
@@ -81,6 +82,8 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       this.el.nativeElement.querySelector('div'),
       Object.assign(this.config, inputsConfig)
     );
+
+    this.handles = this.el.nativeElement.querySelectorAll('.noUi-handle');
 
     this.slider.on('set', (value: any) => {
       let v = toValue(value);
