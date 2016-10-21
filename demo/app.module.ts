@@ -3,16 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { Nouislider } from 'ng2nouislider';
+import { NouisliderModule } from '../src/nouislider';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    NouisliderModule,
   ],
   declarations: [
     AppComponent,
-    Nouislider,
   ],
   providers: [],
   bootstrap: [AppComponent]

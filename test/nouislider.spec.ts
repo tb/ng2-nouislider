@@ -4,16 +4,16 @@ import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { Nouislider } from '../src/nouislider';
+import { NouisliderModule, NouisliderComponent } from '../src/nouislider';
 
 describe('Nouislider Component', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        FormsModule
+        FormsModule,
+        NouisliderModule
       ],
       declarations: [
-        Nouislider,
         TestSingleSliderComponent
       ]
     });
@@ -26,14 +26,14 @@ describe('Nouislider Component', () => {
     let fixtureInstance: TestSingleSliderComponent;
     let sliderDebugElement: DebugElement;
     let sliderNativeElement: HTMLElement;
-    let sliderInstance: Nouislider;
+    let sliderInstance: NouisliderComponent;
 
     beforeEach(() => {
       fixture = TestBed.createComponent(TestSingleSliderComponent);
       fixture.detectChanges();
       fixtureInstance = fixture.componentInstance;
 
-      sliderDebugElement = fixture.debugElement.query(By.directive(Nouislider));
+      sliderDebugElement = fixture.debugElement.query(By.directive(NouisliderComponent));
       sliderNativeElement = sliderDebugElement.nativeElement;
       sliderInstance = sliderDebugElement.componentInstance;
     });

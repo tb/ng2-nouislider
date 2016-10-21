@@ -6,7 +6,8 @@ import {
   forwardRef,
   Input,
   OnInit,
-  Output
+  Output,
+  NgModule,
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -23,15 +24,11 @@ export function toValue(value: string[]): number|number[] {
   }
 }
 
-const NOUISLIDER_CONTROL_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => Nouislider),
-  multi: true
-};
-
 @Component({
   selector: 'nouislider',
-  host: { '[class.ng2-nouislider]': 'true' },
+  host: {
+    '[class.ng2-nouislider]': 'true'
+  },
   template: '<div></div>',
   styles: [`
     :host {
@@ -40,9 +37,15 @@ const NOUISLIDER_CONTROL_VALUE_ACCESSOR: any = {
       margin-bottom: 1rem;
     }
   `],
-  providers: [NOUISLIDER_CONTROL_VALUE_ACCESSOR]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NouisliderComponent),
+      multi: true
+    }
+  ]
 })
-export class Nouislider implements ControlValueAccessor, OnInit {
+export class NouisliderComponent implements ControlValueAccessor, OnInit {
   public slider: any;
   @Input() private behaviour: string;
   @Input() private connect: boolean[];
@@ -129,3 +132,11 @@ export class Nouislider implements ControlValueAccessor, OnInit {
     this.onTouched = fn;
   }
 }
+
+
+@NgModule({
+  imports: [],
+  exports: [NouisliderComponent],
+  declarations: [NouisliderComponent],
+})
+export class NouisliderModule { }

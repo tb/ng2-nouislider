@@ -14,7 +14,7 @@ See [demos](http://tb.github.io/ng2-nouislider/)
 
 ## Import
 
-    import {Nouislider} from 'ng2-nouislider';
+    import { NouisliderModule } from 'ng2-nouislider';
 
 Styles
 
