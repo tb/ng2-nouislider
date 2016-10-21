@@ -3,6 +3,7 @@ import { ControlValueAccessor } from '@angular/forms';
 export declare function toValue(value: string[]): number | number[];
 export declare class Nouislider implements ControlValueAccessor, OnInit {
     private el;
+    slider: any;
     private behaviour;
     private connect;
     private limit;
@@ -18,7 +19,6 @@ export declare class Nouislider implements ControlValueAccessor, OnInit {
     private set;
     private start;
     private end;
-    private slider;
     private value;
     private onChange;
     private onTouched;
