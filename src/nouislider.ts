@@ -84,23 +84,23 @@ export class Nouislider implements ControlValueAccessor, OnInit {
 
     this.slider.on('set', (value: any) => {
       this.writeValue(toValue(value));
-      this.set.emit();
+      this.set.emit(this.value);
     });
 
     this.slider.on('update', () => {
-      this.update.emit();
+      this.update.emit(this.value);
     });
 
     this.slider.on('slide', () => {
-      this.slide.emit();
+      this.slide.emit(this.value);
     });
 
     this.slider.on('start', () => {
-      this.start.emit();
+      this.start.emit(this.value);
     });
 
     this.slider.on('end', () => {
-      this.end.emit();
+      this.end.emit(this.value);
     });
   }
 
