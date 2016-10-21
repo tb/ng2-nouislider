@@ -1,7 +1,7 @@
 import { ElementRef, OnInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 export declare function toValue(value: string[]): number | number[];
-export declare class Nouislider implements ControlValueAccessor, OnInit {
+export declare class NouisliderComponent implements ControlValueAccessor, OnInit {
     private el;
     slider: any;
     private behaviour;
@@ -27,4 +27,6 @@ export declare class Nouislider implements ControlValueAccessor, OnInit {
     writeValue(value: any): void;
     registerOnChange(fn: (value: any) => void): void;
     registerOnTouched(fn: () => {}): void;
+}
+export declare class NouisliderModule {
 }
