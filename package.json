@@ -8,9 +8,9 @@
     "lint": "tslint src/nouislider.ts",
     "build": "typings install && npm run lint && tsc",
     "start": "npm run build && webpack-dev-server --host 0.0.0.0",
-    "deploy": "npm run build && webpack && gh-pages -d demo",
-    "test": "karma start",
-    "test:ci": "karma start --singleRun"
+    "deploy": "NODE_ENV=prod npm run build && NODE_ENV=prod webpack && gh-pages -d demo",
+    "test": "NODE_ENV=test karma start",
+    "test:ci": "NODE_ENV=test karma start --singleRun"
   },
   "keywords": [
     "angular2",

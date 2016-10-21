@@ -1,9 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var ENV = process.env.npm_lifecycle_event;
+var ENV = process.env.NODE_ENV;
 var isTest = /test/.test(ENV);
-var isProd = /demo$/.test(ENV);
+var isProd = /prod/.test(ENV);
 
 module.exports = function makeWebpackConfig() {
   var config = {};
@@ -86,9 +86,7 @@ module.exports = function makeWebpackConfig() {
 
       // support for .html as raw text
       {test: /\.html$/, loader: 'raw'}
-    ],
-    postLoaders: [],
-    noParse: [/.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/, /angular2-polyfills\.js/]
+    ]
   };
 
   /**
@@ -121,8 +119,10 @@ module.exports = function makeWebpackConfig() {
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode
       new webpack.optimize.UglifyJsPlugin({
-        // Angular 2 is broken again, disabling mangle until beta 6 that should fix the thing
-        mangle: true
+        beautify: false,
+        mangle: { screw_ie8: true, keep_fnames: true },
+        compress: true,
+        comments: false
       })
     );
   }
