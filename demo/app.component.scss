@@ -1,0 +1,25 @@
+@import "~nouislider/distribute/nouislider.min.css";
+
+body {
+	padding-bottom: 100px;
+}
+
+code {
+	font-size: 1.5rem;
+}
+
+pre, [nouislider] {
+	margin: 15px 0;
+}
+
+.jumbotron {
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 15px;
+	color: #fff;
+	background: #337ab7;
+}
+
+.noUi-connect {
+	background: #337ab7;
+}

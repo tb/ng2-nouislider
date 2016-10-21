@@ -8,6 +8,7 @@
     "lint": "tslint src/nouislider.ts",
     "build": "typings install && npm run lint && tsc",
     "start": "npm run build && webpack-dev-server --host 0.0.0.0",
+    "deploy": "npm run build && webpack && gh-pages -d demo",
     "test": "karma start",
     "test:ci": "karma start --singleRun"
   },
@@ -38,6 +39,7 @@
     "@angular/platform-browser-dynamic": "2.0.0",
     "css-loader": "^0.23.1",
     "es6-shim": "^0.35.0",
+    "gh-pages": "^0.11.0",
     "http-server": "^0.9.0",
     "jasmine-core": "^2.4.1",
     "karma": "1.1.2",

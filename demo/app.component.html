@@ -1,0 +1,76 @@
+<div class="page-header">
+	<h3>Single value</h3>
+</div>
+
+<pre>&lt;nouislider [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someValue&quot; (change)=&quot;onChange($event)&quot;&gt;&lt;/nouislider&gt;</pre>
+
+<code>someValue: {{ someValue | json }}</code>
+
+<nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="someValue" (change)="onChange($event)"></nouislider>
+
+<div class="btn-group">
+	<button type="button" class="btn btn-primary" (click)="changeSomeValue(-1)">-1</button>
+	<button type="button" class="btn btn-primary" (click)="changeSomeValue(1)">+1</button>
+</div>
+
+<div class="page-header">
+	<h3>Single value (in &lt;form&gt;)</h3>
+</div>
+
+<pre>&lt;form&gt;&lt;nouislider name="form_value" [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.5&quot; [(ngModel)]=&quot;someFormValue&quot;&gt;&lt;/nouislider&gt;&lt;/form&gt;</pre>
+
+<code>someFormValue: {{ someFormValue | json }}</code>
+
+<form>
+  <nouislider name="form_value" [min]="0" [max]="10" [step]="0.5" [(ngModel)]="someFormValue"></nouislider>
+</form>
+
+<div class="btn-group">
+	<button type="button" class="btn btn-primary" (click)="changeSomeFormValue(-0.5)">-0.5</button>
+	<button type="button" class="btn btn-primary" (click)="changeSomeFormValue(0.5)">+0.5</button>
+</div>
+
+<div class="page-header">
+	<h3>Range</h3>
+</div>
+
+<pre>&lt;nouislider [connect]=&quot;true&quot; [min]=&quot;0&quot; [max]=&quot;15&quot; [step]=&quot;1&quot; [(ngModel)]=&quot;someRange&quot; (change)=&quot;onChange($event)&quot;&gt;&lt;/nouislider&gt;</pre>
+
+<code>someRange: {{ someRange | json }}</code>
+
+<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (change)="onChange($event)"></nouislider>
+
+<div class="btn-group">
+	<button type="button" class="btn btn-primary" (click)="changeSomeRange(0,-1)">-</button>
+	<button type="button" class="btn btn-primary" (click)="changeSomeRange(0,1)">+</button>
+</div>
+
+<div class="btn-group">
+	<button type="button" class="btn btn-primary" (click)="changeSomeRange(1,-1)">-</button>
+	<button type="button" class="btn btn-primary" (click)="changeSomeRange(1,1)">+</button>
+</div>
+
+<div class="page-header">
+	<h3>Range with config</h3>
+</div>
+
+<pre>someRange2config: any = &#123;
+  behaviour: 'drag',
+  connect: true,
+  margin: 1,
+  limit: 5, // NOTE: overwritten by [limit]="10"
+  range: &#123;
+    min: 0,
+    max: 20
+  &#125;,
+  pips: &#123;
+    mode: 'steps',
+    density: 5
+  &#125;
+&#125;;</pre>
+
+<pre>&lt;nouislider [config]=&quot;someRange2config&quot; [limit]=&quot;10&quot; [(ngModel)]=&quot;someRange2&quot;&gt;&lt;/nouislider&gt;</pre>
+
+<code>someRange2: {{ someRange2 | json }}</code>
+
+<nouislider [config]="someRange2config" [limit]="10" [(ngModel)]="someRange2"></nouislider>
