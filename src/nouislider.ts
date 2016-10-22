@@ -56,6 +56,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   @Input() private step: number;
   @Input() private config: any = {};
   @Input() private ngModel: number | number[];
+  @Input() private keyboard: boolean;
   @Output() private change: EventEmitter<any> = new EventEmitter(true);
   @Output() private update: EventEmitter<any> = new EventEmitter(true);
   @Output() private slide: EventEmitter<any> = new EventEmitter(true);
@@ -75,6 +76,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       limit: this.limit,
       start: this.ngModel,
       step: this.step,
+      keyboard: this.keyboard,
       range: this.config.range || {min: this.min, max: this.max}
     }));
 
@@ -84,6 +86,50 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
     );
 
     this.handles = this.el.nativeElement.querySelectorAll('.noUi-handle');
+
+    if(this.config.keyboard) {
+      this.handles.forEach((handle, index) => {
+        handle.setAttribute('tabindex', 0);
+        handle.addEventListener('click', () => {
+          handle.focus();
+        });
+        handle.addEventListener('keydown', ( e: any ) => {
+          let steps: any[] = this.slider.steps();
+
+          let delta = 0;
+
+          switch ( e.which ) {
+            case 34:  // PageDown
+              delta = -10 * steps[index][0];
+              break;
+            case 33:  // PageUp
+              delta = 10 * steps[index][1];
+              break;
+            case 40:  // ArrowDown
+            case 37:  // ArrowLeft
+              delta = -steps[index][0];
+              break;
+            case 38:  // ArrowUp
+            case 39:  // ArrowRight
+              delta = steps[index][1];
+              break;
+            default:
+              return false;
+          }
+
+          e.preventDefault();
+
+          if (typeof(this.value) == "number") {
+            this.slider.set(this.value + delta);
+          } else {
+            this.value[index] += delta;
+            this.slider.set(this.value);
+          }
+
+          return true;
+        });
+      });
+    }
 
     this.slider.on('set', (value: any) => {
       let v = toValue(value);
