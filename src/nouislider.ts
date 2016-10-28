@@ -84,10 +84,10 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
 
     this.slider.on('set', (value: any) => {
       let v = toValue(value);
-      this.set.emit(v);
       if (this.value == v || String(this.value) == String(v)) {
         return;
       }
+      this.set.emit(v);
       if(typeof(value) === "number") {
         this.value = v;
       } else {
@@ -121,8 +121,6 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
     if (this.value == value || String(this.value) == String(value)) {
       return;
     }
-
-    this.value = value;
 
     if (this.slider) {
       this.slider.set(value);
