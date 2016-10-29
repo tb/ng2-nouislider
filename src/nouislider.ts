@@ -55,7 +55,6 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   @Input() private step: number;
   @Input() private config: any = {};
   @Input() private ngModel: number | number[];
-  @Output() private ngModelChange: EventEmitter<any> = new EventEmitter(true);
   @Output() private change: EventEmitter<any> = new EventEmitter(true);
   @Output() private update: EventEmitter<any> = new EventEmitter(true);
   @Output() private slide: EventEmitter<any> = new EventEmitter(true);
@@ -66,9 +65,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
 
-  constructor(private el: ElementRef) {
-    this.change = this.ngModelChange;
-  }
+  constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
     let inputsConfig = JSON.parse(JSON.stringify({
@@ -114,7 +111,8 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
 
     // avoid triggering change event on slider initialization
     if (this.value !== undefined) {
-      this.ngModelChange.emit(value);
+      this.onChange(value);
+      this.change.emit(value);
     }
 
     this.value = value;
