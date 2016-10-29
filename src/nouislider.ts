@@ -86,7 +86,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
     );
 
     this.slider.on('set', (value: any) => {
-      this.writeValue(toValue(value));
+      this.writeValue(toValue(value), true);
       this.set.emit(this.value);
     });
 
@@ -107,7 +107,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
     });
   }
 
-  writeValue(value: any): void {
+  writeValue(value: any, isSliderSet: boolean = false): void {
     if (this.value == value || String(this.value) == String(value)) {
       return;
     }
@@ -119,7 +119,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
 
     this.value = value;
 
-    if (this.slider) {
+    if (!isSliderSet && this.slider) {
       this.slider.set(value);
     }
   }
