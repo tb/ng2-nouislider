@@ -16,9 +16,21 @@ See [demos](http://tb.github.io/ng2-nouislider/)
 
     import { NouisliderModule } from 'ng2-nouislider';
 
-Styles
+### Styles
 
     @import "~nouislider/distribute/nouislider.min.css";
+
+## SystemJS config
+
+Add to map:
+
+    'nouislider': 'node_modules/nouislider',
+    'ng2-nouislider': 'node_modules/ng2-nouislider',
+
+Add to packages:
+
+    'nouislider': { main: 'distribute/nouislider.js', defaultExtension: 'js' },
+    'ng2-nouislider': { main: 'src/nouislider.js', defaultExtension: 'js' },
 
 ## Usage
 
