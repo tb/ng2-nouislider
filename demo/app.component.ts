@@ -39,7 +39,7 @@ export class AppComponent {
     this.someRange = newRange;
   }
 
-  onSet(value: any) {
+  onChange(value: any) {
     console.log('Value changed to', value);
   }
 }

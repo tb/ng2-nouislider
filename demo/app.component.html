@@ -2,11 +2,11 @@
 	<h3>Single value</h3>
 </div>
 
-<pre>&lt;nouislider [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someValue&quot; (set)=&quot;onSet($event)&quot;&gt;&lt;/nouislider&gt;</pre>
+<pre>&lt;nouislider [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someValue&quot; (ngModelChange)=&quot;onChange($event)&quot;&gt;&lt;/nouislider&gt;</pre>
 
 <code>someValue: {{ someValue | json }}</code>
 
-<nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="someValue" (set)="onSet($event)"></nouislider>
+<nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="someValue" (ngModelChange)="onChange($event)"></nouislider>
 
 <div class="btn-group">
 	<button type="button" class="btn btn-primary" (click)="changeSomeValue(-1)">-1</button>
@@ -34,11 +34,11 @@
 	<h3>Range</h3>
 </div>
 
-<pre>&lt;nouislider [connect]=&quot;true&quot; [min]=&quot;0&quot; [max]=&quot;15&quot; [step]=&quot;1&quot; [(ngModel)]=&quot;someRange&quot; (set)=&quot;onSet($event)&quot;&gt;&lt;/nouislider&gt;</pre>
+<pre>&lt;nouislider [connect]=&quot;true&quot; [min]=&quot;0&quot; [max]=&quot;15&quot; [step]=&quot;1&quot; [(ngModel)]=&quot;someRange&quot; (ngModelChange)=&quot;onChange($event)&quot;&gt;&lt;/nouislider&gt;</pre>
 
 <code>someRange: {{ someRange | json }}</code>
 
-<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (set)="onSet($event)"></nouislider>
+<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (ngModelChange)="onChange($event)"></nouislider>
 
 <div class="btn-group">
 	<button type="button" class="btn btn-primary" (click)="changeSomeRange(0,-1)">-</button>
