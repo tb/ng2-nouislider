@@ -88,7 +88,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
         return;
       }
       this.set.emit(v);
-      if(typeof(value) === "number") {
+      if(typeof(v) === "number") {
         this.value = v;
       } else {
         this.value = [].concat(v);
