@@ -12,7 +12,6 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     private step;
     private config;
     private ngModel;
-    private ngModelChange;
     private change;
     private update;
     private slide;
