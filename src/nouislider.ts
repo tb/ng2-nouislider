@@ -55,7 +55,6 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   @Input() private step: number;
   @Input() private config: any = {};
   @Input() private ngModel: number | number[];
-  @Output() private ngModelChange: EventEmitter<any> = new EventEmitter(true);
   @Output() private change: EventEmitter<any> = new EventEmitter(true);
   @Output() private update: EventEmitter<any> = new EventEmitter(true);
   @Output() private slide: EventEmitter<any> = new EventEmitter(true);
@@ -66,9 +65,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
 
-  constructor(private el: ElementRef) {
-    this.change = this.ngModelChange;
-  }
+  constructor(private el: ElementRef) { }
 
   ngOnInit(): void {
     let inputsConfig = JSON.parse(JSON.stringify({
@@ -86,12 +83,23 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
     );
 
     this.slider.on('set', (value: any) => {
-      this.writeValue(toValue(value));
-      this.set.emit(this.value);
+      let v = toValue(value);
+      if (this.value == v || String(this.value) == String(v)) {
+        return;
+      }
+      if(this.value !== undefined) {
+        this.set.emit(v);
+        this.onChange(v);
+      }
+      this.value = v;
     });
 
     this.slider.on('update', () => {
       this.update.emit(this.value);
+    });
+
+    this.slider.on('change', () => {
+      this.change.emit(this.value);
     });
 
     this.slider.on('slide', () => {
@@ -108,17 +116,6 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   }
 
   writeValue(value: any): void {
-    if (this.value == value || String(this.value) == String(value)) {
-      return;
-    }
-
-    // avoid triggering change event on slider initialization
-    if (this.value !== undefined) {
-      this.ngModelChange.emit(value);
-    }
-
-    this.value = value;
-
     if (this.slider) {
       this.slider.set(value);
     }
