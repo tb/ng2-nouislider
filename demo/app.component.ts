@@ -48,6 +48,59 @@ export class AppComponent {
     }
   }
 
+  public someKeyboard2: number[] = [1, 3];
+
+  private someKeyboard2EventHandler = (e: KeyboardEvent) => {
+    console.log("overridden keyboard handler");
+
+    // determine which handle triggered the event
+    let index = parseInt((<HTMLElement>e.target).getAttribute('data-handle'));
+
+    let multiplier: number = 0;
+    let stepSize = 0.1;
+
+    switch ( e.which ) {
+      case 40:  // ArrowDown
+      case 37:  // ArrowLeft
+        multiplier = -2;
+        e.preventDefault();
+        break;
+
+      case 38:  // ArrowUp
+      case 39:  // ArrowRight
+        multiplier = 3;
+        e.preventDefault();
+        break;
+
+      default:
+        break;
+    }
+
+    let delta = multiplier * stepSize;
+    let newValue = [].concat(this.someKeyboard2);
+    newValue[index] += delta;
+    this.someKeyboard2 = newValue;
+  }
+
+  public someKeyboardConfig2: any = {
+    behaviour: 'drag',
+    connect: true,
+    start: [0, 5],
+    step: 0.1,
+    range: {
+      min: 0,
+      max: 5
+    },
+    pips: {
+      mode: 'count',
+      density: 2,
+      values: 6,
+      stepped: true
+    },
+    keyboard: true,
+    onKeydown: this.someKeyboard2EventHandler
+  }
+
   changeSomeValue(value: number) {
     this.someValue = this.someValue + value;
   }
