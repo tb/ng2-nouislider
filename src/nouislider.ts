@@ -57,6 +57,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   @Input() private config: any = {};
   @Input() private ngModel: number | number[];
   @Input() private keyboard: boolean;
+  @Input() private onKeydown: any;
   @Output() private change: EventEmitter<any> = new EventEmitter(true);
   @Output() private update: EventEmitter<any> = new EventEmitter(true);
   @Output() private slide: EventEmitter<any> = new EventEmitter(true);
@@ -77,6 +78,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       start: this.ngModel,
       step: this.step,
       keyboard: this.keyboard,
+      onKeydown: this.onKeydown,
       range: this.config.range || {min: this.min, max: this.max}
     }));
 
@@ -85,50 +87,20 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       Object.assign(this.config, inputsConfig)
     );
 
-    this.handles = this.el.nativeElement.querySelectorAll('.noUi-handle');
+    this.handles = [].slice.call(this.el.nativeElement.querySelectorAll('.noUi-handle'));
 
     if(this.config.keyboard) {
-      this.handles.forEach((handle, index) => {
+      for(let handle of this.handles) {
         handle.setAttribute('tabindex', 0);
         handle.addEventListener('click', () => {
           handle.focus();
         });
-        handle.addEventListener('keydown', ( e: any ) => {
-          let steps: any[] = this.slider.steps();
-
-          let delta = 0;
-
-          switch ( e.which ) {
-            case 34:  // PageDown
-              delta = -10 * steps[index][0];
-              break;
-            case 33:  // PageUp
-              delta = 10 * steps[index][1];
-              break;
-            case 40:  // ArrowDown
-            case 37:  // ArrowLeft
-              delta = -steps[index][0];
-              break;
-            case 38:  // ArrowUp
-            case 39:  // ArrowRight
-              delta = steps[index][1];
-              break;
-            default:
-              return false;
-          }
-
-          e.preventDefault();
-
-          if (typeof(this.value) == "number") {
-            this.slider.set(this.value + delta);
-          } else {
-            this.value[index] += delta;
-            this.slider.set(this.value);
-          }
-
-          return true;
-        });
-      });
+        if(this.config.onKeydown === undefined) {
+          handle.addEventListener('keydown', this.defaultKeyHandler);
+        } else {
+          handle.addEventListener('keydown', this.config.onKeydown);
+        }
+      }
     }
 
     this.slider.on('set', (value: any) => {
@@ -176,6 +148,48 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
 
   registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
+  }
+
+  private defaultKeyHandler = (e: KeyboardEvent) => {
+    let stepSize: any[] = this.slider.steps();
+    let index = parseInt((<HTMLElement>e.target).getAttribute('data-handle'));
+    let sign = 1;
+    let multiplier: number = 1;
+    let step = 0;
+    let delta = 0;
+
+    switch ( e.which ) {
+      case 34:  // PageDown
+        multiplier = 10;
+      case 40:  // ArrowDown
+      case 37:  // ArrowLeft
+        sign = -1;
+        step = stepSize[index][0];
+        e.preventDefault();
+        break;
+
+      case 33:  // PageUp
+        multiplier = 10;
+      case 38:  // ArrowUp
+      case 39:  // ArrowRight
+        step = stepSize[index][1];
+        e.preventDefault();
+        break;
+
+      default:
+        break;
+    }
+
+    delta = sign * multiplier * step;
+    let newValue: number | number[];
+
+    if (typeof(this.value) == "number") {
+      newValue = this.value + delta;
+    } else {
+      newValue = [].concat(this.value);
+      newValue[index] += delta;
+    }
+    this.slider.set(newValue);
   }
 }
 
