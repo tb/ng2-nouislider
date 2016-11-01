@@ -83,8 +83,9 @@ someKeyboardConfig: any = &#123;
   behaviour: 'drag',
   connect: true,
   start: [0, 5],
-  step: 0.1,
   keyboard: true,  // same as [keyboard]="true"
+  step: 0.1,
+  pageSteps: 10,  // number of page steps, defaults to 10
   range: &#123;
     min: 0,
     max: 5

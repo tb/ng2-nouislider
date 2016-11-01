@@ -34,8 +34,9 @@ export class AppComponent {
     behaviour: 'drag',
     connect: true,
     start: [0, 5],
-    step: 0.1,
     keyboard: true,
+    step: 0.1,
+    pageSteps: 10,  // number of page steps, defaults to 10
     range: {
       min: 0,
       max: 5

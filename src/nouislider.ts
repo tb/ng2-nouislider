@@ -54,6 +54,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   @Input() private min: number;
   @Input() private max: number;
   @Input() private step: number;
+  @Input() private pageSteps: number;
   @Input() private config: any = {};
   @Input() private ngModel: number | number[];
   @Input() private keyboard: boolean;
@@ -77,6 +78,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       limit: this.limit,
       start: this.ngModel,
       step: this.step,
+      pageSteps: this.pageSteps,
       keyboard: this.keyboard,
       onKeydown: this.onKeydown,
       range: this.config.range || {min: this.min, max: this.max}
@@ -90,6 +92,9 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
     this.handles = [].slice.call(this.el.nativeElement.querySelectorAll('.noUi-handle'));
 
     if(this.config.keyboard) {
+      if(this.config.pageSteps === undefined) {
+        this.config.pageSteps = 10;
+      }
       for(let handle of this.handles) {
         handle.setAttribute('tabindex', 0);
         handle.addEventListener('click', () => {
@@ -160,7 +165,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
 
     switch ( e.which ) {
       case 34:  // PageDown
-        multiplier = 10;
+        multiplier = this.config.pageSteps;
       case 40:  // ArrowDown
       case 37:  // ArrowLeft
         sign = -1;
@@ -169,7 +174,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
         break;
 
       case 33:  // PageUp
-        multiplier = 10;
+        multiplier = this.config.pageSteps;
       case 38:  // ArrowUp
       case 39:  // ArrowRight
         step = stepSize[index][1];
