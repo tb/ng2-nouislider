@@ -6,6 +6,9 @@ import './app.component.scss';
   template: require('./app.component.html')
 })
 export class AppComponent {
+  public keyupLabelOn: boolean = false;
+  public keydownLabelOn: boolean = false;
+
   public someValue: number = 5;
   public someFormValue: number = 7;
   public someRange: number[] = [3, 7];
@@ -63,11 +66,17 @@ export class AppComponent {
     console.log('Value changed to', value);
   }
 
-  addClassFor ( elementId, className, duration ) {
-    let element = document.getElementById(elementId);
-    element.classList.add(className);
-    setTimeout(function(){
-      element.classList.remove(className);
-    }, duration);
+  blinkKeyupLabel() {
+    this.keyupLabelOn = true;
+    setTimeout(() => {
+      this.keyupLabelOn = false;
+    },450);
+  }
+
+  blinkKeydownLabel() {
+    this.keydownLabelOn = true;
+    setTimeout(() => {
+      this.keydownLabelOn = false;
+    },450);
   }
 }

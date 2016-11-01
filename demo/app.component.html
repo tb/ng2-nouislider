@@ -102,12 +102,12 @@ someKeyboardConfig: any = &#123;
 Select a handle and use arrow keys or page up / page down.
 <div class="event-logger">
     Keboard events (key up, key down):
-    <span id="keyup-label" class="h6 label label-default">keyup</span>
-    <span id="keydown-label" class="h6 label label-default">keydown</span>
+    <span class="h6 label label-default event-label" [ngClass]="{'label-info': keyupLabelOn}">keyup</span>
+    <span class="h6 label label-default event-label" [ngClass]="{'label-info': keydownLabelOn}">keydown</span>
 </div>
 <nouislider [config]="someKeyboardConfig"
             [(ngModel)]="someKeyboard"
-            (keyup)="addClassFor('keyup-label', 'label-info', 450)"
-            (keydown)="addClassFor('keydown-label', 'label-info', 450)"
+            (keyup)="blinkKeyupLabel()"
+            (keydown)="blinkKeydownLabel()"
             style="margin-bottom: 5rem"></nouislider>
 
