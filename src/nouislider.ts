@@ -94,24 +94,24 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       this.value = v;
     });
 
-    this.slider.on('update', () => {
-      this.update.emit(this.value);
+    this.slider.on('update', (values: string[]) => {
+      this.update.emit(toValue(values));
     });
 
-    this.slider.on('change', () => {
-      this.change.emit(this.value);
+    this.slider.on('change', (values: string[]) => {
+      this.change.emit(toValue(values));
     });
 
-    this.slider.on('slide', () => {
-      this.slide.emit(this.value);
+    this.slider.on('slide', (values: string[]) => {
+      this.slide.emit(toValue(values));
     });
 
-    this.slider.on('start', () => {
-      this.start.emit(this.value);
+    this.slider.on('start', (values: string[]) => {
+      this.start.emit(toValue(values));
     });
 
-    this.slider.on('end', () => {
-      this.end.emit(this.value);
+    this.slider.on('end', (values: string[]) => {
+      this.end.emit(toValue(values));
     });
   }
 
