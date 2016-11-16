@@ -30,7 +30,7 @@ export interface NouiFormatter {
 }
 
 export class DefaultFormatter implements NouiFormatter {
-  to(value: any): any{
+  to(value: any): any {
     return parseFloat(value);
   };
 

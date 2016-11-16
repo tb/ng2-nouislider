@@ -1,6 +1,14 @@
 import { ElementRef, OnInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-export declare function toValue(value: string[]): number | number[];
+export declare function toValue(value: string[]): any | any[];
+export interface NouiFormatter {
+    to(value: any): any;
+    from(value: any): any;
+}
+export declare class DefaultFormatter implements NouiFormatter {
+    to(value: any): any;
+    from(value: any): any;
+}
 export declare class NouisliderComponent implements ControlValueAccessor, OnInit {
     private el;
     slider: any;
@@ -10,6 +18,7 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     private min;
     private max;
     private step;
+    private format;
     private config;
     private ngModel;
     private change;
