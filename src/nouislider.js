@@ -13,12 +13,10 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 function toValue(value) {
     if (value.length == 1) {
-        return parseFloat(value[0]);
-    }
-    else if (value.length > 1) {
-        return value.map(parseFloat);
-    }
-    else {
+        return value[0];
+    } else if (value.length > 1) {
+        return value;
+    } else {
         return 0;
     }
 }
