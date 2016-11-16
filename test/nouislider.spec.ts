@@ -4,14 +4,38 @@ import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { toValue, NouisliderModule, NouisliderComponent } from '../src/nouislider.ts';
+import { DefaultFormatter, NouisliderModule, NouisliderComponent } from '../src/nouislider.ts';
 
-describe('toValue', () => {
-  it('should transform strings array to values', () => {
-    expect(toValue(['0'])).toEqual(0);
-    expect(toValue(['1'])).toEqual(1);
-    expect(toValue(['2','3'])).toEqual([2,3]);
+// describe('toValue', () => {
+//   it('should transform strings array to values', () => {
+//     expect(toValue(['0'])).toEqual(0);
+//     expect(toValue(['1'])).toEqual(1);
+//     expect(toValue(['2','3'])).toEqual([2,3]);
+//   });
+// });
+
+describe('Default Formatter', () => {
+
+  let formatter: DefaultFormatter;
+
+  beforeEach(async(() => {
+    formatter = new DefaultFormatter();
+  }));
+
+  describe('to', () => {
+    it('should transform strings to numbers', () => {
+      expect(formatter.to('0')).toEqual(0);
+      expect(formatter.to('1')).toEqual(1);
+    });
   });
+
+  describe('from', () => {
+    it('should transform numbers to strings', () => {
+      expect(formatter.from(0)).toEqual('0.00');
+      expect(formatter.from(1)).toEqual('1.00');
+    });
+  });
+
 });
 
 describe('Nouislider Component', () => {
@@ -52,10 +76,25 @@ describe('Nouislider Component', () => {
         range: {
           min: 0,
           max: 10
+        },
+        format: {
+          to: function (value) {
+            return value;
+          },
+          from: function (value) {
+            return parseFloat(value);
+          }
         }
       };
-      expect(sliderInstance['config']).toEqual(defaultOptions);
-      expect(sliderInstance.slider.options).toEqual(defaultOptions);
+
+      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+    });
+
+    it('should set default formatter', () => {
+
+      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
+      expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
     });
 
     it('should trigger events on model change', async(() => {
@@ -66,8 +105,8 @@ describe('Nouislider Component', () => {
         expect(isStable).toBe(true, 'isStable');
         expect(componentInstance.someValue).toEqual(6);
         expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
-          [ 'ngModelChange', 6 ],
-          [ 'set', 6 ]
+          ['ngModelChange', 6],
+          ['set', 6]
         ]);
       });
     }));
@@ -77,8 +116,8 @@ describe('Nouislider Component', () => {
       setTimeout(() => {
         expect(componentInstance.someValue).toEqual(6);
         expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
-          [ 'ngModelChange', 6 ],
-          [ 'set', 6 ]
+          ['ngModelChange', 6],
+          ['set', 6]
         ]);
       });
     }));
@@ -103,38 +142,52 @@ describe('Nouislider Component', () => {
 
     it('should set config', () => {
       const defaultOptions = {
-        start: [ 3 , 7 ],
+        start: [3, 7],
         step: 1,
         range: {
           min: 0,
           max: 10
+        },
+        format: {
+          to: function (value) {
+            return value;
+          },
+          from: function (value) {
+            return parseFloat(value);
+          }
         }
       };
-      expect(sliderInstance['config']).toEqual(defaultOptions);
-      expect(sliderInstance.slider.options).toEqual(defaultOptions);
+      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+    });
+
+    it('should set default formatter', () => {
+
+      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
+      expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
     });
 
     it('should trigger events on model change', async(() => {
-      componentInstance.someRange = [componentInstance.someRange[0]+1, componentInstance.someRange[1]];
+      componentInstance.someRange = [componentInstance.someRange[0] + 1, componentInstance.someRange[1]];
       fixture.detectChanges();
       fixture.whenStable().then((isStable) => {
         fixture.detectChanges();
         expect(isStable).toBe(true, 'isStable');
-        expect(componentInstance.someRange).toEqual([ 4, 7 ]);
+        expect(componentInstance.someRange).toEqual([4, 7]);
         expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
-          [ 'ngModelChange', [ 4, 7 ] ],
-          [ 'set', [ 4, 7 ] ]
+          ['ngModelChange', [4, 7]],
+          ['set', [4, 7]]
         ]);
       });
     }));
 
     it('should trigger events on slider set', async(() => {
-      sliderInstance.slider.set([ '4', '7' ]);
+      sliderInstance.slider.set(['4', '7']);
       setTimeout(() => {
-        expect(componentInstance.someRange).toEqual([ 4, 7 ]);
+        expect(componentInstance.someRange).toEqual([4, 7]);
         expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
-          [ 'ngModelChange', [ 4, 7 ] ],
-          [ 'set', [ 4, 7 ] ]
+          ['ngModelChange', [4, 7]],
+          ['set', [4, 7]]
         ]);
       });
     }));
@@ -157,7 +210,7 @@ describe('Nouislider Component', () => {
 })
 class TestSingleSliderComponent {
   public someValue: number = 5;
-  public onEvent(event: string, value: number) {};
+  public onEvent(event: string, value: number) { };
 }
 
 @Component({
@@ -176,5 +229,5 @@ class TestSingleSliderComponent {
 })
 class TestRangeSliderComponent {
   public someRange: number[] = [3, 7];
-  public onEvent(event: string, value: number[]) {};
+  public onEvent(event: string, value: number[]) { };
 }

@@ -14,13 +14,28 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
-export function toValue(value: string[]): any|any[] {
+export function toValue(value: string[]): any | any[] {
   if (value.length == 1) {
     return value[0];
   } else if (value.length > 1) {
     return value;
   } else {
     return 0;
+  }
+}
+
+export interface NouiFormatter {
+  to(value: any): any;
+  from(value: any): any;
+}
+
+export class DefaultFormatter implements NouiFormatter {
+  to(value: any) {
+    return parseFloat(value);
+  };
+
+  from(value: any) {
+    return parseFloat(value).toFixed(2);
   }
 }
 
@@ -46,6 +61,7 @@ export function toValue(value: string[]): any|any[] {
   ]
 })
 export class NouisliderComponent implements ControlValueAccessor, OnInit {
+
   public slider: any;
   @Input() private behaviour: string;
   @Input() private connect: boolean[];
@@ -53,6 +69,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   @Input() private min: number;
   @Input() private max: number;
   @Input() private step: number;
+  @Input() private format: NouiFormatter;
   @Input() private config: any = {};
   @Input() private ngModel: number | number[];
   @Output() private change: EventEmitter<any> = new EventEmitter(true);
@@ -74,8 +91,11 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       limit: this.limit,
       start: this.ngModel,
       step: this.step,
-      range: this.config.range || {min: this.min, max: this.max}
+      range: this.config.range || { min: this.min, max: this.max }
     }));
+
+    inputsConfig.format = this.format || new DefaultFormatter();
+
 
     this.slider = noUiSlider.create(
       this.el.nativeElement.querySelector('div'),
@@ -87,7 +107,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       if (this.value == v || String(this.value) == String(v)) {
         return;
       }
-      if(this.value !== undefined) {
+      if (this.value !== undefined) {
         this.set.emit(v);
         this.onChange(v);
       }
