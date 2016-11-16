@@ -78,10 +78,10 @@ describe('Nouislider Component', () => {
           max: 10
         },
         format: {
-          to: function (value) {
+          to: function (value: any) : any {
             return value;
           },
-          from: function (value) {
+          from: function (value: any) : any {
             return parseFloat(value);
           }
         }
@@ -149,10 +149,10 @@ describe('Nouislider Component', () => {
           max: 10
         },
         format: {
-          to: function (value) {
+          to: function (value: any) : any {
             return value;
           },
-          from: function (value) {
+          from: function (value: any) : any {
             return parseFloat(value);
           }
         }

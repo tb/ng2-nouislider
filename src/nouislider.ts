@@ -30,11 +30,11 @@ export interface NouiFormatter {
 }
 
 export class DefaultFormatter implements NouiFormatter {
-  to(value: any) {
+  to(value: any): any{
     return parseFloat(value);
   };
 
-  from(value: any) {
+  from(value: any): any {
     return parseFloat(value).toFixed(2);
   }
 }
