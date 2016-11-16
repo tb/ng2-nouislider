@@ -94,8 +94,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       range: this.config.range || { min: this.min, max: this.max }
     }));
 
-    inputsConfig.format = this.format || new DefaultFormatter();
-
+    inputsConfig.format = this.format || this.config.format || new DefaultFormatter();
 
     this.slider = noUiSlider.create(
       this.el.nativeElement.querySelector('div'),
