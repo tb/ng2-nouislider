@@ -47,11 +47,30 @@ export class AppComponent {
       values: 6,
       stepped: true
     }
-  }
+  };
 
   public someKeyboard2: number[] = [1, 3];
 
-  private someKeyboard2EventHandler = (e: KeyboardEvent) => {
+  public someKeyboardConfig2: any = {
+    behaviour: 'drag',
+    connect: true,
+    start: [0, 5],
+    step: 0.1,
+    range: {
+      min: 0,
+      max: 5
+    },
+    pips: {
+      mode: 'count',
+      density: 2,
+      values: 6,
+      stepped: true
+    },
+    keyboard: true,
+    onKeydown: this.someKeyboard2EventHandler
+  };
+
+  public someKeyboard2EventHandler = (e: KeyboardEvent) => {
     console.log("overridden keyboard handler");
 
     // determine which handle triggered the event
@@ -81,26 +100,7 @@ export class AppComponent {
     let newValue = [].concat(this.someKeyboard2);
     newValue[index] += delta;
     this.someKeyboard2 = newValue;
-  }
-
-  public someKeyboardConfig2: any = {
-    behaviour: 'drag',
-    connect: true,
-    start: [0, 5],
-    step: 0.1,
-    range: {
-      min: 0,
-      max: 5
-    },
-    pips: {
-      mode: 'count',
-      density: 2,
-      values: 6,
-      stepped: true
-    },
-    keyboard: true,
-    onKeydown: this.someKeyboard2EventHandler
-  }
+  };
 
   changeSomeValue(value: number) {
     this.someValue = this.someValue + value;
@@ -124,13 +124,13 @@ export class AppComponent {
     this.keyupLabelOn = true;
     setTimeout(() => {
       this.keyupLabelOn = false;
-    },450);
+    }, 450);
   }
 
   blinkKeydownLabel() {
     this.keydownLabelOn = true;
     setTimeout(() => {
       this.keydownLabelOn = false;
-    },450);
+    }, 450);
   }
 }

@@ -10,8 +10,8 @@ export declare class AppComponent {
     someKeyboard: number[];
     someKeyboardConfig: any;
     someKeyboard2: number[];
-    private someKeyboard2EventHandler;
     someKeyboardConfig2: any;
+    someKeyboard2EventHandler: (e: KeyboardEvent) => void;
     changeSomeValue(value: number): void;
     changeSomeFormValue(value: number): void;
     changeSomeRange(index: number, value: number): void;
