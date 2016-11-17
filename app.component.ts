@@ -6,6 +6,9 @@ import './app.component.scss';
   template: require('./app.component.html')
 })
 export class AppComponent {
+  public keyupLabelOn: boolean = false;
+  public keydownLabelOn: boolean = false;
+
   public someValue: number = 5;
   public someFormValue: number = 7;
   public someRange: number[] = [3, 7];
@@ -25,6 +28,80 @@ export class AppComponent {
     }
   };
 
+  public someKeyboard: number[] = [1, 3];
+
+  public someKeyboardConfig: any = {
+    behaviour: 'drag',
+    connect: true,
+    start: [0, 5],
+    keyboard: true,
+    step: 0.1,
+    pageSteps: 10,  // number of page steps, defaults to 10
+    range: {
+      min: 0,
+      max: 5
+    },
+    pips: {
+      mode: 'count',
+      density: 2,
+      values: 6,
+      stepped: true
+    }
+  }
+
+  public someKeyboard2: number[] = [1, 3];
+
+  private someKeyboard2EventHandler = (e: KeyboardEvent) => {
+    console.log("overridden keyboard handler");
+
+    // determine which handle triggered the event
+    let index = parseInt((<HTMLElement>e.target).getAttribute('data-handle'));
+
+    let multiplier: number = 0;
+    let stepSize = 0.1;
+
+    switch ( e.which ) {
+      case 40:  // ArrowDown
+      case 37:  // ArrowLeft
+        multiplier = -2;
+        e.preventDefault();
+        break;
+
+      case 38:  // ArrowUp
+      case 39:  // ArrowRight
+        multiplier = 3;
+        e.preventDefault();
+        break;
+
+      default:
+        break;
+    }
+
+    let delta = multiplier * stepSize;
+    let newValue = [].concat(this.someKeyboard2);
+    newValue[index] += delta;
+    this.someKeyboard2 = newValue;
+  }
+
+  public someKeyboardConfig2: any = {
+    behaviour: 'drag',
+    connect: true,
+    start: [0, 5],
+    step: 0.1,
+    range: {
+      min: 0,
+      max: 5
+    },
+    pips: {
+      mode: 'count',
+      density: 2,
+      values: 6,
+      stepped: true
+    },
+    keyboard: true,
+    onKeydown: this.someKeyboard2EventHandler
+  }
+
   changeSomeValue(value: number) {
     this.someValue = this.someValue + value;
   }
@@ -41,5 +118,19 @@ export class AppComponent {
 
   onChange(value: any) {
     console.log('Value changed to', value);
+  }
+
+  blinkKeyupLabel() {
+    this.keyupLabelOn = true;
+    setTimeout(() => {
+      this.keyupLabelOn = false;
+    },450);
+  }
+
+  blinkKeydownLabel() {
+    this.keydownLabelOn = true;
+    setTimeout(() => {
+      this.keydownLabelOn = false;
+    },450);
   }
 }

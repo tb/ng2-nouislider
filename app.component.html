@@ -73,4 +73,93 @@
 
 <code>someRange2: {{ someRange2 | json }}</code>
 
-<nouislider [config]="someRange2config" [limit]="10" [(ngModel)]="someRange2"></nouislider>
+<nouislider [config]="someRange2config" [limit]="10" [(ngModel)]="someRange2" style="margin-bottom: 5rem"></nouislider>
+
+<div class="page-header">
+    <h3>Keyboard support</h3>
+</div>
+<pre>
+someKeyboardConfig: any = &#123;
+  behaviour: 'drag',
+  connect: true,
+  start: [0, 5],
+  keyboard: true,  // same as [keyboard]="true"
+  step: 0.1,
+  pageSteps: 10,  // number of page steps, defaults to 10
+  range: &#123;
+    min: 0,
+    max: 5
+  &#125;,
+  pips: &#123;
+    mode: 'count',
+    density: 2,
+    values: 6,
+    stepped: true
+  &#125;
+&#125;;
+</pre>
+
+<pre>&lt;nouislider [config]=&quot;someKeyboardConfig&quot; [(ngModel)]=&quot;someKeyboard&quot;&gt;&lt;/nouislider&gt;</pre>
+Select a handle and use arrow keys or page up / page down.
+<div class="event-logger">
+    Keboard events (key up, key down):
+    <span class="h6 label label-default event-label" [ngClass]="{'label-info': keyupLabelOn}">keyup</span>
+    <span class="h6 label label-default event-label" [ngClass]="{'label-info': keydownLabelOn}">keydown</span>
+</div>
+<nouislider [config]="someKeyboardConfig"
+            [(ngModel)]="someKeyboard"
+            (keyup)="blinkKeyupLabel()"
+            (keydown)="blinkKeydownLabel()"
+            style="margin-bottom: 5rem"></nouislider>
+
+<h4>With custom key handler:</h4>
+<pre>
+@ViewChild('someKeyboardSlider2') someKeyboardSlider2: NouisliderComponent;
+
+public someKeyboard2: number[] = [1, 3];
+
+private someKeyboard2EventHandler = (e: KeyboardEvent) => &#123;
+  console.log("overridden keyboard handler");
+
+  // determine which handle triggered the event
+  let index = parseInt((&lt;HTMLElement&gt;e.target).getAttribute('data-handle'));
+
+  let multiplier: number = 0;
+  let stepSize = 0.1;
+
+  switch ( e.which ) &#123;
+    case 40:  // ArrowDown
+    case 37:  // ArrowLeft
+      multiplier = -2;
+      e.preventDefault();
+      break;
+
+    case 38:  // ArrowUp
+    case 39:  // ArrowRight
+      multiplier = 3;
+      e.preventDefault();
+      break;
+
+    default:
+      break;
+  &#125;
+
+  let delta = multiplier * stepSize;
+  let newValue = [].concat(this.someKeyboard2);
+  newValue[index] += delta;
+  this.someKeyboard2 = newValue;
+&#125;
+
+public someKeyboardConfig2: any = &#123;
+  // ...
+
+  keyboard: true,
+  onKeydown: this.someKeyboard2EventHandler
+&#125;
+</pre>
+<pre>
+&lt;nouislider [config]=&quot;someKeyboardConfig2&quot; [(ngModel)]=&quot;someKeyboard2&quot; &gt;&lt;/nouislider&gt;
+</pre>
+<nouislider [config]="someKeyboardConfig2"
+            [(ngModel)]="someKeyboard2"
+            style="margin-bottom: 5rem"></nouislider>
