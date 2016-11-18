@@ -12,6 +12,7 @@ export declare class DefaultFormatter implements NouiFormatter {
 export declare class NouisliderComponent implements ControlValueAccessor, OnInit {
     private el;
     slider: any;
+    handles: any[];
     private behaviour;
     private connect;
     private limit;
@@ -19,8 +20,11 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     private max;
     private step;
     private format;
+    private pageSteps;
     private config;
     private ngModel;
+    private keyboard;
+    private onKeydown;
     private change;
     private update;
     private slide;
@@ -35,6 +39,7 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     writeValue(value: any): void;
     registerOnChange(fn: (value: any) => void): void;
     registerOnTouched(fn: () => {}): void;
+    private defaultKeyHandler;
 }
 export declare class NouisliderModule {
 }

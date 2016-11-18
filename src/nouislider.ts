@@ -63,6 +63,7 @@ export class DefaultFormatter implements NouiFormatter {
 export class NouisliderComponent implements ControlValueAccessor, OnInit {
 
   public slider: any;
+  public handles: any[];
   @Input() private behaviour: string;
   @Input() private connect: boolean[];
   @Input() private limit: number;
@@ -70,8 +71,11 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   @Input() private max: number;
   @Input() private step: number;
   @Input() private format: NouiFormatter;
+  @Input() private pageSteps: number;
   @Input() private config: any = {};
   @Input() private ngModel: number | number[];
+  @Input() private keyboard: boolean;
+  @Input() private onKeydown: any;
   @Output() private change: EventEmitter<any> = new EventEmitter(true);
   @Output() private update: EventEmitter<any> = new EventEmitter(true);
   @Output() private slide: EventEmitter<any> = new EventEmitter(true);
@@ -91,7 +95,10 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       limit: this.limit,
       start: this.ngModel,
       step: this.step,
-      range: this.config.range || { min: this.min, max: this.max }
+      pageSteps: this.pageSteps,
+      keyboard: this.keyboard,
+      onKeydown: this.onKeydown,
+      range: this.config.range || {min: this.min, max: this.max}
     }));
 
     inputsConfig.format = this.format || this.config.format || new DefaultFormatter();
@@ -100,6 +107,25 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       this.el.nativeElement.querySelector('div'),
       Object.assign(this.config, inputsConfig)
     );
+
+    this.handles = [].slice.call(this.el.nativeElement.querySelectorAll('.noUi-handle'));
+
+    if(this.config.keyboard) {
+      if(this.config.pageSteps === undefined) {
+        this.config.pageSteps = 10;
+      }
+      for(let handle of this.handles) {
+        handle.setAttribute('tabindex', 0);
+        handle.addEventListener('click', () => {
+          handle.focus();
+        });
+        if(this.config.onKeydown === undefined) {
+          handle.addEventListener('keydown', this.defaultKeyHandler);
+        } else {
+          handle.addEventListener('keydown', this.config.onKeydown);
+        }
+      }
+    }
 
     this.slider.on('set', (value: any) => {
       let v = toValue(value);
@@ -113,24 +139,24 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       this.value = v;
     });
 
-    this.slider.on('update', () => {
-      this.update.emit(this.value);
+    this.slider.on('update', (values: string[]) => {
+      this.update.emit(toValue(values));
     });
 
-    this.slider.on('change', () => {
-      this.change.emit(this.value);
+    this.slider.on('change', (values: string[]) => {
+      this.change.emit(toValue(values));
     });
 
-    this.slider.on('slide', () => {
-      this.slide.emit(this.value);
+    this.slider.on('slide', (values: string[]) => {
+      this.slide.emit(toValue(values));
     });
 
-    this.slider.on('start', () => {
-      this.start.emit(this.value);
+    this.slider.on('start', (values: string[]) => {
+      this.start.emit(toValue(values));
     });
 
-    this.slider.on('end', () => {
-      this.end.emit(this.value);
+    this.slider.on('end', (values: string[]) => {
+      this.end.emit(toValue(values));
     });
   }
 
@@ -146,6 +172,48 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
 
   registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
+  }
+
+  private defaultKeyHandler = (e: KeyboardEvent) => {
+    let stepSize: any[] = this.slider.steps();
+    let index = parseInt((<HTMLElement>e.target).getAttribute('data-handle'));
+    let sign = 1;
+    let multiplier: number = 1;
+    let step = 0;
+    let delta = 0;
+
+    switch ( e.which ) {
+      case 34:  // PageDown
+        multiplier = this.config.pageSteps;
+      case 40:  // ArrowDown
+      case 37:  // ArrowLeft
+        sign = -1;
+        step = stepSize[index][0];
+        e.preventDefault();
+        break;
+
+      case 33:  // PageUp
+        multiplier = this.config.pageSteps;
+      case 38:  // ArrowUp
+      case 39:  // ArrowRight
+        step = stepSize[index][1];
+        e.preventDefault();
+        break;
+
+      default:
+        break;
+    }
+
+    delta = sign * multiplier * step;
+    let newValue: number | number[];
+
+    if (typeof(this.value) == "number") {
+      newValue = this.value + delta;
+    } else {
+      newValue = [].concat(this.value);
+      newValue[index] += delta;
+    }
+    this.slider.set(newValue);
   }
 }
 
