@@ -207,12 +207,14 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
     delta = sign * multiplier * step;
     let newValue: number | number[];
 
-    if (typeof(this.value) == "number") {
-      newValue = this.value + delta;
-    } else {
+    if(Array.isArray(this.value)) {
       newValue = [].concat(this.value);
-      newValue[index] += delta;
+      newValue[index] = this.config.format.to(parseFloat(this.config.format.from(newValue[index])) + delta);
+    } else {
+      newValue = this.config.format.to(parseFloat(this.config.format.from(this.value)) + delta);
+      
     }
+  
     this.slider.set(newValue);
   }
 }
