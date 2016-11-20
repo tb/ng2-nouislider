@@ -51,25 +51,6 @@ export class AppComponent {
 
   public someKeyboard2: number[] = [1, 3];
 
-  public someKeyboardConfig2: any = {
-    behaviour: 'drag',
-    connect: true,
-    start: [0, 5],
-    step: 0.1,
-    range: {
-      min: 0,
-      max: 5
-    },
-    pips: {
-      mode: 'count',
-      density: 2,
-      values: 6,
-      stepped: true
-    },
-    keyboard: true,
-    onKeydown: this.someKeyboard2EventHandler
-  };
-
   public someKeyboard2EventHandler = (e: KeyboardEvent) => {
     console.log("overridden keyboard handler");
 
@@ -100,6 +81,25 @@ export class AppComponent {
     let newValue = [].concat(this.someKeyboard2);
     newValue[index] += delta;
     this.someKeyboard2 = newValue;
+  };
+
+  public someKeyboardConfig2: any = {
+    behaviour: 'drag',
+    connect: true,
+    start: [0, 5],
+    step: 0.1,
+    range: {
+      min: 0,
+      max: 5
+    },
+    pips: {
+      mode: 'count',
+      density: 2,
+      values: 6,
+      stepped: true
+    },
+    keyboard: true,
+    onKeydown: this.someKeyboard2EventHandler,
   };
 
   changeSomeValue(value: number) {
