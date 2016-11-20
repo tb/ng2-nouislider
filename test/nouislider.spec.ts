@@ -6,16 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { DefaultFormatter, NouisliderModule, NouisliderComponent } from '../src/nouislider.ts';
 
-// describe('toValue', () => {
-//   it('should transform strings array to values', () => {
-//     expect(toValue(['0'])).toEqual(0);
-//     expect(toValue(['1'])).toEqual(1);
-//     expect(toValue(['2','3'])).toEqual([2,3]);
-//   });
-// });
-
 describe('Default Formatter', () => {
-
   let formatter: DefaultFormatter;
 
   beforeEach(async(() => {
@@ -35,7 +26,6 @@ describe('Default Formatter', () => {
       expect(formatter.from(1)).toEqual('1.00');
     });
   });
-
 });
 
 describe('Nouislider Component', () => {
@@ -92,7 +82,6 @@ describe('Nouislider Component', () => {
     });
 
     it('should set default formatter', () => {
-
       expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
       expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
     });

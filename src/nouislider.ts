@@ -212,9 +212,8 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       newValue[index] = this.config.format.to(parseFloat(this.config.format.from(newValue[index])) + delta);
     } else {
       newValue = this.config.format.to(parseFloat(this.config.format.from(this.value)) + delta);
-      
     }
-  
+
     this.slider.set(newValue);
   }
 }
