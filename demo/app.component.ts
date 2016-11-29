@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   public someFormValue: number = 7;
   public someRange: number[] = [3, 7];
   public someRange2: number[] = [10, 15];
+  public someRange3: number[] = [2, 8];
   public someRange2config: any = {
     behaviour: 'drag',
     connect: true,

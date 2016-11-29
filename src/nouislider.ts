@@ -78,6 +78,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   @Input() private keyboard: boolean;
   @Input() private onKeydown: any;
   @Input() private formControl: FormControl;
+  @Input() private tooltips: Array<any>;
   @Output() private change: EventEmitter<any> = new EventEmitter(true);
   @Output() private update: EventEmitter<any> = new EventEmitter(true);
   @Output() private slide: EventEmitter<any> = new EventEmitter(true);
@@ -100,7 +101,8 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       pageSteps: this.pageSteps,
       keyboard: this.keyboard,
       onKeydown: this.onKeydown,
-      range: this.config.range || {min: this.min, max: this.max}
+      range: this.config.range || {min: this.min, max: this.max},
+      tooltips: this.tooltips,
     }));
 
     inputsConfig.format = this.format || this.config.format || new DefaultFormatter();

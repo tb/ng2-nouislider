@@ -1,5 +1,5 @@
 <div class="page-header">
-	<h3>Single value</h3>
+  <h3>Single value</h3>
 </div>
 
 <pre>&lt;nouislider [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someValue&quot; (ngModelChange)=&quot;onChange($event)&quot;&gt;&lt;/nouislider&gt;</pre>
@@ -9,12 +9,12 @@
 <nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="someValue" (ngModelChange)="onChange($event)"></nouislider>
 
 <div class="btn-group">
-	<button type="button" class="btn btn-primary" (click)="changeSomeValue(-1)">-1</button>
-	<button type="button" class="btn btn-primary" (click)="changeSomeValue(1)">+1</button>
+  <button type="button" class="btn btn-primary" (click)="changeSomeValue(-1)">-1</button>
+  <button type="button" class="btn btn-primary" (click)="changeSomeValue(1)">+1</button>
 </div>
 
 <div class="page-header">
-	<h3>Single value (in &lt;form&gt;)</h3>
+  <h3>Single value (in &lt;form&gt;)</h3>
 </div>
 
 <pre>
@@ -28,12 +28,12 @@
 </form>
 
 <div class="btn-group">
-	<button type="button" class="btn btn-primary" (click)="changeSingleFormValue(-0.5)">-0.5</button>
-	<button type="button" class="btn btn-primary" (click)="changeSingleFormValue(0.5)">+0.5</button>
+  <button type="button" class="btn btn-primary" (click)="changeSingleFormValue(-0.5)">-0.5</button>
+  <button type="button" class="btn btn-primary" (click)="changeSingleFormValue(0.5)">+0.5</button>
 </div>
 
 <div class="page-header">
-	<h3>Range</h3>
+  <h3>Range</h3>
 </div>
 
 <pre>&lt;nouislider [connect]=&quot;true&quot; [min]=&quot;0&quot; [max]=&quot;15&quot; [step]=&quot;1&quot; [(ngModel)]=&quot;someRange&quot; (ngModelChange)=&quot;onChange($event)&quot;&gt;&lt;/nouislider&gt;</pre>
@@ -43,17 +43,17 @@
 <nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (ngModelChange)="onChange($event)"></nouislider>
 
 <div class="btn-group">
-	<button type="button" class="btn btn-primary" (click)="changeSomeRange(0,-1)">-</button>
-	<button type="button" class="btn btn-primary" (click)="changeSomeRange(0,1)">+</button>
+  <button type="button" class="btn btn-primary" (click)="changeSomeRange(0,-1)">-</button>
+  <button type="button" class="btn btn-primary" (click)="changeSomeRange(0,1)">+</button>
 </div>
 
 <div class="btn-group">
-	<button type="button" class="btn btn-primary" (click)="changeSomeRange(1,-1)">-</button>
-	<button type="button" class="btn btn-primary" (click)="changeSomeRange(1,1)">+</button>
+  <button type="button" class="btn btn-primary" (click)="changeSomeRange(1,-1)">-</button>
+  <button type="button" class="btn btn-primary" (click)="changeSomeRange(1,1)">+</button>
 </div>
 
 <div class="page-header">
-	<h3>Range (in &lt;form&gt;)</h3>
+  <h3>Range (in &lt;form&gt;)</h3>
 </div>
 
 <pre>
@@ -67,16 +67,16 @@
 </form>
 
 <div class="btn-group">
-	<button type="button" class="btn btn-primary" (click)="changeRangeFormValue(0,-1)">-</button>
-	<button type="button" class="btn btn-primary" (click)="changeRangeFormValue(0,1)">+</button>
+  <button type="button" class="btn btn-primary" (click)="changeRangeFormValue(0,-1)">-</button>
+  <button type="button" class="btn btn-primary" (click)="changeRangeFormValue(0,1)">+</button>
 </div>
 
 <div class="btn-group">
-	<button type="button" class="btn btn-primary" (click)="changeRangeFormValue(1,-1)">-</button>
-	<button type="button" class="btn btn-primary" (click)="changeRangeFormValue(1,1)">+</button>
+  <button type="button" class="btn btn-primary" (click)="changeRangeFormValue(1,-1)">-</button>
+  <button type="button" class="btn btn-primary" (click)="changeRangeFormValue(1,1)">+</button>
 </div>
 <div class="page-header">
-	<h3>Range with config</h3>
+  <h3>Range with config</h3>
 </div>
 
 <pre>someRange2config: any = &#123;
@@ -188,3 +188,12 @@ public someKeyboardConfig2: any = &#123;
 <nouislider [config]="someKeyboardConfig2"
             [(ngModel)]="someKeyboard2"
             style="margin-bottom: 5rem"></nouislider>
+
+
+<div class="page-header">
+  <h3>Tooltips</h3>
+</div>
+
+<pre>&lt;nouislider[min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someRange3&quot; [tooltips]=&quot;[ false, true ]&quot; style=&quot;margin-top: 4em;&quot;&gt;&lt;/nouislider&gt;</pre>
+
+<nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="someRange3" [tooltips]="[ false, true ]" style="margin-top: 4em;"></nouislider>
