@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import {
   ControlValueAccessor,
+  FormControl,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
@@ -76,6 +77,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   @Input() private ngModel: number | number[];
   @Input() private keyboard: boolean;
   @Input() private onKeydown: any;
+  @Input() private formControl: FormControl;
   @Output() private change: EventEmitter<any> = new EventEmitter(true);
   @Output() private update: EventEmitter<any> = new EventEmitter(true);
   @Output() private slide: EventEmitter<any> = new EventEmitter(true);
@@ -93,7 +95,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       behaviour: this.behaviour,
       connect: this.connect,
       limit: this.limit,
-      start: this.ngModel,
+      start: this.ngModel || this.formControl.value,
       step: this.step,
       pageSteps: this.pageSteps,
       keyboard: this.keyboard,
