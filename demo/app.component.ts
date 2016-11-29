@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import './app.component.scss';
 
 @Component({
   selector: 'app',
   template: require('./app.component.html')
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public keyupLabelOn: boolean = false;
   public keydownLabelOn: boolean = false;
 
@@ -50,6 +51,17 @@ export class AppComponent {
   };
 
   public someKeyboard2: number[] = [1, 3];
+  public form1: FormGroup;
+  public form2: FormGroup;
+
+  constructor (
+    private formBuilder: FormBuilder
+  ) {}
+
+  public ngOnInit () {
+    this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
+    this.form2 = this.formBuilder.group({ 'range': [ [ 2, 8 ] ] });
+  }
 
   public someKeyboard2EventHandler = (e: KeyboardEvent) => {
     console.log("overridden keyboard handler");
@@ -106,8 +118,16 @@ export class AppComponent {
     this.someValue = this.someValue + value;
   }
 
-  changeSomeFormValue(value: number) {
-    this.someFormValue = this.someFormValue + value;
+  changeSingleFormValue(value: number) {
+    const control = <FormControl>this.form1.controls['single'];
+    control.setValue(control.value + value);
+  }
+
+  changeRangeFormValue(index: number, value: number) {
+    const control = <FormControl>this.form2.controls['range'];
+    const newRange = control.value;
+    newRange[index] = newRange[index] + value;
+    control.setValue(newRange);
   }
 
   changeSomeRange(index: number, value: number) {
