@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { Component, DebugElement } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { DefaultFormatter, NouisliderModule, NouisliderComponent } from '../src/nouislider.ts';
 
@@ -33,11 +33,14 @@ describe('Nouislider Component', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        NouisliderModule
+        NouisliderModule,
+        ReactiveFormsModule
       ],
       declarations: [
         TestSingleSliderComponent,
-        TestRangeSliderComponent
+        TestRangeSliderComponent,
+        TestSingleFormSliderComponent,
+        TestRangeFormSliderComponent
       ]
     });
   }));
@@ -112,6 +115,58 @@ describe('Nouislider Component', () => {
     }));
   });
 
+  describe('single slider (as form control)', () => {
+    let fixture: ComponentFixture<TestSingleFormSliderComponent>;
+    let componentInstance: TestSingleFormSliderComponent;
+    let sliderDebugElement: DebugElement;
+    let sliderInstance: NouisliderComponent;
+
+    beforeEach(async(() => {
+      fixture = TestBed.createComponent(TestSingleFormSliderComponent);
+      componentInstance = fixture.debugElement.componentInstance;
+      sliderDebugElement = fixture.debugElement.query(By.directive(NouisliderComponent));
+      sliderInstance = sliderDebugElement.componentInstance;
+      fixture.detectChanges();
+    }));
+
+    it('should set config', () => {
+      const defaultOptions = {
+        start: 8,
+        step: 0.05,
+        range: {
+          min: 0,
+          max: 10
+        },
+        format: {
+          to: function (value: any) : any {
+            return value;
+          },
+          from: function (value: any) : any {
+            return parseFloat(value);
+          }
+        }
+      };
+
+      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+    });
+
+    it('should set default formatter', () => {
+      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
+      expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
+    });
+
+    it('should change the form value on slider set', async(() => {
+
+      // Initial value
+      expect(componentInstance.form.value).toEqual({ single: 8 });
+
+      // Change value via noUiSlider object
+      sliderInstance.slider.set(4);
+      expect(componentInstance.form.value).toEqual({ single: 4 });
+    }));
+  });
+
   describe('range slider', () => {
     let fixture: ComponentFixture<TestRangeSliderComponent>;
     let componentInstance: TestRangeSliderComponent;
@@ -151,7 +206,6 @@ describe('Nouislider Component', () => {
     });
 
     it('should set default formatter', () => {
-
       expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
       expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
     });
@@ -181,6 +235,55 @@ describe('Nouislider Component', () => {
       });
     }));
   });
+
+  describe('range slider (as form control)', () => {
+    let fixture: ComponentFixture<TestRangeFormSliderComponent>;
+    let componentInstance: TestRangeFormSliderComponent;
+    let sliderDebugElement: DebugElement;
+    let sliderInstance: NouisliderComponent;
+
+    beforeEach(async(() => {
+      fixture = TestBed.createComponent(TestRangeFormSliderComponent);
+      componentInstance = fixture.debugElement.componentInstance;
+      sliderDebugElement = fixture.debugElement.query(By.directive(NouisliderComponent));
+      sliderInstance = sliderDebugElement.componentInstance;
+      fixture.detectChanges();
+    }));
+
+    it('should set config', () => {
+      const defaultOptions = {
+        start: [2, 8],
+        step: 1,
+        range: { min: 0, max: 10 },
+        format: {
+          to: function (value: any) : any {
+            return value;
+          },
+          from: function (value: any) : any {
+            return parseFloat(value);
+          }
+        }
+      };
+
+      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+    });
+
+    it('should set default formatter', () => {
+      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
+      expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
+    });
+
+    it('should change the form value on slider set', async(() => {
+
+      // Initial value
+      expect(componentInstance.form.value).toEqual({ range: [2, 8] });
+
+      // Change value via noUiSlider object
+      sliderInstance.slider.set([4, 6]);
+      expect(componentInstance.form.value).toEqual({ range: [4, 6] });
+    }));
+  });
 });
 
 @Component({
@@ -203,6 +306,26 @@ class TestSingleSliderComponent {
 }
 
 @Component({
+  selector: 'test-single-form-slider',
+  template: `
+    <form [formGroup]="form">
+      <nouislider
+        [min]="0"
+        [max]="10"
+        [step]="0.05"
+        [formControl]="form.controls.single"
+      ></nouislider>
+    </form>
+  `,
+})
+class TestSingleFormSliderComponent {
+  public form: FormGroup;
+  constructor (private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({ 'single': [ 8 ] });
+  }
+}
+
+@Component({
   selector: 'test-range-slider',
   template: `
     <nouislider
@@ -219,4 +342,24 @@ class TestSingleSliderComponent {
 class TestRangeSliderComponent {
   public someRange: number[] = [3, 7];
   public onEvent(event: string, value: number[]) { };
+}
+
+@Component({
+  selector: 'test-range-form-slider',
+  template: `
+    <form [formGroup]="form">
+      <nouislider
+        [min]="0"
+        [max]="10"
+        [step]="1"
+        [formControl]="form.controls.range"
+      ></nouislider>
+    </form>
+  `,
+})
+class TestRangeFormSliderComponent {
+  public form: FormGroup;
+  constructor (private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({ 'range': [[2, 8]] });
+  }
 }
