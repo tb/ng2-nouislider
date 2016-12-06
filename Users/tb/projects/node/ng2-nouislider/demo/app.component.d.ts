@@ -1,19 +1,29 @@
+import { OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import './app.component.scss';
-export declare class AppComponent {
+export declare class AppComponent implements OnInit {
+    private formBuilder;
+    disabled: boolean;
     keyupLabelOn: boolean;
     keydownLabelOn: boolean;
     someValue: number;
     someFormValue: number;
     someRange: number[];
     someRange2: number[];
+    someRange3: number[];
     someRange2config: any;
     someKeyboard: number[];
     someKeyboardConfig: any;
     someKeyboard2: number[];
+    form1: FormGroup;
+    form2: FormGroup;
+    constructor(formBuilder: FormBuilder);
+    ngOnInit(): void;
     someKeyboard2EventHandler: (e: KeyboardEvent) => void;
     someKeyboardConfig2: any;
     changeSomeValue(value: number): void;
-    changeSomeFormValue(value: number): void;
+    changeSingleFormValue(value: number): void;
+    changeRangeFormValue(index: number, value: number): void;
     changeSomeRange(index: number, value: number): void;
     onChange(value: any): void;
     blinkKeyupLabel(): void;

@@ -13,6 +13,7 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     private el;
     slider: any;
     handles: any[];
+    private disabled;
     private behaviour;
     private connect;
     private limit;
@@ -25,6 +26,8 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     private ngModel;
     private keyboard;
     private onKeydown;
+    private formControl;
+    private tooltips;
     private change;
     private update;
     private slide;
