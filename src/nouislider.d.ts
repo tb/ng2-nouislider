@@ -25,6 +25,8 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     private ngModel;
     private keyboard;
     private onKeydown;
+    private formControl;
+    private tooltips;
     private change;
     private update;
     private slide;

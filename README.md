@@ -34,7 +34,21 @@ Add to packages:
 
 ## Usage
 
+### Using ngModel
+
     <nouislider [connect]="true" [min]="0" [max]="15" [(ngModel)]="someRange"></nouislider>
+
+### Within reactive forms
+
+```js
+this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
+```
+
+```html
+<form [formGroup]="form">
+    <nouislider [min]="0" [max]="20" [step]="0.5" [formControl]="form.controls.slider"></nouislider>
+</form>
+```
 
 ## Start development
 
