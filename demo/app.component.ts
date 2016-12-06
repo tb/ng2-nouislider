@@ -7,6 +7,7 @@ import './app.component.scss';
   template: require('./app.component.html')
 })
 export class AppComponent implements OnInit {
+  public disabled: boolean = false;
   public keyupLabelOn: boolean = false;
   public keydownLabelOn: boolean = false;
 

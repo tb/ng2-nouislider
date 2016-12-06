@@ -45,7 +45,7 @@ export class DefaultFormatter implements NouiFormatter {
   host: {
     '[class.ng2-nouislider]': 'true'
   },
-  template: '<div></div>',
+  template: '<div [attr.disabled]="disabled ? true : undefined"></div>',
   styles: [`
     :host {
       display: block;
@@ -65,6 +65,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
 
   public slider: any;
   public handles: any[];
+  @Input() private disabled: boolean; // tslint:disable-line
   @Input() private behaviour: string;
   @Input() private connect: boolean[];
   @Input() private limit: number;

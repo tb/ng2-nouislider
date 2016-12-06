@@ -13,6 +13,7 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     private el;
     slider: any;
     handles: any[];
+    private disabled;
     private behaviour;
     private connect;
     private limit;
