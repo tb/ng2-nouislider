@@ -97,7 +97,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       behaviour: this.behaviour,
       connect: this.connect,
       limit: this.limit,
-      start: this.ngModel || (this.ngModel === 0 ? 0 : this.formControl.value),
+      start: this.formControl !== undefined ? this.formControl.value : this.ngModel,
       step: this.step,
       pageSteps: this.pageSteps,
       keyboard: this.keyboard,
