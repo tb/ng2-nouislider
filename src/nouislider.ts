@@ -15,11 +15,11 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
-export function toValue(value: string[]): any | any[] {
+export function toValue(value: string[]): number|number[] {
   if (value.length == 1) {
-    return value[0];
+    return parseFloat(value[0]);
   } else if (value.length > 1) {
-    return value;
+    return value.map(parseFloat);
   } else {
     return 0;
   }
