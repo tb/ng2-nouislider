@@ -14,16 +14,16 @@ describe('Default Formatter', () => {
   }));
 
   describe('to', () => {
-    it('should transform strings to numbers', () => {
-      expect(formatter.to('0')).toEqual(0);
-      expect(formatter.to('1')).toEqual(1);
+    it('should transform numbers to strings with default formatting', () => {
+      expect(formatter.to(0)).toEqual('0.00');
+      expect(formatter.to(1)).toEqual('1.00');
     });
   });
 
   describe('from', () => {
-    it('should transform numbers to strings', () => {
-      expect(formatter.from(0)).toEqual('0.00');
-      expect(formatter.from(1)).toEqual('1.00');
+    it('should transform strings with default formatting to numbers', () => {
+      expect(formatter.from('0.00')).toEqual(0);
+      expect(formatter.from('1.00')).toEqual(1);
     });
   });
 });
@@ -67,7 +67,7 @@ describe('Nouislider Component', () => {
         start: 5,
         step: 0.05,
         range: {
-          min: 0,
+          min: -10,
           max: 10
         },
         format: {
@@ -290,7 +290,7 @@ describe('Nouislider Component', () => {
   selector: 'test-single-slider',
   template: `
     <nouislider
-      [min]="0"
+      [min]="-10"
       [max]="10"
       [step]="0.05"
       [(ngModel)]="someValue"
