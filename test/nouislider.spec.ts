@@ -16,6 +16,7 @@ describe('Default Formatter', () => {
   describe('to', () => {
     it('should transform numbers to strings with default formatting', () => {
       expect(formatter.to(0)).toEqual('0');
+      expect(formatter.to(0.001)).toEqual('0');
       expect(formatter.to(0.5)).toEqual('0.5');
       expect(formatter.to(1)).toEqual('1');
     });

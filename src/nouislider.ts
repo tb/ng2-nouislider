@@ -32,7 +32,8 @@ export interface NouiFormatter {
 
 export class DefaultFormatter implements NouiFormatter {
   to(value: number): string {
-    return String(value);
+    // formatting with http://stackoverflow.com/a/26463364/478584
+    return String(parseFloat(parseFloat(String(value)).toFixed(2)));
   };
 
   from(value: string): number {
