@@ -15,15 +15,17 @@ describe('Default Formatter', () => {
 
   describe('to', () => {
     it('should transform numbers to strings with default formatting', () => {
-      expect(formatter.to(0)).toEqual('0.00');
-      expect(formatter.to(1)).toEqual('1.00');
+      expect(formatter.to(0)).toEqual('0');
+      expect(formatter.to(0.5)).toEqual('0.5');
+      expect(formatter.to(1)).toEqual('1');
     });
   });
 
   describe('from', () => {
     it('should transform strings with default formatting to numbers', () => {
-      expect(formatter.from('0.00')).toEqual(0);
-      expect(formatter.from('1.00')).toEqual(1);
+      expect(formatter.from('0')).toEqual(0);
+      expect(formatter.from('0.5')).toEqual(0.5);
+      expect(formatter.from('1')).toEqual(1);
     });
   });
 });

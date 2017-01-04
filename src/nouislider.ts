@@ -26,17 +26,17 @@ export function toValue(value: string[]): number|number[] {
 }
 
 export interface NouiFormatter {
-  to(value: any): any;
-  from(value: any): any;
+  to(value: number): string;
+  from(value: string): number;
 }
 
 export class DefaultFormatter implements NouiFormatter {
-  to(value: any): any {
-    return parseFloat(value).toFixed(2);
+  to(value: number): string {
+    return String(value);
   };
 
-  from(value: any): any {
-    return parseFloat(this.to(value));
+  from(value: string): number {
+    return parseFloat(value);
   }
 }
 
