@@ -1,13 +1,13 @@
 import { ElementRef, OnInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-export declare function toValue(value: string[]): any | any[];
+export declare function toValue(value: string[]): number | number[];
 export interface NouiFormatter {
-    to(value: any): any;
-    from(value: any): any;
+    to(value: number): string;
+    from(value: string): number;
 }
 export declare class DefaultFormatter implements NouiFormatter {
-    to(value: any): any;
-    from(value: any): any;
+    to(value: number): string;
+    from(value: string): number;
 }
 export declare class NouisliderComponent implements ControlValueAccessor, OnInit {
     private el;
