@@ -6,3 +6,4 @@ tsconfig.json
 tslint.json
 typings.json
 webpack*
+/compiled

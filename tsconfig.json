@@ -16,5 +16,8 @@
   "files": [
     "src/nouislider.ts",
     "typings/index.d.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "genDir": "compiled"
+  }
 }
