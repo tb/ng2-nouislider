@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   public keydownLabelOn: boolean = false;
 
   public someValue: number = 5;
-  public someFormValue: number = 7;
   public someRange: number[] = [3, 7];
   public someRange2: number[] = [10, 15];
   public someRange3: number[] = [2, 8];
