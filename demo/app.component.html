@@ -201,3 +201,9 @@ public someKeyboardConfig2: any = &#123;
 <pre>&lt;nouislider[min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someRange3&quot; [tooltips]=&quot;[ false, true ]&quot; style=&quot;margin-top: 4em;&quot;&gt;&lt;/nouislider&gt;</pre>
 
 <nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="someRange3" [tooltips]="[ false, true ]" style="margin-top: 4em;"></nouislider>
+
+<div class="page-header">
+  <h3>With custom formatting</h3>
+</div>
+
+<nouislider [config]="someTimeConfig" [(ngModel)]="someTime" style="margin-bottom: 5rem"></nouislider>
