@@ -15,16 +15,6 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
-export function toValue(value: string[]): number|number[] {
-  if (value.length == 1) {
-    return parseFloat(value[0]);
-  } else if (value.length > 1) {
-    return value.map(parseFloat);
-  } else {
-    return 0;
-  }
-}
-
 export interface NouiFormatter {
   to(value: number): string;
   from(value: string): number;
@@ -133,37 +123,48 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       }
     }
 
-    this.slider.on('set', (value: any) => {
-      let v = toValue(value);
-      if (this.value == v || String(this.value) == String(v)) {
-        return;
+    this.slider.on('set', (values: string[], handle: number, unencoded: number[]) => {
+      let v = this.toValues(values);
+      let emitEvents = false;
+      if(this.value !== undefined) {
+        if(Array.isArray(v) && this.value[handle] != v[handle]) {
+          emitEvents = true;
+        }
+        if(!Array.isArray(v) && this.value != v) {
+          emitEvents = true;
+        }
       }
-      if (this.value !== undefined) {
+      if(emitEvents) {
         this.set.emit(v);
         this.onChange(v);
       }
       this.value = v;
     });
 
-    this.slider.on('update', (values: string[]) => {
-      this.update.emit(toValue(values));
+    this.slider.on('update', (values: string[], handle: number, unencoded: number[]) => {
+      this.update.emit(this.toValues(values));
     });
 
-    this.slider.on('change', (values: string[]) => {
-      this.change.emit(toValue(values));
+    this.slider.on('change', (values: string[], handle: number, unencoded: number[]) => {
+      this.change.emit(this.toValues(values));
     });
 
-    this.slider.on('slide', (values: string[]) => {
-      this.slide.emit(toValue(values));
+    this.slider.on('slide', (values: string[], handle: number, unencoded: number[]) => {
+      this.slide.emit(this.toValues(values));
     });
 
-    this.slider.on('start', (values: string[]) => {
-      this.start.emit(toValue(values));
+    this.slider.on('start', (values: string[], handle: number, unencoded: number[]) => {
+      this.start.emit(this.toValues(values));
     });
 
-    this.slider.on('end', (values: string[]) => {
-      this.end.emit(toValue(values));
+    this.slider.on('end', (values: string[], handle: number, unencoded: number[]) => {
+      this.end.emit(this.toValues(values));
     });
+  }
+
+  toValues(values: string[]): any | any[] {
+    let v = values.map(this.config.format.from);
+    return (v.length == 1 ? v[0] : v);
   }
 
   writeValue(value: any): void {
