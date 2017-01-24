@@ -135,6 +135,7 @@ Select a handle and use arrow keys or page up / page down.
     <span class="h6 label label-default event-label" [ngClass]="{'label-info': keyupLabelOn}">keyup</span>
     <span class="h6 label label-default event-label" [ngClass]="{'label-info': keydownLabelOn}">keydown</span>
 </div>
+<code>someKeyboard: {{ someKeyboard | json }}</code>
 <nouislider [config]="someKeyboardConfig"
             [(ngModel)]="someKeyboard"
             (keyup)="blinkKeyupLabel()"

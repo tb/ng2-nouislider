@@ -126,19 +126,25 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
     this.slider.on('set', (values: string[], handle: number, unencoded: number[]) => {
       let v = this.toValues(values);
       let emitEvents = false;
-      if(this.value !== undefined) {
-        if(Array.isArray(v) && this.value[handle] != v[handle]) {
-          emitEvents = true;
-        }
-        if(!Array.isArray(v) && this.value != v) {
-          emitEvents = true;
-        }
+      if(this.value === undefined) {
+        this.value = v;
+        return;
+      }
+      if(Array.isArray(v) && this.value[handle] != v[handle]) {
+        emitEvents = true;
+      }
+      if(!Array.isArray(v) && this.value != v) {
+        emitEvents = true;
       }
       if(emitEvents) {
         this.set.emit(v);
         this.onChange(v);
       }
-      this.value = v;
+      if(Array.isArray(v)) {
+        this.value[handle] = v[handle];
+      } else {
+        this.value = v;
+      }
     });
 
     this.slider.on('update', (values: string[], handle: number, unencoded: number[]) => {
@@ -216,9 +222,9 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
 
     if(Array.isArray(this.value)) {
       newValue = [].concat(this.value);
-      newValue[index] = this.config.format.to(parseFloat(this.config.format.from(newValue[index])) + delta);
+      newValue[index] = newValue[index] + delta;
     } else {
-      newValue = this.config.format.to(parseFloat(this.config.format.from(this.value)) + delta);
+      newValue = this.value + delta;
     }
 
     this.slider.set(newValue);
