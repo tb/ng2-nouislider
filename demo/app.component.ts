@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import './app.component.scss';
 
-import { NouiFormatter } from 'ng2-nouislider';
+import { NouiFormatter } from '../src/nouislider';
 
 export class TimeFormatter implements NouiFormatter {
   to(value: number): string {
@@ -17,7 +17,7 @@ export class TimeFormatter implements NouiFormatter {
         timeString += '0';
       timeString += values[i].toFixed(0);
       if(i < 2) {
-        timeString += ':'
+        timeString += ':';
       }
       i++;
     }

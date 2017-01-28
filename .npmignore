@@ -7,3 +7,4 @@ tslint.json
 typings.json
 webpack*
 /compiled
+/demo
