@@ -3,7 +3,6 @@ node_modules/
 typings/
 npm-debug.log
 /compiled
-*.metadata.json
 nouislider.map.js
 nouislider.js
 src/nouislider.d.ts
