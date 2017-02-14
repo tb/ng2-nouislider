@@ -56,27 +56,27 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
 
   public slider: any;
   public handles: any[];
-  @Input() private disabled: boolean; // tslint:disable-line
-  @Input() private behaviour: string;
-  @Input() private connect: boolean[];
-  @Input() private limit: number;
-  @Input() private min: number;
-  @Input() private max: number;
-  @Input() private step: number;
-  @Input() private format: NouiFormatter;
-  @Input() private pageSteps: number;
-  @Input() private config: any = {};
-  @Input() private ngModel: number | number[];
-  @Input() private keyboard: boolean;
-  @Input() private onKeydown: any;
-  @Input() private formControl: FormControl;
-  @Input() private tooltips: Array<any>;
-  @Output() private change: EventEmitter<any> = new EventEmitter(true);
-  @Output() private update: EventEmitter<any> = new EventEmitter(true);
-  @Output() private slide: EventEmitter<any> = new EventEmitter(true);
-  @Output() private set: EventEmitter<any> = new EventEmitter(true);
-  @Output() private start: EventEmitter<any> = new EventEmitter(true);
-  @Output() private end: EventEmitter<any> = new EventEmitter(true);
+  @Input() public disabled: boolean; // tslint:disable-line
+  @Input() public behaviour: string;
+  @Input() public connect: boolean[];
+  @Input() public limit: number;
+  @Input() public min: number;
+  @Input() public max: number;
+  @Input() public step: number;
+  @Input() public format: NouiFormatter;
+  @Input() public pageSteps: number;
+  @Input() public config: any = {};
+  @Input() public ngModel: number | number[];
+  @Input() public keyboard: boolean;
+  @Input() public onKeydown: any;
+  @Input() public formControl: FormControl;
+  @Input() public tooltips: Array<any>;
+  @Output() public change: EventEmitter<any> = new EventEmitter(true);
+  @Output() public update: EventEmitter<any> = new EventEmitter(true);
+  @Output() public slide: EventEmitter<any> = new EventEmitter(true);
+  @Output() public set: EventEmitter<any> = new EventEmitter(true);
+  @Output() public start: EventEmitter<any> = new EventEmitter(true);
+  @Output() public end: EventEmitter<any> = new EventEmitter(true);
   private value: any;
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
