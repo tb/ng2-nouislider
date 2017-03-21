@@ -106,6 +106,21 @@ describe('Nouislider Component', () => {
       });
     }));
 
+    it('should trigger events on limit change', async(() => {
+      componentInstance.someLimit = 4;
+      fixture.detectChanges();
+      fixture.whenStable().then((isStable) => {
+        fixture.detectChanges();
+        expect(isStable).toBe(true, 'isStable');
+        expect(componentInstance.someLimit).toEqual(4);
+        expect(componentInstance.someValue).toEqual(4);
+        expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+          ['ngModelChange', 4],
+          ['set', 4]
+        ]);
+      });
+    }));
+
     it('should trigger events on slider set', async(() => {
       sliderInstance.slider.set('6');
       setTimeout(() => {
@@ -294,7 +309,7 @@ describe('Nouislider Component', () => {
   template: `
     <nouislider
       [min]="-10"
-      [max]="10"
+      [max]="someLimit"
       [step]="0.05"
       [(ngModel)]="someValue"
       (ngModelChange)="onEvent('ngModelChange', $event)"
@@ -305,6 +320,7 @@ describe('Nouislider Component', () => {
 })
 class TestSingleSliderComponent {
   public someValue: number = 5;
+  public someLimit: number = 10;
   public onEvent(event: string, value: number) { };
 }
 

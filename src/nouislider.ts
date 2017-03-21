@@ -6,6 +6,7 @@ import {
   forwardRef,
   Input,
   OnInit,
+  OnChanges,
   Output,
   NgModule,
 } from '@angular/core';
@@ -52,7 +53,7 @@ export class DefaultFormatter implements NouiFormatter {
     }
   ]
 })
-export class NouisliderComponent implements ControlValueAccessor, OnInit {
+export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   public slider: any;
   public handles: any[];
@@ -166,6 +167,19 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
     this.slider.on('end', (values: string[], handle: number, unencoded: number[]) => {
       this.end.emit(this.toValues(values));
     });
+  }
+
+  ngOnChanges(changes: any) {
+    if (this.slider && (changes.min || changes.max)) {
+      setTimeout(() => {
+        this.slider.updateOptions({
+          range: {
+            min: this.min,
+            max: this.max
+          }
+        });
+      });
+    }
   }
 
   toValues(values: string[]): any | any[] {
