@@ -77,6 +77,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
   @Output() public set: EventEmitter<any> = new EventEmitter(true);
   @Output() public start: EventEmitter<any> = new EventEmitter(true);
   @Output() public end: EventEmitter<any> = new EventEmitter(true);
+  @Output() public init: EventEmitter<any> = new EventEmitter(true);
   private value: any;
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
@@ -103,6 +104,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
       this.el.nativeElement.querySelector('div'),
       Object.assign(this.config, inputsConfig)
     );
+
 
     this.handles = [].slice.call(this.el.nativeElement.querySelectorAll('.noUi-handle'));
 
@@ -166,6 +168,8 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit {
     this.slider.on('end', (values: string[], handle: number, unencoded: number[]) => {
       this.end.emit(this.toValues(values));
     });
+
+    this.init.emit(this.slider);
   }
 
   toValues(values: string[]): any | any[] {

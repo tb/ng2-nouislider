@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   public disabled: boolean = false;
   public keyupLabelOn: boolean = false;
   public keydownLabelOn: boolean = false;
-
+  public sliderObject: any;
   public someValue: number = 5;
   public someRange: number[] = [3, 7];
   public someRange2: number[] = [10, 15];
@@ -105,6 +105,10 @@ export class AppComponent implements OnInit {
   public ngOnInit () {
     this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
     this.form2 = this.formBuilder.group({ 'range': [ [ 2, 8 ] ] });
+  }
+
+  onSliderInit(slider:any){
+    this.sliderObject  = slider;
   }
 
   public someKeyboard2EventHandler = (e: KeyboardEvent) => {

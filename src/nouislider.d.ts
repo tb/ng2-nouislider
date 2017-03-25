@@ -33,6 +33,7 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     set: EventEmitter<any>;
     start: EventEmitter<any>;
     end: EventEmitter<any>;
+    init: EventEmitter<any>;
     private value;
     private onChange;
     private onTouched;
