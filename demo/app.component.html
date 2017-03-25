@@ -2,15 +2,21 @@
   <h3>Single value</h3>
 </div>
 
-<pre>&lt;nouislider [min]=&quot;-10&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someValue&quot; (ngModelChange)=&quot;onChange($event)&quot; [disabled]=&quot;disabled&quot;&gt;&lt;/nouislider&gt;</pre>
+<pre>&lt;nouislider (init)=&quot;onSliderInit($event)&quot; [min]=&quot;-10&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someValue&quot; (ngModelChange)=&quot;onChange($event)&quot; [disabled]=&quot;disabled&quot;&gt;&lt;/nouislider&gt;
+</pre>
 
 <code>someValue: {{ someValue | json }}</code>
 
-<nouislider [min]="-10" [max]="10" [step]="0.05" [(ngModel)]="someValue" (ngModelChange)="onChange($event)" [disabled]="disabled"></nouislider>
 
+<nouislider (init)="onSliderInit($event)" [min]="-10" [max]="10" [step]="0.05" [(ngModel)]="someValue" (ngModelChange)="onChange($event)" [disabled]="disabled"></nouislider>
+<br/>
+<br/>
 <div class="btn-group">
   <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeValue(-1)">-1</button>
   <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeValue(1)">+1</button>
+  <button type="button" class="btn btn-primary" (click)="togglePips()">Toggle Pips</button>
+    <button type="button" class="btn btn-primary" (click)="resetSlider()">Reset</button>
+
 </div>
 
 <div class="btn-group">

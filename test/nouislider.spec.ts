@@ -97,9 +97,11 @@ describe('Nouislider Component', () => {
       fixture.detectChanges();
       fixture.whenStable().then((isStable) => {
         fixture.detectChanges();
+        let noUiSliderObject = (componentInstance.onEvent as any).calls.argsFor(0);
         expect(isStable).toBe(true, 'isStable');
         expect(componentInstance.someValue).toEqual(6);
         expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+          noUiSliderObject,
           ['ngModelChange', 6],
           ['set', 6]
         ]);
@@ -109,13 +111,23 @@ describe('Nouislider Component', () => {
     it('should trigger events on slider set', async(() => {
       sliderInstance.slider.set('6');
       setTimeout(() => {
+        let noUiSliderObject = (componentInstance.onEvent as any).calls.argsFor(0);
         expect(componentInstance.someValue).toEqual(6);
         expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+          noUiSliderObject,
           ['ngModelChange', 6],
           ['set', 6]
         ]);
       });
     }));
+
+    it('should trigger event on init and return the nouislider object',async(()=>{
+       let eventResult = (componentInstance.onEvent as any).calls.allArgs()[0];
+       expect(eventResult).toBeDefined();
+       expect(eventResult[0]).toEqual('init');
+       expect(typeof eventResult[1]).toEqual('object');
+       expect(eventResult[1].hasOwnProperty('set')).toBe(true);
+    }))
   });
 
   describe('single slider (as form control)', () => {
@@ -300,12 +312,14 @@ describe('Nouislider Component', () => {
       (ngModelChange)="onEvent('ngModelChange', $event)"
       (change)="onEvent('change', $event)"
       (set)="onEvent('set', $event)"
+      (init)="onEvent('init',$event)"
     ></nouislider>
   `,
 })
 class TestSingleSliderComponent {
   public someValue: number = 5;
   public onEvent(event: string, value: number) { };
+  public onInit(value:any) { };
 }
 
 @Component({
