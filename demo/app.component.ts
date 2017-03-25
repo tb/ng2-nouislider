@@ -13,8 +13,9 @@ export class TimeFormatter implements NouiFormatter {
     let timeString: string = '';
     let i = 0;
     for(let v of values) {
-      if(values[i] < 10)
+      if(values[i] < 10) {
         timeString += '0';
+      }
       timeString += values[i].toFixed(0);
       if(i < 2) {
         timeString += ':';
@@ -107,8 +108,23 @@ export class AppComponent implements OnInit {
     this.form2 = this.formBuilder.group({ 'range': [ [ 2, 8 ] ] });
   }
 
-  onSliderInit(slider:any){
+  public onSliderInit(slider: any) {
     this.sliderObject  = slider;
+    console.debug('Slider Object Instance Initiated and available for use in your component');
+    console.debug(this.sliderObject);
+  }
+
+  public resetSlider() {
+    this.sliderObject.reset();
+  }
+
+  public togglePips() {
+    let pips = this.sliderObject.target.querySelector('.noUi-pips');
+      if(pips) {
+         pips.parentElement.removeChild(pips);
+      } else {
+        this.sliderObject.pips({mode: 'range', density: this.sliderObject.options.range.max / 2 });
+      }
   }
 
   public someKeyboard2EventHandler = (e: KeyboardEvent) => {
