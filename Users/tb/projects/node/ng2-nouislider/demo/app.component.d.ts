@@ -12,6 +12,8 @@ export declare class AppComponent implements OnInit {
     keyupLabelOn: boolean;
     keydownLabelOn: boolean;
     someValue: number;
+    someMin: number;
+    someMax: number;
     someRange: number[];
     someRange2: number[];
     someRange3: number[];
@@ -28,6 +30,8 @@ export declare class AppComponent implements OnInit {
     someKeyboard2EventHandler: (e: KeyboardEvent) => void;
     someKeyboardConfig2: any;
     changeSomeValue(value: number): void;
+    changeSomeMin(value: number): void;
+    changeSomeMax(value: number): void;
     changeSingleFormValue(value: number): void;
     changeRangeFormValue(index: number, value: number): void;
     changeSomeRange(index: number, value: number): void;

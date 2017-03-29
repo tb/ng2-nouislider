@@ -44,6 +44,8 @@ export class AppComponent implements OnInit {
   public keydownLabelOn: boolean = false;
 
   public someValue: number = 5;
+  public someMin: number = -10;
+  public someMax: number = 10;
   public someRange: number[] = [3, 7];
   public someRange2: number[] = [10, 15];
   public someRange3: number[] = [2, 8];
@@ -160,6 +162,14 @@ export class AppComponent implements OnInit {
 
   changeSomeValue(value: number) {
     this.someValue = this.someValue + value;
+  }
+
+  changeSomeMin(value: number) {
+    this.someMin = this.someMin + value;
+  }
+
+  changeSomeMax(value: number) {
+    this.someMax = this.someMax + value;
   }
 
   changeSingleFormValue(value: number) {
