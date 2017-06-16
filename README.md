@@ -46,7 +46,7 @@ this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
 
 ```html
 <form [formGroup]="form">
-    <nouislider [min]="0" [max]="20" [step]="0.5" [formControl]="form.controls.slider"></nouislider>
+    <nouislider [min]="0" [max]="20" [step]="0.5" [formControl]="form.controls.single"></nouislider>
 </form>
 ```
 
