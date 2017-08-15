@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
   public someValue: number = 5;
   public someMin: number = -10;
   public someMax: number = 10;
+  public someStep: number = 1;
   public someRange: number[] = [3, 7];
   public someRange2: number[] = [10, 15];
   public someRange3: number[] = [2, 8];
@@ -170,6 +171,10 @@ export class AppComponent implements OnInit {
 
   changeSomeMax(value: number) {
     this.someMax = this.someMax + value;
+  }
+
+  changeSomeStep(value: number) {
+    this.someStep = this.someStep + value;
   }
 
   changeSingleFormValue(value: number) {
