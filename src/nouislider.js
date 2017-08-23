@@ -91,69 +91,72 @@ var NouisliderComponent = NouisliderComponent_1 = (function () {
             tooltips: this.tooltips,
         }));
         inputsConfig.format = this.format || this.config.format || new DefaultFormatter();
-        this.slider = noUiSlider.create(this.el.nativeElement.querySelector('div'), Object.assign(this.config, inputsConfig));
-        this.handles = [].slice.call(this.el.nativeElement.querySelectorAll('.noUi-handle'));
-        if (this.config.keyboard) {
-            if (this.config.pageSteps === undefined) {
-                this.config.pageSteps = 10;
+        if(this && this.el && this.el.nativeElement && typeof this.el.nativeElement.querySelector === 'function') {
+            this.slider = noUiSlider.create(this.el.nativeElement.querySelector('div'), Object.assign(this.config, inputsConfig));
+
+            this.handles = [].slice.call(this.el.nativeElement.querySelectorAll('.noUi-handle'));
+            if (this.config.keyboard) {
+                if (this.config.pageSteps === undefined) {
+                    this.config.pageSteps = 10;
+                }
+                var _loop_1 = function (handle) {
+                    handle.setAttribute('tabindex', 0);
+                    handle.addEventListener('click', function () {
+                        handle.focus();
+                    });
+                    if (this_1.config.onKeydown === undefined) {
+                        handle.addEventListener('keydown', this_1.defaultKeyHandler);
+                    }
+                    else {
+                        handle.addEventListener('keydown', this_1.config.onKeydown);
+                    }
+                };
+                var this_1 = this;
+                for (var _i = 0, _a = this.handles; _i < _a.length; _i++) {
+                    var handle = _a[_i];
+                    _loop_1(handle);
+                }
             }
-            var _loop_1 = function (handle) {
-                handle.setAttribute('tabindex', 0);
-                handle.addEventListener('click', function () {
-                    handle.focus();
-                });
-                if (this_1.config.onKeydown === undefined) {
-                    handle.addEventListener('keydown', this_1.defaultKeyHandler);
+            this.slider.on('set', function (values, handle, unencoded) {
+                var v = _this.toValues(values);
+                var emitEvents = false;
+                if (_this.value === undefined) {
+                    _this.value = v;
+                    return;
+                }
+                if (Array.isArray(v) && _this.value[handle] != v[handle]) {
+                    emitEvents = true;
+                }
+                if (!Array.isArray(v) && _this.value != v) {
+                    emitEvents = true;
+                }
+                if (emitEvents) {
+                    _this.set.emit(v);
+                    _this.onChange(v);
+                }
+                if (Array.isArray(v)) {
+                    _this.value[handle] = v[handle];
                 }
                 else {
-                    handle.addEventListener('keydown', this_1.config.onKeydown);
+                    _this.value = v;
                 }
-            };
-            var this_1 = this;
-            for (var _i = 0, _a = this.handles; _i < _a.length; _i++) {
-                var handle = _a[_i];
-                _loop_1(handle);
-            }
+            });
+            this.slider.on('update', function (values, handle, unencoded) {
+                _this.update.emit(_this.toValues(values));
+            });
+            this.slider.on('change', function (values, handle, unencoded) {
+                _this.change.emit(_this.toValues(values));
+            });
+            this.slider.on('slide', function (values, handle, unencoded) {
+                _this.slide.emit(_this.toValues(values));
+            });
+            this.slider.on('start', function (values, handle, unencoded) {
+                _this.start.emit(_this.toValues(values));
+            });
+            this.slider.on('end', function (values, handle, unencoded) {
+                _this.end.emit(_this.toValues(values));
+            });
         }
-        this.slider.on('set', function (values, handle, unencoded) {
-            var v = _this.toValues(values);
-            var emitEvents = false;
-            if (_this.value === undefined) {
-                _this.value = v;
-                return;
-            }
-            if (Array.isArray(v) && _this.value[handle] != v[handle]) {
-                emitEvents = true;
-            }
-            if (!Array.isArray(v) && _this.value != v) {
-                emitEvents = true;
-            }
-            if (emitEvents) {
-                _this.set.emit(v);
-                _this.onChange(v);
-            }
-            if (Array.isArray(v)) {
-                _this.value[handle] = v[handle];
-            }
-            else {
-                _this.value = v;
-            }
-        });
-        this.slider.on('update', function (values, handle, unencoded) {
-            _this.update.emit(_this.toValues(values));
-        });
-        this.slider.on('change', function (values, handle, unencoded) {
-            _this.change.emit(_this.toValues(values));
-        });
-        this.slider.on('slide', function (values, handle, unencoded) {
-            _this.slide.emit(_this.toValues(values));
-        });
-        this.slider.on('start', function (values, handle, unencoded) {
-            _this.start.emit(_this.toValues(values));
-        });
-        this.slider.on('end', function (values, handle, unencoded) {
-            _this.end.emit(_this.toValues(values));
-        });
     };
     NouisliderComponent.prototype.ngOnChanges = function (changes) {
         var _this = this;
