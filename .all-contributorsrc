@@ -1,0 +1,21 @@
+{
+  "projectName": "ng2-nouislider",
+  "projectOwner": "tb",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "tb",
+      "name": "Tomasz Bak",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/71683?v=4",
+      "profile": "http://twitter.com/tomaszbak",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    }
+  ]
+}

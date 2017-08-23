@@ -1,4 +1,5 @@
 # ng2-nouislider
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 [![Build Status](https://travis-ci.org/tb/ng2-nouislider.svg?branch=master)](https://travis-ci.org/tb/ng2-nouislider)
 [![npm version](https://badge.fury.io/js/ng2-nouislider.svg)](http://badge.fury.io/js/ng2-nouislider)
@@ -59,3 +60,10 @@ this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
 ## License
 
 MIT
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+| [<img src="https://avatars2.githubusercontent.com/u/71683?v=4" width="100px;"/><br /><sub>Tomasz Bak</sub>](http://twitter.com/tomaszbak)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=tb "Code") [👀](#review-tb "Reviewed Pull Requests") |
+| :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
