@@ -11,16 +11,15 @@ export class TimeFormatter implements NouiFormatter {
     let s = value - 60 * m - 3600 * h;
     let values = [h, m, s];
     let timeString: string = '';
-    let i = 0;
-    for(let v of values) {
-      if(values[i] < 10)
+    values.forEach((_, i) => {
+      if(values[i] < 10) {
         timeString += '0';
+      }
       timeString += values[i].toFixed(0);
       if(i < 2) {
         timeString += ':';
       }
-      i++;
-    }
+    });
     return timeString;
   };
 
@@ -67,7 +66,6 @@ export class AppComponent implements OnInit {
   };
 
   public someKeyboard: number[] = [1, 3];
-
   public someKeyboardConfig: any = {
     behaviour: 'drag',
     connect: true,
@@ -88,6 +86,25 @@ export class AppComponent implements OnInit {
   };
 
   public someKeyboard2: number[] = [1, 3];
+  public someKeyboardConfig2: any = {
+      behaviour: 'drag',
+      connect: true,
+      start: [0, 5],
+      step: 0.1,
+      range: {
+          min: 0,
+          max: 5
+      },
+      pips: {
+          mode: 'count',
+          density: 2,
+          values: 6,
+          stepped: true
+      },
+      keyboard: true,
+      onKeydown: this.someKeyboard2EventHandler,
+  };
+
   public form1: FormGroup;
   public form2: FormGroup;
 
@@ -140,25 +157,6 @@ export class AppComponent implements OnInit {
     let newValue = [].concat(this.someKeyboard2);
     newValue[index] += delta;
     this.someKeyboard2 = newValue;
-  };
-
-  public someKeyboardConfig2: any = {
-    behaviour: 'drag',
-    connect: true,
-    start: [0, 5],
-    step: 0.1,
-    range: {
-      min: 0,
-      max: 5
-    },
-    pips: {
-      mode: 'count',
-      density: 2,
-      values: 6,
-      stepped: true
-    },
-    keyboard: true,
-    onKeydown: this.someKeyboard2EventHandler,
   };
 
   changeSomeValue(value: number) {
