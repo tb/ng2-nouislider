@@ -80,7 +80,8 @@ describe('Nouislider Component', () => {
           from: function (value: any) : any {
             return parseFloat(value);
           }
-        }
+        },
+        ariaFormat: {}
       };
 
       expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
@@ -162,7 +163,8 @@ describe('Nouislider Component', () => {
           from: function (value: any) : any {
             return parseFloat(value);
           }
-        }
+        },
+        ariaFormat: {}
       };
 
       expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
@@ -217,7 +219,8 @@ describe('Nouislider Component', () => {
           from: function (value: any) : any {
             return parseFloat(value);
           }
-        }
+        },
+        ariaFormat: {}
       };
       expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
       expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
@@ -280,7 +283,8 @@ describe('Nouislider Component', () => {
           from: function (value: any) : any {
             return parseFloat(value);
           }
-        }
+        },
+        ariaFormat: {}
       };
 
       expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
