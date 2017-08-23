@@ -26,6 +26,15 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "ryan-morris",
+      "name": "Ryan Morris",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7102450?v=4",
+      "profile": "https://github.com/ryan-morris",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
