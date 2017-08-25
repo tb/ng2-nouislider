@@ -43,6 +43,7 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     writeValue(value: any): void;
     registerOnChange(fn: (value: any) => void): void;
     registerOnTouched(fn: () => {}): void;
+    private eventHandler;
     private defaultKeyHandler;
 }
 export declare class NouisliderModule {

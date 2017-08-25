@@ -182,7 +182,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     this.onTouched = fn;
   }
 
-  private eventHandler = (emitter: EventEmitter, values: string[], handle: number, unencoded: number[]) => {
+  private eventHandler = (emitter: EventEmitter<any>, values: string[], handle: number, unencoded: number[]) => {
     let v = this.toValues(values);
     let emitEvents = false;
     if(this.value === undefined) {
