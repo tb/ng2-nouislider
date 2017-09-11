@@ -50,6 +50,10 @@ this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
     <nouislider [min]="0" [max]="20" [step]="0.5" [formControl]="form.controls.single"></nouislider>
 </form>
 ```
+## Nouislider documentation
+
+This component based on [nouislider](https://refreshless.com/nouislider/). Documentation about additional settings (passed in [config] @Input) can found [here](https://refreshless.com/nouislider/slider-options/).
+
 
 ## Start development
 
