@@ -11,16 +11,15 @@ export class TimeFormatter implements NouiFormatter {
     let s = value - 60 * m - 3600 * h;
     let values = [h, m, s];
     let timeString: string = '';
-    let i = 0;
-    for(let v of values) {
-      if(values[i] < 10)
+    values.forEach((_, i) => {
+      if(values[i] < 10) {
         timeString += '0';
+      }
       timeString += values[i].toFixed(0);
       if(i < 2) {
         timeString += ':';
       }
-      i++;
-    }
+    });
     return timeString;
   };
 
@@ -46,6 +45,7 @@ export class AppComponent implements OnInit {
   public someValue: number = 5;
   public someMin: number = -10;
   public someMax: number = 10;
+  public someStep: number = 1;
   public someRange: number[] = [3, 7];
   public someRange2: number[] = [10, 15];
   public someRange3: number[] = [2, 8];
@@ -66,7 +66,6 @@ export class AppComponent implements OnInit {
   };
 
   public someKeyboard: number[] = [1, 3];
-
   public someKeyboardConfig: any = {
     behaviour: 'drag',
     connect: true,
@@ -87,6 +86,25 @@ export class AppComponent implements OnInit {
   };
 
   public someKeyboard2: number[] = [1, 3];
+  public someKeyboardConfig2: any = {
+      behaviour: 'drag',
+      connect: true,
+      start: [0, 5],
+      step: 0.1,
+      range: {
+          min: 0,
+          max: 5
+      },
+      pips: {
+          mode: 'count',
+          density: 2,
+          values: 6,
+          stepped: true
+      },
+      keyboard: true,
+      onKeydown: this.someKeyboard2EventHandler,
+  };
+
   public form1: FormGroup;
   public form2: FormGroup;
 
@@ -141,25 +159,6 @@ export class AppComponent implements OnInit {
     this.someKeyboard2 = newValue;
   };
 
-  public someKeyboardConfig2: any = {
-    behaviour: 'drag',
-    connect: true,
-    start: [0, 5],
-    step: 0.1,
-    range: {
-      min: 0,
-      max: 5
-    },
-    pips: {
-      mode: 'count',
-      density: 2,
-      values: 6,
-      stepped: true
-    },
-    keyboard: true,
-    onKeydown: this.someKeyboard2EventHandler,
-  };
-
   changeSomeValue(value: number) {
     this.someValue = this.someValue + value;
   }
@@ -170,6 +169,10 @@ export class AppComponent implements OnInit {
 
   changeSomeMax(value: number) {
     this.someMax = this.someMax + value;
+  }
+
+  changeSomeStep(value: number) {
+    this.someStep = this.someStep + value;
   }
 
   changeSingleFormValue(value: number) {
