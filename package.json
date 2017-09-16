@@ -1,6 +1,6 @@
 {
   "name": "ng2-nouislider",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Angular2 noUiSlider component",
   "main": "src/nouislider.js",
   "scripts": {
