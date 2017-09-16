@@ -125,27 +125,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     }
 
     this.slider.on('set', (values: string[], handle: number, unencoded: number[]) => {
-      let v = this.toValues(values);
-      let emitEvents = false;
-      if(this.value === undefined) {
-        this.value = v;
-        return;
-      }
-      if(Array.isArray(v) && this.value[handle] != v[handle]) {
-        emitEvents = true;
-      }
-      if(!Array.isArray(v) && this.value != v) {
-        emitEvents = true;
-      }
-      if(emitEvents) {
-        this.set.emit(v);
-        this.onChange(v);
-      }
-      if(Array.isArray(v)) {
-        this.value[handle] = v[handle];
-      } else {
-        this.value = v;
-      }
+      this.eventHandler(this.set, values, handle, unencoded);
     });
 
     this.slider.on('update', (values: string[], handle: number, unencoded: number[]) => {
@@ -157,7 +137,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     });
 
     this.slider.on('slide', (values: string[], handle: number, unencoded: number[]) => {
-      this.slide.emit(this.toValues(values));
+      this.eventHandler(this.slide, values, handle, unencoded);
     });
 
     this.slider.on('start', (values: string[], handle: number, unencoded: number[]) => {
@@ -200,6 +180,30 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
 
   registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
+  }
+
+  private eventHandler = (emitter: EventEmitter<any>, values: string[], handle: number, unencoded: number[]) => {
+    let v = this.toValues(values);
+    let emitEvents = false;
+    if(this.value === undefined) {
+      this.value = v;
+      return;
+    }
+    if(Array.isArray(v) && this.value[handle] != v[handle]) {
+      emitEvents = true;
+    }
+    if(!Array.isArray(v) && this.value != v) {
+      emitEvents = true;
+    }
+    if(emitEvents) {
+      emitter.emit(v);
+      this.onChange(v);
+    }
+    if(Array.isArray(v)) {
+      this.value[handle] = v[handle];
+    } else {
+      this.value = v;
+    }
   }
 
   private defaultKeyHandler = (e: KeyboardEvent) => {
