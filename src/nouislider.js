@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var noUiSlider = require("nouislider");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
