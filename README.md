@@ -50,6 +50,15 @@ this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
     <nouislider [min]="0" [max]="20" [step]="0.5" [formControl]="form.controls.single"></nouislider>
 </form>
 ```
+### Multiple handles
+
+```html
+<nouislider [min]="0" [max]="15" [(ngModel)]="handles"></nouislider>
+```
+
+```js
+handles = [ 5, 10 ];  # first handle on 5 and second on 10
+```
 ## Nouislider documentation
 
 This component based on [nouislider](https://refreshless.com/nouislider/). Documentation about additional settings (passed in [config] @Input) can found [here](https://refreshless.com/nouislider/slider-options/).
