@@ -3,6 +3,7 @@
   "version": "1.7.1",
   "description": "Angular2 noUiSlider component",
   "main": "src/nouislider.js",
+  "typings": "src/nouislider.d.ts",
   "scripts": {
     "contributors": "all-contributors generate",
     "lint": "tslint src/nouislider.ts",
