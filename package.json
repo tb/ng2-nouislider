@@ -7,7 +7,7 @@
   "scripts": {
     "contributors": "all-contributors generate",
     "lint": "tslint src/nouislider.ts",
-    "build": "ngc",
+    "build": "npm run lint && ngc",
     "start": "npm run build && webpack-dev-server --host 0.0.0.0",
     "deploy": "NODE_ENV=prod npm run build && NODE_ENV=prod webpack && gh-pages -d demo",
     "test": "NODE_ENV=test karma start",
