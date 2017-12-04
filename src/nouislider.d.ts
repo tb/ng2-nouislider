@@ -9,7 +9,7 @@ export declare class DefaultFormatter implements NouiFormatter {
     from(value: string): number;
 }
 export declare class NouisliderComponent implements ControlValueAccessor, OnInit, OnChanges {
-    private el;
+    protected el;
     slider: any;
     handles: any[];
     disabled: boolean;
