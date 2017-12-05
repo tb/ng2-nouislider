@@ -125,6 +125,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "rubentrf",
+      "name": "Rubén Trujillo",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/596580?v=4",
+      "profile": "http://bi4group.com",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
