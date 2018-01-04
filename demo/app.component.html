@@ -220,3 +220,29 @@ public someKeyboardConfig2: any = &#123;
 </div>
 
 <nouislider [config]="someTimeConfig" [(ngModel)]="someTime" style="margin-bottom: 5rem"></nouislider>
+
+
+<div class="page-header">
+  <h3>Disable control (reactive forms)</h3>
+</div>
+
+<pre>
+&lt;form [formGroup]=&quot;form3&quot;&gt;&#10;  &lt;nouislider [min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;1&quot; [formControl]=&quot;form3.controls.single&quot;&gt;&lt;/nouislider&gt;&#10;&lt;/form&gt;
+
+  toggleDisabled() {{ '{' }}
+    this.disabled = !this.disabled;
+    this.disabled ? this.form3.controls.single.disable() : this.form3.controls.single.enable();
+  {{ '}' }}
+</pre>
+
+<code>form3.controls.single.disabled: {{ form3.controls.single.disabled }}</code>
+<form [formGroup]="form3">
+  <nouislider [min]="0" [max]="10" [step]="1" [formControl]="form3.controls.single"></nouislider>
+</form>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-primary" (click)="toggleDisabled()">
+    {{form3.controls.single.disabled ? 'Enable': 'Disable'}}
+  </button>
+</div>
+

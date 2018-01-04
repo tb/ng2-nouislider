@@ -9,6 +9,7 @@ import {
   OnChanges,
   Output,
   NgModule,
+  Renderer2
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -82,7 +83,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef, private renderer : Renderer2) { }
 
   ngOnInit(): void {
     let inputsConfig = JSON.parse(JSON.stringify({
@@ -180,6 +181,12 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
 
   registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    isDisabled
+      ? this.renderer.setAttribute(this.el.nativeElement.childNodes[0], 'disabled', 'true')
+      : this.renderer.removeAttribute(this.el.nativeElement.childNodes[0], 'disabled');
   }
 
   private eventHandler = (emitter: EventEmitter<any>, values: string[], handle: number, unencoded: number[]) => {
