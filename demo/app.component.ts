@@ -107,6 +107,7 @@ export class AppComponent implements OnInit {
 
   public form1: FormGroup;
   public form2: FormGroup;
+  public form3: FormGroup;
 
   public someTimeConfig: any = {
     start: 86400 / 2,
@@ -125,6 +126,7 @@ export class AppComponent implements OnInit {
   public ngOnInit () {
     this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
     this.form2 = this.formBuilder.group({ 'range': [ [ 2, 8 ] ] });
+    this.form3 = this.formBuilder.group({ 'single': [ 3 ] });
   }
 
   public someKeyboard2EventHandler = (e: KeyboardEvent) => {
@@ -209,5 +211,10 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       this.keydownLabelOn = false;
     }, 450);
+  }
+
+  toggleDisabled() {
+    const control = this.form3.controls.single;
+    control.enabled ? control.disable() : control.enable();
   }
 }
