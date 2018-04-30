@@ -96,9 +96,8 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
       keyboard: this.keyboard,
       onKeydown: this.onKeydown,
       range: this.config.range || {min: this.min, max: this.max},
-      tooltips: this.tooltips,
     }));
-
+    inputsConfig.tooltips = this.tooltips || this.config.tooltips;
     inputsConfig.format = this.format || this.config.format || new DefaultFormatter();
 
     this.slider = noUiSlider.create(
