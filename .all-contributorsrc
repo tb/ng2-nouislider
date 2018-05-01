@@ -144,6 +144,15 @@
         "code",
         "example"
       ]
+    },
+    {
+      "login": "jeremyfry",
+      "name": "Jeremy Fry",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/316541?v=4",
+      "profile": "http://www.jeremyfry.com",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
