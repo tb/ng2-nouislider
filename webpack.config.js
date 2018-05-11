@@ -52,7 +52,7 @@ module.exports = function makeWebpackConfig() {
     // only discover files that have those extensions
     extensions: ['', '.ts', '.js', '.json', '.css', '.scss', '.html'],
     alias: {
-      'ng2nouislider': path.resolve('./src/nouislider.ts')
+      'ng2nouislider': path.resolve('./src/ng2-nouislider.ts')
     }
   };
 
