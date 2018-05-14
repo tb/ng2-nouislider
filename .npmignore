@@ -8,4 +8,4 @@ typings.json
 webpack*
 compiled/
 demo/
-src/nouislider.ts
+src/ng2-nouislider.ts
