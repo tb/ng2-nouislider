@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
 import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { DefaultFormatter, NouisliderModule, NouisliderComponent } from '../src/nouislider.ts';
+import { DefaultFormatter, NouisliderModule, NouisliderComponent } from '../src/ng2-nouislider.ts';
 
 describe('Default Formatter', () => {
   let formatter: DefaultFormatter;
@@ -43,7 +43,8 @@ describe('Nouislider Component', () => {
         TestSingleSliderComponent,
         TestRangeSliderComponent,
         TestSingleFormSliderComponent,
-        TestRangeFormSliderComponent
+        TestRangeFormSliderComponent,
+        TestRangeTooltipFormatterSliderComponent
       ]
     });
   }));
@@ -257,6 +258,30 @@ describe('Nouislider Component', () => {
     }));
   });
 
+  describe('range slider', () => {
+    let fixture: ComponentFixture<TestRangeSliderComponent>;
+    let componentInstance: TestRangeSliderComponent;
+    let sliderDebugElement: DebugElement;
+    let sliderNativeElement: HTMLElement;
+    let sliderInstance: NouisliderComponent;
+
+    beforeEach(async(() => {
+      fixture = TestBed.createComponent(TestRangeTooltipFormatterSliderComponent);
+      componentInstance = fixture.debugElement.componentInstance;
+      sliderDebugElement = fixture.debugElement.query(By.directive(NouisliderComponent));
+      sliderNativeElement = sliderDebugElement.nativeElement;
+      sliderInstance = sliderDebugElement.componentInstance;
+      spyOn(componentInstance, 'onEvent');
+      fixture.detectChanges();
+    }));
+
+    it('should preserve tooltip formatting', () => {
+      expect(sliderInstance['config'].tooltips[0].to).toBeTruthy();
+      expect(sliderInstance.slider.options.tooltips[0].to).toBeTruthy();
+    });
+
+  });
+
   describe('range slider (as form control)', () => {
     let fixture: ComponentFixture<TestRangeFormSliderComponent>;
     let componentInstance: TestRangeFormSliderComponent;
@@ -365,6 +390,29 @@ class TestSingleFormSliderComponent {
 class TestRangeSliderComponent {
   public someRange: number[] = [3, 7];
   public onEvent(event: string, value: number[]) { };
+}
+
+@Component({
+  selector: 'test-range-slider-with-tooltip-formatter',
+  template: `
+    <nouislider
+      [min]="0"
+      [max]="10"
+      [step]="1"
+      [(ngModel)]="someRange"
+      (ngModelChange)="onEvent('ngModelChange', $event)"
+      (change)="onEvent('change', $event)"
+      (set)="onEvent('set', $event)"
+      [tooltips]="[formatter, formatter]"
+    ></nouislider>
+  `,
+})
+class TestRangeTooltipFormatterSliderComponent {
+  public someRange: number[] = [3, 7];
+  public onEvent(event: string, value: number[]) { };
+  public formatter = {
+    to: (value: number): number => value
+  }
 }
 
 @Component({

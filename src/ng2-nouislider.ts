@@ -103,7 +103,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
       snap: this.snap,
       animate: this.animate
     }));
-
+    inputsConfig.tooltips = this.tooltips || this.config.tooltips;
     inputsConfig.format = this.format || this.config.format || new DefaultFormatter();
 
     this.slider = noUiSlider.create(

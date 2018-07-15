@@ -134,6 +134,34 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sharlatta",
+      "name": "Olena Horal",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12625792?v=4",
+      "profile": "https://github.com/sharlatta",
+      "contributions": [
+        "code",
+        "example"
+      ]
+    },
+    {
+      "login": "jeremyfry",
+      "name": "Jeremy Fry",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/316541?v=4",
+      "profile": "http://www.jeremyfry.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mkp05",
+      "name": "Tadeusz",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/9978922?v=4",
+      "profile": "https://github.com/mkp05",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
