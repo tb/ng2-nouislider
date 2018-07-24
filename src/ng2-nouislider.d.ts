@@ -19,6 +19,9 @@ export declare class NouisliderComponent implements ControlValueAccessor, OnInit
     limit: number;
     min: number;
     max: number;
+    snap: boolean;
+    animate: boolean | boolean[];
+    range: any;
     step: number;
     format: NouiFormatter;
     pageSteps: number;

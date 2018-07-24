@@ -64,6 +64,9 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   @Input() public limit: number;
   @Input() public min: number;
   @Input() public max: number;
+  @Input() public snap: boolean;
+  @Input() public animate: boolean | boolean[];
+  @Input() public range: any;
   @Input() public step: number;
   @Input() public format: NouiFormatter;
   @Input() public pageSteps: number;
@@ -95,7 +98,10 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
       pageSteps: this.pageSteps,
       keyboard: this.keyboard,
       onKeydown: this.onKeydown,
-      range: this.config.range || {min: this.min, max: this.max},
+      range: this.range || this.config.range || {min: this.min, max: this.max},
+      tooltips: this.tooltips,
+      snap: this.snap,
+      animate: this.animate
     }));
     inputsConfig.tooltips = this.tooltips || this.config.tooltips;
     inputsConfig.format = this.format || this.config.format || new DefaultFormatter();
@@ -150,13 +156,13 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   ngOnChanges(changes: any) {
-    if (this.slider && (changes.min || changes.max || changes.step)) {
+    if (this.slider && (changes.min || changes.max || changes.step || changes.range)) {
       setTimeout(() => {
         this.slider.updateOptions({
-          range: {
+          range: Object.assign({}, {
             min: this.min,
             max: this.max
-          },
+          }, this.range || {}),
           step: this.step
         });
       });
@@ -170,7 +176,9 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
 
   writeValue(value: any): void {
     if (this.slider) {
-      this.slider.set(value);
+      setTimeout(() => {
+        this.slider.set(value);
+      });
     }
   }
 
