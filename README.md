@@ -52,7 +52,7 @@ this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
 ```
 ## Nouislider documentation
 
-This component based on [nouislider](https://refreshless.com/nouislider/). Documentation about additional settings (passed in [config] @Input) can found [here](https://refreshless.com/nouislider/slider-options/).
+This component is based on [nouislider](https://refreshless.com/nouislider/). Documentation about additional settings (passed in [config] @Input) can be found [here](https://refreshless.com/nouislider/slider-options/).
 
 
 ## Start development
