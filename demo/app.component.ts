@@ -102,7 +102,6 @@ export class AppComponent implements OnInit {
           stepped: true
       },
       keyboard: true,
-      onKeydown: this.someKeyboard2EventHandler,
   };
 
   public form1: FormGroup;
@@ -124,6 +123,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   public ngOnInit () {
+    this.someKeyboardConfig2.onKeydown = this.someKeyboard2EventHandler;
     this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
     this.form2 = this.formBuilder.group({ 'range': [ [ 2, 8 ] ] });
     this.form3 = this.formBuilder.group({ 'single': [ 3 ] });
