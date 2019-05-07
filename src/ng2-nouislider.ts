@@ -7,6 +7,7 @@ import {
   Input,
   OnInit,
   OnChanges,
+  OnDestroy,
   Output,
   NgModule,
   Renderer2
@@ -54,7 +55,7 @@ export class DefaultFormatter implements NouiFormatter {
     }
   ]
 })
-export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
 
   public slider: any;
   public handles: any[];
@@ -156,16 +157,32 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   ngOnChanges(changes: any) {
-    if (this.slider && (changes.min || changes.max || changes.step || changes.range)) {
+    if (changes.min || changes.max || changes.step || changes.range) {
       setTimeout(() => {
-        this.slider.updateOptions({
-          range: Object.assign({}, {
-            min: this.min,
-            max: this.max
-          }, this.range || {}),
-          step: this.step
-        });
+        if (this.slider) {
+          this.slider.updateOptions({
+            range: Object.assign({}, {
+                min: this.min,
+                max: this.max
+            }, this.range || {}),
+            step: this.step
+          });
+        }
       });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.slider) {
+      this.slider.off('set');
+      this.slider.off('update');
+      this.slider.off('change');
+      this.slider.off('slide');
+      this.slider.off('start');
+      this.slider.off('end');
+
+      this.slider.destroy();
+      this.slider = null;
     }
   }
 
@@ -175,11 +192,11 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   writeValue(value: any): void {
-    if (this.slider) {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (this.slider) {
         this.slider.set(value);
-      });
-    }
+      }
+    });
   }
 
   registerOnChange(fn: (value: any) => void) {
