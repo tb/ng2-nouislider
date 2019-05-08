@@ -1,6 +1,6 @@
 {
   "name": "ng2-nouislider",
-  "version": "1.7.12",
+  "version": "1.8.0",
   "description": "Angular2 noUiSlider component",
   "scripts": {
     "contributors": "all-contributors generate",
