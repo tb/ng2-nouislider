@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { NouisliderModule } from '../src/ng2-nouislider';
+import { NouisliderModule } from '../src/public_api';
 
 @NgModule({
   imports: [

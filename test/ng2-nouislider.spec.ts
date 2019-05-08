@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
 import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { DefaultFormatter, NouisliderModule, NouisliderComponent } from '../src/ng2-nouislider.ts';
+import { DefaultFormatter, NouisliderModule, NouisliderComponent } from '../src/public_api';
 
 describe('Default Formatter', () => {
   let formatter: DefaultFormatter;

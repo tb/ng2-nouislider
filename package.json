@@ -4,7 +4,7 @@
   "description": "Angular2 noUiSlider component",
   "scripts": {
     "contributors": "all-contributors generate",
-    "lint": "tslint src/ng2-nouislider.ts",
+    "lint": "tslint src/public_api.ts",
     "build": "npm run lint && ng-packagr -p ng-package.json",
     "start": "npm run build && webpack-dev-server --host 0.0.0.0",
     "deploy": "NODE_ENV=prod npm run build && NODE_ENV=prod webpack && gh-pages -d demo",

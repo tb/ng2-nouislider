@@ -25,7 +25,7 @@
     "node_modules"
   ],
   "files": [
-    "src/ng2-nouislider.ts"
+    "src/public_api.ts"
   ],
   "angularCompilerOptions": {
     "genDir": "compiled"
