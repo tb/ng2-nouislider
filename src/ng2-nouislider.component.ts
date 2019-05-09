@@ -8,7 +8,6 @@ import {
   OnInit,
   OnChanges,
   Output,
-  NgModule,
   Renderer2
 } from '@angular/core';
 import {
@@ -264,10 +263,3 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   }
 }
 
-
-@NgModule({
-  imports: [],
-  exports: [NouisliderComponent],
-  declarations: [NouisliderComponent],
-})
-export class NouisliderModule { }

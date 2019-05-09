@@ -1,6 +1,9 @@
 {
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "lib": {
-    "entryFile": "src/ng2-nouislider.ts"
+    "entryFile": "src/public_api.ts",
+    "externals": {
+      "nouislider": "noUiSlider"
+    }
   }
 }
