@@ -31,7 +31,7 @@ Add to map:
 Add to packages:
 
     'nouislider': { main: 'distribute/nouislider.js', defaultExtension: 'js' },
-    'ng2-nouislider': { main: 'src/nouislider.js', defaultExtension: 'js' },
+    'ng2-nouislider': { main: 'bundles/ng2-nouislider.umd.js', defaultExtension: 'js' },
 
 ## Usage
 
@@ -59,7 +59,6 @@ This component is based on [nouislider](https://refreshless.com/nouislider/). Do
 
     npm i
     npm start
-    open http://localhost:8080
 
 ## Contributors
 
