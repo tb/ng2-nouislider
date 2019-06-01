@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": []
+  },
+  "include": [
+    "projects/**/*.ts"
+  ],
+  "exclude": [
+    "projects/ngx-nouislider/src/test.ts",
+    "projects/**/*.spec.ts"
+  ]
+}
