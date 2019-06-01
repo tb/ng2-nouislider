@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
 import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { DefaultFormatter, NouisliderModule, NouisliderComponent } from '../src/public_api';
+import { DefaultFormatter, NouisliderModule, NouisliderComponent } from '../public-api';
 
 describe('Default Formatter', () => {
   let formatter: DefaultFormatter;
@@ -75,22 +75,22 @@ describe('Nouislider Component', () => {
           max: 10
         },
         format: {
-          to: function (value: any) : any {
+          to(value: any): any {
             return value;
           },
-          from: function (value: any) : any {
+          from(value: any): any {
             return parseFloat(value);
           }
         },
         ariaFormat: {}
       };
 
-      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance.config))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
       expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
     });
 
     it('should set default formatter', () => {
-      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
+      expect(sliderInstance.config.format instanceof DefaultFormatter).toBeTruthy();
       expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
     });
 
@@ -101,7 +101,7 @@ describe('Nouislider Component', () => {
         fixture.detectChanges();
         expect(isStable).toBe(true, 'isStable');
         expect(componentInstance.someValue).toEqual(6);
-        expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        expect((componentInstance.onEvent as any).calls.allArgs()).toEqual([
           ['ngModelChange', 6],
           ['set', 6]
         ]);
@@ -116,7 +116,7 @@ describe('Nouislider Component', () => {
         expect(isStable).toBe(true, 'isStable');
         expect(componentInstance.someLimit).toEqual(4);
         expect(componentInstance.someValue).toEqual(4);
-        expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        expect((componentInstance.onEvent as any).calls.allArgs()).toEqual([
           ['ngModelChange', 4],
           ['set', 4]
         ]);
@@ -127,7 +127,7 @@ describe('Nouislider Component', () => {
       sliderInstance.slider.set('6');
       setTimeout(() => {
         expect(componentInstance.someValue).toEqual(6);
-        expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        expect((componentInstance.onEvent as any).calls.allArgs()).toEqual([
           ['ngModelChange', 6],
           ['set', 6]
         ]);
@@ -158,22 +158,22 @@ describe('Nouislider Component', () => {
           max: 10
         },
         format: {
-          to: function (value: any) : any {
+          to(value: any): any {
             return value;
           },
-          from: function (value: any) : any {
+          from(value: any): any {
             return parseFloat(value);
           }
         },
         ariaFormat: {}
       };
 
-      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance.config))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
       expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
     });
 
     it('should set default formatter', () => {
-      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
+      expect(sliderInstance.config.format instanceof DefaultFormatter).toBeTruthy();
       expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
     });
 
@@ -214,21 +214,21 @@ describe('Nouislider Component', () => {
           max: 10
         },
         format: {
-          to: function (value: any) : any {
+          to(value: any): any {
             return value;
           },
-          from: function (value: any) : any {
+          from(value: any): any {
             return parseFloat(value);
           }
         },
         ariaFormat: {}
       };
-      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance.config))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
       expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
     });
 
     it('should set default formatter', () => {
-      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
+      expect(sliderInstance.config.format instanceof DefaultFormatter).toBeTruthy();
       expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
     });
 
@@ -239,7 +239,7 @@ describe('Nouislider Component', () => {
         fixture.detectChanges();
         expect(isStable).toBe(true, 'isStable');
         expect(componentInstance.someRange).toEqual([4, 7]);
-        expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        expect((componentInstance.onEvent as any).calls.allArgs()).toEqual([
           ['ngModelChange', [4, 7]],
           ['set', [4, 7]]
         ]);
@@ -250,7 +250,7 @@ describe('Nouislider Component', () => {
       sliderInstance.slider.set(['4', '7']);
       setTimeout(() => {
         expect(componentInstance.someRange).toEqual([4, 7]);
-        expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        expect((componentInstance.onEvent as any).calls.allArgs()).toEqual([
           ['ngModelChange', [4, 7]],
           ['set', [4, 7]]
         ]);
@@ -276,7 +276,7 @@ describe('Nouislider Component', () => {
     }));
 
     it('should preserve tooltip formatting', () => {
-      expect(sliderInstance['config'].tooltips[0].to).toBeTruthy();
+      expect(sliderInstance.config.tooltips[0].to).toBeTruthy();
       expect(sliderInstance.slider.options.tooltips[0].to).toBeTruthy();
     });
 
@@ -302,22 +302,22 @@ describe('Nouislider Component', () => {
         step: 1,
         range: { min: 0, max: 10 },
         format: {
-          to: function (value: any) : any {
+          to(value: any): any {
             return value;
           },
-          from: function (value: any) : any {
+          from(value: any): any {
             return parseFloat(value);
           }
         },
         ariaFormat: {}
       };
 
-      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance.config))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
       expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
     });
 
     it('should set default formatter', () => {
-      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
+      expect(sliderInstance.config.format instanceof DefaultFormatter).toBeTruthy();
       expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
     });
 
@@ -348,9 +348,9 @@ describe('Nouislider Component', () => {
   `,
 })
 class TestSingleSliderComponent {
-  public someValue: number = 5;
-  public someLimit: number = 10;
-  public onEvent(event: string, value: number) { };
+  public someValue = 5;
+  public someLimit = 10;
+  public onEvent(event: string, value: number) { }
 }
 
 @Component({
@@ -368,8 +368,8 @@ class TestSingleSliderComponent {
 })
 class TestSingleFormSliderComponent {
   public form: FormGroup;
-  constructor (private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({ 'single': [ 8 ] });
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({ single: [ 8 ] });
   }
 }
 
@@ -389,7 +389,7 @@ class TestSingleFormSliderComponent {
 })
 class TestRangeSliderComponent {
   public someRange: number[] = [3, 7];
-  public onEvent(event: string, value: number[]) { };
+  public onEvent(event: string, value: number[]) { }
 }
 
 @Component({
@@ -408,12 +408,12 @@ class TestRangeSliderComponent {
   `,
 })
 class TestRangeTooltipFormatterSliderComponent {
+
   public someRange: number[] = [3, 7];
-  public onEvent(event: string, value: number[]) { };
   public formatter = {
     to: (value: number): number => value
-  }
-}
+  };
+  public onEvent(event: string, value: number[]) { }}
 
 @Component({
   selector: 'test-range-form-slider',
@@ -430,7 +430,7 @@ class TestRangeTooltipFormatterSliderComponent {
 })
 class TestRangeFormSliderComponent {
   public form: FormGroup;
-  constructor (private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({ 'range': [[2, 8]] });
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({ range: [[2, 8]] });
   }
 }

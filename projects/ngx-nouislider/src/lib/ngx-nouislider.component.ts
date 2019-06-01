@@ -25,7 +25,7 @@ export class DefaultFormatter implements NouiFormatter {
   to(value: number): string {
     // formatting with http://stackoverflow.com/a/26463364/478584
     return String(parseFloat(parseFloat(String(value)).toFixed(2)));
-  };
+  }
 
   from(value: string): number {
     return parseFloat(value);
@@ -85,10 +85,10 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
 
-  constructor(private el: ElementRef, private renderer : Renderer2) { }
+  constructor(private el: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    let inputsConfig = JSON.parse(JSON.stringify({
+    const inputsConfig = JSON.parse(JSON.stringify({
       behaviour: this.behaviour,
       connect: this.connect,
       limit: this.limit,
@@ -112,16 +112,16 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
 
     this.handles = [].slice.call(this.el.nativeElement.querySelectorAll('.noUi-handle'));
 
-    if(this.config.keyboard) {
-      if(this.config.pageSteps === undefined) {
+    if (this.config.keyboard) {
+      if (this.config.pageSteps === undefined) {
         this.config.pageSteps = 10;
       }
-      for(let handle of this.handles) {
+      for (const handle of this.handles) {
         handle.setAttribute('tabindex', 0);
         handle.addEventListener('click', () => {
           handle.focus();
         });
-        if(this.config.onKeydown === undefined) {
+        if (this.config.onKeydown === undefined) {
           handle.addEventListener('keydown', this.defaultKeyHandler);
         } else {
           handle.addEventListener('keydown', this.config.onKeydown);
@@ -169,8 +169,8 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   toValues(values: string[]): any | any[] {
-    let v = values.map(this.config.format.from);
-    return (v.length == 1 ? v[0] : v);
+    const v = values.map(this.config.format.from);
+    return (v.length === 1 ? v[0] : v);
   }
 
   writeValue(value: any): void {
@@ -196,23 +196,25 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   private eventHandler = (emitter: EventEmitter<any>, values: string[], handle: number, unencoded: number[]) => {
-    let v = this.toValues(values);
+    const v = this.toValues(values);
     let emitEvents = false;
-    if(this.value === undefined) {
+    if (this.value === undefined) {
       this.value = v;
       return;
     }
-    if(Array.isArray(v) && this.value[handle] != v[handle]) {
+    // tslint:disable triple-equals
+    if (Array.isArray(v) && this.value[handle] != v[handle]) {
       emitEvents = true;
     }
-    if(!Array.isArray(v) && this.value != v) {
+    if (!Array.isArray(v) && this.value != v) {
       emitEvents = true;
     }
-    if(emitEvents) {
+    // tslint:enable triple-equals
+    if (emitEvents) {
       emitter.emit(v);
       this.onChange(v);
     }
-    if(Array.isArray(v)) {
+    if (Array.isArray(v)) {
       this.value[handle] = v[handle];
     } else {
       this.value = v;
@@ -220,14 +222,14 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   private defaultKeyHandler = (e: KeyboardEvent) => {
-    let stepSize: any[] = this.slider.steps();
-    let index = parseInt((<HTMLElement>e.target).getAttribute('data-handle'));
+    const stepSize: any[] = this.slider.steps();
+    const index = parseInt((e.target as HTMLElement).getAttribute('data-handle'), 10);
     let sign = 1;
-    let multiplier: number = 1;
+    let multiplier = 1;
     let step = 0;
     let delta = 0;
 
-    switch ( e.which ) {
+    switch ( e['which'] ) {
       case 34:  // PageDown
         multiplier = this.config.pageSteps;
       case 40:  // ArrowDown
@@ -252,7 +254,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     delta = sign * multiplier * step;
     let newValue: number | number[];
 
-    if(Array.isArray(this.value)) {
+    if (Array.isArray(this.value)) {
       newValue = [].concat(this.value);
       newValue[index] = newValue[index] + delta;
     } else {
