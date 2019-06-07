@@ -75,6 +75,8 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   @Input() public onKeydown: any;
   @Input() public formControl: FormControl;
   @Input() public tooltips: Array<any>;
+  @Input() public direction: 'ltr' | 'rtl';
+  @Input() public padding: number | number[];
   @Output() public change: EventEmitter<any> = new EventEmitter(true);
   @Output() public update: EventEmitter<any> = new EventEmitter(true);
   @Output() public slide: EventEmitter<any> = new EventEmitter(true);
@@ -100,8 +102,11 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
       range: this.range || this.config.range || {min: this.min, max: this.max},
       tooltips: this.tooltips,
       snap: this.snap,
-      animate: this.animate
-    }));
+      animate: this.animate,
+      direction: this.direction || this.config.direction || 'ltr',
+      padding: this.padding || this.config.padding || 0
+      })
+    );
     inputsConfig.tooltips = this.tooltips || this.config.tooltips;
     inputsConfig.format = this.format || this.config.format || new DefaultFormatter();
 

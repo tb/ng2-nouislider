@@ -44,7 +44,8 @@ describe('Nouislider Component', () => {
         TestRangeSliderComponent,
         TestSingleFormSliderComponent,
         TestRangeFormSliderComponent,
-        TestRangeTooltipFormatterSliderComponent
+        TestRangeTooltipFormatterSliderComponent,
+        TestSingleSliderCustomDirectionPaddingComponent
       ]
     });
   }));
@@ -82,7 +83,9 @@ describe('Nouislider Component', () => {
             return parseFloat(value);
           }
         },
-        ariaFormat: {}
+        ariaFormat: {},
+        direction: 'ltr',
+        padding: 0
       };
 
       expect(JSON.parse(JSON.stringify(sliderInstance.config))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
@@ -165,7 +168,9 @@ describe('Nouislider Component', () => {
             return parseFloat(value);
           }
         },
-        ariaFormat: {}
+        ariaFormat: {},
+        direction: 'ltr',
+        padding: 0
       };
 
       expect(JSON.parse(JSON.stringify(sliderInstance.config))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
@@ -221,7 +226,9 @@ describe('Nouislider Component', () => {
             return parseFloat(value);
           }
         },
-        ariaFormat: {}
+        ariaFormat: {},
+        direction: 'ltr',
+        padding: 0
       };
       expect(JSON.parse(JSON.stringify(sliderInstance.config))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
       expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
@@ -309,7 +316,9 @@ describe('Nouislider Component', () => {
             return parseFloat(value);
           }
         },
-        ariaFormat: {}
+        ariaFormat: {},
+        direction: 'ltr',
+        padding: 0
       };
 
       expect(JSON.parse(JSON.stringify(sliderInstance.config))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
@@ -331,6 +340,53 @@ describe('Nouislider Component', () => {
       expect(componentInstance.form.value).toEqual({ range: [4, 6] });
     }));
   });
+
+  describe('single slider with custom padding and direction inputs', () => {
+    let fixture: ComponentFixture<TestSingleSliderCustomDirectionPaddingComponent>;
+    let componentInstance: TestSingleSliderCustomDirectionPaddingComponent;
+    let sliderDebugElement: DebugElement;
+    let sliderNativeElement: HTMLElement;
+    let sliderInstance: NouisliderComponent;
+
+    beforeEach(async(() => {
+      fixture = TestBed.createComponent(TestSingleSliderCustomDirectionPaddingComponent);
+      componentInstance = fixture.debugElement.componentInstance;
+      sliderDebugElement = fixture.debugElement.query(By.directive(NouisliderComponent));
+      sliderNativeElement = sliderDebugElement.nativeElement;
+      sliderInstance = sliderDebugElement.componentInstance;
+      spyOn(componentInstance, 'onEvent');
+      fixture.detectChanges();
+    }));
+
+    it('should set custom padding and direction', () => {
+      const defaultOptions = {
+        start: 5,
+        step: 0.05,
+        range: {
+          min: -10,
+          max: 10
+        },
+        format: {
+          to(value: any): any {
+            return value;
+          },
+          from(value: any): any {
+            return parseFloat(value);
+          }
+        },
+        ariaFormat: {},
+        direction: 'rtl',
+        padding: [1, 1]
+      };
+
+      expect(JSON.parse(JSON.stringify(sliderInstance.config))).toEqual(
+        JSON.parse(JSON.stringify(defaultOptions))
+      );
+      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(
+        JSON.parse(JSON.stringify(defaultOptions))
+      );
+});
+});
 });
 
 @Component({
@@ -433,4 +489,26 @@ class TestRangeFormSliderComponent {
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({ range: [[2, 8]] });
   }
+}
+
+@Component({
+  selector: 'test-single-slider-custom-direction-padding',
+  template: `
+    <nouislider
+      [min]="-10"
+      [max]="someLimit"
+      [step]="0.05"
+      [direction]="'rtl'"
+      [padding]="[1, 1]"
+      [(ngModel)]="someValue"
+      (ngModelChange)="onEvent('ngModelChange', $event)"
+      (change)="onEvent('change', $event)"
+      (set)="onEvent('set', $event)"
+    ></nouislider>
+  `
+})
+class TestSingleSliderCustomDirectionPaddingComponent {
+  public someValue = 5;
+  public someLimit = 10;
+  public onEvent(event: string, value: number) {}
 }
