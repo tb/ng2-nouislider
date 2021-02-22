@@ -8,7 +8,9 @@ import {
   OnInit,
   OnChanges,
   Output,
-  Renderer2
+  Renderer2,
+  NgZone,
+  OnDestroy
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -53,7 +55,7 @@ export class DefaultFormatter implements NouiFormatter {
     }
   ]
 })
-export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
 
   public slider: any;
   public handles: any[];
@@ -83,49 +85,57 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   @Output() public end: EventEmitter<any> = new EventEmitter(true);
   private value: any;
   private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
+  private cleanups: VoidFunction[] = [];
 
-  constructor(private el: ElementRef, private renderer : Renderer2) { }
+  constructor(private ngZone: NgZone, private el: ElementRef, private renderer : Renderer2) { }
 
   ngOnInit(): void {
-    let inputsConfig = JSON.parse(JSON.stringify({
-      behaviour: this.behaviour,
-      connect: this.connect,
-      limit: this.limit,
-      start: this.formControl !== undefined ? this.formControl.value : this.ngModel,
-      step: this.step,
-      pageSteps: this.pageSteps,
-      keyboard: this.keyboard,
-      onKeydown: this.onKeydown,
-      range: this.range || this.config.range || {min: this.min, max: this.max},
-      tooltips: this.tooltips,
-      snap: this.snap,
-      animate: this.animate
-    }));
+    let inputsConfig = JSON.parse(
+      JSON.stringify({
+        behaviour: this.behaviour,
+        connect: this.connect,
+        limit: this.limit,
+        start: this.formControl !== undefined ? this.formControl.value : this.ngModel,
+        step: this.step,
+        pageSteps: this.pageSteps,
+        keyboard: this.keyboard,
+        onKeydown: this.onKeydown,
+        range: this.range || this.config.range || { min: this.min, max: this.max },
+        tooltips: this.tooltips,
+        snap: this.snap,
+        animate: this.animate,
+      }),
+    );
     inputsConfig.tooltips = this.tooltips || this.config.tooltips;
     inputsConfig.format = this.format || this.config.format || new DefaultFormatter();
 
-    this.slider = noUiSlider.create(
-      this.el.nativeElement.querySelector('div'),
-      Object.assign(this.config, inputsConfig)
-    );
+    this.ngZone.runOutsideAngular(() => {
+      this.slider = noUiSlider.create(
+        this.el.nativeElement.querySelector('div'),
+        Object.assign(this.config, inputsConfig)
+      );
+    });
 
     this.handles = [].slice.call(this.el.nativeElement.querySelectorAll('.noUi-handle'));
 
-    if(this.config.keyboard) {
-      if(this.config.pageSteps === undefined) {
+    if (this.config.keyboard) {
+      if (this.config.pageSteps === undefined) {
         this.config.pageSteps = 10;
       }
-      for(let handle of this.handles) {
+
+      for (const handle of this.handles) {
         handle.setAttribute('tabindex', 0);
-        handle.addEventListener('click', () => {
-          handle.focus();
+
+        const onKeydown = this.config.onKeydown || this.defaultKeyHandler;
+
+        this.ngZone.runOutsideAngular(() => {
+          this.cleanups.push(
+            this.renderer.listen(handle, 'keydown', onKeydown),
+            this.renderer.listen(handle, 'click', () => {
+              handle.focus();
+            }),
+          );
         });
-        if(this.config.onKeydown === undefined) {
-          handle.addEventListener('keydown', this.defaultKeyHandler);
-        } else {
-          handle.addEventListener('keydown', this.config.onKeydown);
-        }
       }
     }
 
@@ -134,11 +144,19 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     });
 
     this.slider.on('update', (values: string[], handle: number, unencoded: number[]) => {
-      this.update.emit(this.toValues(values));
+      if (this.update.observers.length > 0) {
+        this.ngZone.run(() => {
+          this.update.emit(this.toValues(values));
+        });
+      }
     });
 
     this.slider.on('change', (values: string[], handle: number, unencoded: number[]) => {
-      this.change.emit(this.toValues(values));
+      if (this.change.observers.length > 0) {
+        this.ngZone.run(() => {
+          this.change.emit(this.toValues(values));
+        });
+      }
     });
 
     this.slider.on('slide', (values: string[], handle: number, unencoded: number[]) => {
@@ -146,25 +164,43 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     });
 
     this.slider.on('start', (values: string[], handle: number, unencoded: number[]) => {
-      this.start.emit(this.toValues(values));
+      if (this.start.observers.length > 0) {
+        this.ngZone.run(() => {
+          this.start.emit(this.toValues(values));
+        });
+      }
     });
 
     this.slider.on('end', (values: string[], handle: number, unencoded: number[]) => {
-      this.end.emit(this.toValues(values));
+      if (this.end.observers.length > 0) {
+        this.ngZone.run(() => {
+          this.end.emit(this.toValues(values));
+        });
+      }
     });
   }
 
   ngOnChanges(changes: any) {
     if (this.slider && (changes.min || changes.max || changes.step || changes.range)) {
-      setTimeout(() => {
-        this.slider.updateOptions({
-          range: Object.assign({}, {
-            min: this.min,
-            max: this.max
-          }, this.range || {}),
-          step: this.step
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          this.slider.updateOptions({
+            range: Object.assign({}, {
+              min: this.min,
+              max: this.max
+            }, this.range || {}),
+            step: this.step
+          });
         });
       });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.slider.destroy();
+
+    while (this.cleanups.length) {
+      this.cleanups.pop()();
     }
   }
 
@@ -175,8 +211,10 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
 
   writeValue(value: any): void {
     if (this.slider) {
-      setTimeout(() => {
-        this.slider.set(value);
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          this.slider.set(value);
+        });
       });
     }
   }
@@ -185,9 +223,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => {}): void {
-    this.onTouched = fn;
-  }
+  registerOnTouched(fn: () => {}): void {}
 
   setDisabledState(isDisabled: boolean): void {
     isDisabled
@@ -209,8 +245,12 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
       emitEvents = true;
     }
     if(emitEvents) {
-      emitter.emit(v);
-      this.onChange(v);
+      this.ngZone.run(() => {
+        if (emitter.observers.length > 0) {
+          emitter.emit(v);
+        }
+        this.onChange(v);
+      });
     }
     if(Array.isArray(v)) {
       this.value[handle] = v[handle];
@@ -262,4 +302,3 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     this.slider.set(newValue);
   }
 }
-

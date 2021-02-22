@@ -94,34 +94,51 @@ describe('Nouislider Component', () => {
       expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
     });
 
-    it('should trigger events on model change', async(() => {
+    it('should trigger events on model change', async () => {
       componentInstance.someValue = componentInstance.someValue + 1;
       fixture.detectChanges();
-      fixture.whenStable().then((isStable) => {
-        fixture.detectChanges();
-        expect(isStable).toBe(true, 'isStable');
-        expect(componentInstance.someValue).toEqual(6);
-        expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
-          ['ngModelChange', 6],
-          ['set', 6]
-        ]);
-      });
-    }));
+      const isStable = await fixture.whenStable();
+      fixture.detectChanges();
 
-    it('should trigger events on limit change', async(() => {
+      expect(isStable).toEqual(true, 'isStable');
+      expect(componentInstance.someValue).toEqual(6);
+
+      await waitForNgModelChange();
+
+      expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        ['ngModelChange', 6]
+      ]);
+
+      await waitForAsynchronousEventEmitter();
+
+      expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        ['ngModelChange', 6],
+        ['set', 6]
+      ]);
+    });
+
+    it('should trigger events on limit change', async () => {
       componentInstance.someLimit = 4;
       fixture.detectChanges();
-      fixture.whenStable().then((isStable) => {
-        fixture.detectChanges();
-        expect(isStable).toBe(true, 'isStable');
-        expect(componentInstance.someLimit).toEqual(4);
-        expect(componentInstance.someValue).toEqual(4);
-        expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
-          ['ngModelChange', 4],
-          ['set', 4]
-        ]);
-      });
-    }));
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(componentInstance.someLimit).toEqual(4);
+      await waitForNgModelChange();
+
+      expect(componentInstance.someValue).toEqual(4);
+
+      expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        ['ngModelChange', 4]
+      ]);
+
+      await waitForAsynchronousEventEmitter();
+
+      expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        ['ngModelChange', 4],
+        ['set', 4]
+      ]);
+    });
 
     it('should trigger events on slider set', async(() => {
       sliderInstance.slider.set('6');
@@ -232,19 +249,28 @@ describe('Nouislider Component', () => {
       expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
     });
 
-    it('should trigger events on model change', async(() => {
+    it('should trigger events on model change', async () => {
       componentInstance.someRange = [componentInstance.someRange[0] + 1, componentInstance.someRange[1]];
       fixture.detectChanges();
-      fixture.whenStable().then((isStable) => {
-        fixture.detectChanges();
-        expect(isStable).toBe(true, 'isStable');
-        expect(componentInstance.someRange).toEqual([4, 7]);
-        expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
-          ['ngModelChange', [4, 7]],
-          ['set', [4, 7]]
-        ]);
-      });
-    }));
+      const isStable = await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(isStable).toBe(true, 'isStable');
+      expect(componentInstance.someRange).toEqual([4, 7]);
+
+      await waitForNgModelChange();
+
+      expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        ['ngModelChange', [4, 7]]
+      ]);
+
+      await waitForAsynchronousEventEmitter();
+
+      expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
+        ['ngModelChange', [4, 7]],
+        ['set', [4, 7]]
+      ]);
+    });
 
     it('should trigger events on slider set', async(() => {
       sliderInstance.slider.set(['4', '7']);
@@ -433,4 +459,31 @@ class TestRangeFormSliderComponent {
   constructor (private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({ 'range': [[2, 8]] });
   }
+}
+
+function delay() {
+  return new Promise<void>(resolve => setTimeout(resolve));
+}
+
+/**
+ * @description
+ * The below functions do the same job but they're named differently so it's
+ * easier to understand the context they're used in.
+ *
+ * The `waitForNgModelChange` is used to suspend subsequent code execution until
+ * the next event loop tick. Basically, we're waiting until the `ngModelChange` event is fired.
+ * It will be fired when the `onChange` function will be called inside the `NouisliderComponent`.
+ * The `onChange` function is called when the slider fires `set` or `slide` events and they're fired
+ * asynchronously.
+ *
+ * The `waitForAsynchronousEventEmitter` function is used to wait until any `NouisliderComponent` event
+ * emitter fires any event. There are asynchronous event emitters, that means that they wrap their `next()`
+ * method calls into `setTimeout`.
+ */
+function waitForNgModelChange() {
+  return delay();
+}
+
+function waitForAsynchronousEventEmitter() {
+  return delay();
 }
