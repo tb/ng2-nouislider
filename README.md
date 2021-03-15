@@ -50,6 +50,23 @@ this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
     <nouislider [min]="0" [max]="20" [step]="0.5" [formControl]="form.controls.single"></nouislider>
 </form>
 ```
+
+### Dynamically update slider options
+
+```js
+export class myComponent {
+    @ViewChild('mySlider') slider: NouisliderComponent
+
+    updateSliderOptions() {
+        this.slider.slider.updateOptions(configObject)
+    }
+}
+```
+
+```html
+<nouislider #mySlider></nouislider>
+```
+
 ## Nouislider documentation
 
 This component is based on [nouislider](https://refreshless.com/nouislider/). Documentation about additional settings (passed in [config] @Input) can be found [here](https://refreshless.com/nouislider/slider-options/).
