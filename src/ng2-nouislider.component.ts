@@ -58,25 +58,25 @@ export class DefaultFormatter implements NouiFormatter {
 export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
 
   public slider: any;
-  public handles: any[];
-  @Input() public disabled: boolean; // tslint:disable-line
-  @Input() public behaviour: string;
-  @Input() public connect: boolean[];
-  @Input() public limit: number;
-  @Input() public min: number;
-  @Input() public max: number;
-  @Input() public snap: boolean;
-  @Input() public animate: boolean | boolean[];
-  @Input() public range: any;
-  @Input() public step: number;
-  @Input() public format: NouiFormatter;
-  @Input() public pageSteps: number;
-  @Input() public config: any = {};
-  @Input() public ngModel: number | number[];
-  @Input() public keyboard: boolean;
-  @Input() public onKeydown: any;
-  @Input() public formControl: FormControl;
-  @Input() public tooltips: Array<any>;
+  public handles?: any[];
+  @Input() public disabled?: boolean; // tslint:disable-line
+  @Input() public behaviour?: string;
+  @Input() public connect?: boolean[];
+  @Input() public limit?: number;
+  @Input() public min?: number;
+  @Input() public max?: number;
+  @Input() public snap?: boolean;
+  @Input() public animate?: boolean | boolean[];
+  @Input() public range?: any;
+  @Input() public step?: number;
+  @Input() public format?: NouiFormatter;
+  @Input() public pageSteps?: number;
+  @Input() public config?: any = {};
+//  @Input() public ngModel?: number | number[];
+  @Input() public keyboard?: boolean;
+  @Input() public onKeydown?: any;
+  @Input() public formControl?: FormControl;
+  @Input() public tooltips?: Array<any>;
   @Output() public change: EventEmitter<any> = new EventEmitter(true);
   @Output() public update: EventEmitter<any> = new EventEmitter(true);
   @Output() public slide: EventEmitter<any> = new EventEmitter(true);
@@ -95,7 +95,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
         behaviour: this.behaviour,
         connect: this.connect,
         limit: this.limit,
-        start: this.formControl !== undefined ? this.formControl.value : this.ngModel,
+        start: this.formControl !== undefined ? this.formControl.value : undefined, //this.ngModel,
         step: this.step,
         pageSteps: this.pageSteps,
         keyboard: this.keyboard,
@@ -200,7 +200,10 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     this.slider.destroy();
 
     while (this.cleanups.length) {
-      this.cleanups.pop()();
+      const fn = this.cleanups.pop();
+      if (fn) {
+        fn();
+      }
     }
   }
 
@@ -261,7 +264,8 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
 
   private defaultKeyHandler = (e: KeyboardEvent) => {
     let stepSize: any[] = this.slider.steps();
-    let index = parseInt((<HTMLElement>e.target).getAttribute('data-handle'));
+    const indexAttr = (<HTMLElement>e.target).getAttribute('data-handle');
+    let index = parseInt(indexAttr !== null ? indexAttr : '-1');
     let sign = 1;
     let multiplier: number = 1;
     let step = 0;
@@ -270,6 +274,10 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     switch ( e.which ) {
       case 34:  // PageDown
         multiplier = this.config.pageSteps;
+        sign = -1;
+        step = stepSize[index][0];
+        e.preventDefault();
+        break;
       case 40:  // ArrowDown
       case 37:  // ArrowLeft
         sign = -1;
@@ -279,6 +287,9 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
 
       case 33:  // PageUp
         multiplier = this.config.pageSteps;
+        step = stepSize[index][1];
+        e.preventDefault();
+        break;
       case 38:  // ArrowUp
       case 39:  // ArrowRight
         step = stepSize[index][1];
@@ -293,7 +304,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     let newValue: number | number[];
 
     if(Array.isArray(this.value)) {
-      newValue = [].concat(this.value);
+      newValue = [...this.value];//.concat(this.value);
       newValue[index] = newValue[index] + delta;
     } else {
       newValue = this.value + delta;
