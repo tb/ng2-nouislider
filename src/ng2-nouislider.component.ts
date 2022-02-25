@@ -146,7 +146,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     this.slider.on('update', (values: string[], handle: number, unencoded: number[]) => {
       if (this.update.observers.length > 0) {
         this.ngZone.run(() => {
-          this.update.emit(this.toValues(values));
+          this.update.emit(this.toValues(values), handle, unencoded);
         });
       }
     });
@@ -154,7 +154,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     this.slider.on('change', (values: string[], handle: number, unencoded: number[]) => {
       if (this.change.observers.length > 0) {
         this.ngZone.run(() => {
-          this.change.emit(this.toValues(values));
+          this.change.emit(this.toValues(values), handle, unencoded);
         });
       }
     });
@@ -166,7 +166,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     this.slider.on('start', (values: string[], handle: number, unencoded: number[]) => {
       if (this.start.observers.length > 0) {
         this.ngZone.run(() => {
-          this.start.emit(this.toValues(values));
+          this.start.emit(this.toValues(values), handle, unencoded);
         });
       }
     });
@@ -174,7 +174,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     this.slider.on('end', (values: string[], handle: number, unencoded: number[]) => {
       if (this.end.observers.length > 0) {
         this.ngZone.run(() => {
-          this.end.emit(this.toValues(values));
+          this.end.emit(this.toValues(values), handle, unencoded);
         });
       }
     });
