@@ -33,9 +33,6 @@
     "@angular/core": ">=14.x",
     "nouislider": ">=9.x"
   },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
   "devDependencies": {
     "@types/nouislider": "^9.0.1",
     "all-contributors-cli": "^4.4.0",
@@ -63,5 +60,6 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "typescript": "~4.7.2",
     "nouislider": "^11.0.0"
-  }
+  },
+  "packageManager": "pnpm@8.5.1"
 }

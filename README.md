@@ -11,7 +11,7 @@ See [demos](http://tb.github.io/ng2-nouislider/)
 
 ## Install
 
-    npm i --save nouislider ng2-nouislider
+    npm i nouislider ng2-nouislider
 
 ## Import
 
@@ -20,18 +20,6 @@ See [demos](http://tb.github.io/ng2-nouislider/)
 ### Styles
 
     @import "~nouislider/distribute/nouislider.min.css";
-
-### SystemJS config
-
-Add to map:
-
-    'nouislider': 'node_modules/nouislider',
-    'ng2-nouislider': 'node_modules/ng2-nouislider',
-
-Add to packages:
-
-    'nouislider': { main: 'distribute/nouislider.js', defaultExtension: 'js' },
-    'ng2-nouislider': { main: 'src/nouislider.js', defaultExtension: 'js' },
 
 ## Usage
 
@@ -57,20 +45,20 @@ This component is based on [nouislider](https://refreshless.com/nouislider/). Do
 
 ## Start development
 
-    npm i
-    npm start
-    open http://localhost:8080
+    corepack enable
+    pnpm i
+    pnpm start
+    open http://localhost:4200
 
 ## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-| [<img src="https://avatars2.githubusercontent.com/u/71683?v=4" width="100px;"/><br /><sub><b>Tomasz Bak</b></sub>](http://twitter.com/tomaszbak)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=tb "Code") [👀](#review-tb "Reviewed Pull Requests") | [<img src="https://avatars2.githubusercontent.com/u/18688794?v=4" width="100px;"/><br /><sub><b>Giacomo Mazzamuto</b></sub>](https://github.com/gmazzamuto)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=gmazzamuto "Code") [👀](#review-gmazzamuto "Reviewed Pull Requests") | [<img src="https://avatars3.githubusercontent.com/u/7102450?v=4" width="100px;"/><br /><sub><b>Ryan Morris</b></sub>](https://github.com/ryan-morris)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=ryan-morris "Code") | [<img src="https://avatars2.githubusercontent.com/u/2569015?v=4" width="100px;"/><br /><sub><b>Sven Flickinger</b></sub>](https://github.com/naeramarth7)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=naeramarth7 "Code") | [<img src="https://avatars0.githubusercontent.com/u/8615481?v=4" width="100px;"/><br /><sub><b>Riku Kallio</b></sub>](https://github.com/RichieRock)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=RichieRock "Code") | [<img src="https://avatars3.githubusercontent.com/u/5350861?v=4" width="100px;"/><br /><sub><b>John Pinkster</b></sub>](https://github.com/jpinkster)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=jpinkster "Code") | [<img src="https://avatars1.githubusercontent.com/u/477298?v=4" width="100px;"/><br /><sub><b>Oleg Romanovskyi</b></sub>](https://olg.io/)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=shedar "Code") |
+| [<img src="https://avatars2.githubusercontent.com/u/71683?v=4" width="100px;"/><br /><sub>Tomasz Bak</sub>](http://twitter.com/tomaszbak)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=tb "Code") [👀](#review-tb "Reviewed Pull Requests") | [<img src="https://avatars2.githubusercontent.com/u/18688794?v=4" width="100px;"/><br /><sub>Giacomo Mazzamuto</sub>](https://github.com/gmazzamuto)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=gmazzamuto "Code") [👀](#review-gmazzamuto "Reviewed Pull Requests") | [<img src="https://avatars3.githubusercontent.com/u/7102450?v=4" width="100px;"/><br /><sub>Ryan Morris</sub>](https://github.com/ryan-morris)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=ryan-morris "Code") | [<img src="https://avatars2.githubusercontent.com/u/2569015?v=4" width="100px;"/><br /><sub>Sven Flickinger</sub>](https://github.com/naeramarth7)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=naeramarth7 "Code") | [<img src="https://avatars0.githubusercontent.com/u/8615481?v=4" width="100px;"/><br /><sub>Riku Kallio</sub>](https://github.com/RichieRock)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=RichieRock "Code") | [<img src="https://avatars3.githubusercontent.com/u/5350861?v=4" width="100px;"/><br /><sub>John Pinkster</sub>](https://github.com/jpinkster)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=jpinkster "Code") | [<img src="https://avatars1.githubusercontent.com/u/477298?v=4" width="100px;"/><br /><sub>Oleg Romanovskyi</sub>](https://olg.io/)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=shedar "Code") |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| [<img src="https://avatars1.githubusercontent.com/u/5629145?v=4" width="100px;"/><br /><sub><b>ATeal</b></sub>](http://www.alexrteal.com)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=ATeal "Code") | [<img src="https://avatars1.githubusercontent.com/u/2158235?v=4" width="100px;"/><br /><sub><b>Jérémy Leherpeur</b></sub>](https://github.com/amenophis)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=amenophis "Code") | [<img src="https://avatars1.githubusercontent.com/u/6425649?v=4" width="100px;"/><br /><sub><b>Matt Lewis</b></sub>](https://mattlewis.me/)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=mattlewis92 "Code") | [<img src="https://avatars1.githubusercontent.com/u/5819263?v=4" width="100px;"/><br /><sub><b>anysite</b></sub>](https://github.com/anysite)<br />[📖](https://github.com/tb/ng2-nouislider/commits?author=anysite "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/3389712?v=4" width="100px;"/><br /><sub><b>flmg</b></sub>](https://github.com/flmg)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=flmg "Code") | [<img src="https://avatars2.githubusercontent.com/u/8425921?v=4" width="100px;"/><br /><sub><b>SirWojtek</b></sub>](https://github.com/SirWojtek)<br />[📖](https://github.com/tb/ng2-nouislider/commits?author=SirWojtek "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/596580?v=4" width="100px;"/><br /><sub><b>Rubén Trujillo</b></sub>](http://bi4group.com)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=rubentrf "Code") |
-| [<img src="https://avatars1.githubusercontent.com/u/12625792?v=4" width="100px;"/><br /><sub><b>Olena Horal</b></sub>](https://github.com/sharlatta)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=sharlatta "Code") [💡](#example-sharlatta "Examples") | [<img src="https://avatars1.githubusercontent.com/u/316541?v=4" width="100px;"/><br /><sub><b>Jeremy Fry</b></sub>](http://www.jeremyfry.com)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=jeremyfry "Code") | [<img src="https://avatars0.githubusercontent.com/u/9978922?v=4" width="100px;"/><br /><sub><b>Tadeusz</b></sub>](https://github.com/mkp05)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=mkp05 "Code") | [<img src="https://avatars0.githubusercontent.com/u/2358714?v=4" width="100px;"/><br /><sub><b>Philippe Roy</b></sub>](http://philipperoy.github.io)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=PhilippeRoy "Code") |
+| [<img src="https://avatars1.githubusercontent.com/u/5629145?v=4" width="100px;"/><br /><sub>ATeal</sub>](http://www.alexrteal.com)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=ATeal "Code") | [<img src="https://avatars1.githubusercontent.com/u/2158235?v=4" width="100px;"/><br /><sub>Jérémy Leherpeur</sub>](https://github.com/amenophis)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=amenophis "Code") | [<img src="https://avatars1.githubusercontent.com/u/6425649?v=4" width="100px;"/><br /><sub>Matt Lewis</sub>](https://mattlewis.me/)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=mattlewis92 "Code") | [<img src="https://avatars1.githubusercontent.com/u/5819263?v=4" width="100px;"/><br /><sub>anysite</sub>](https://github.com/anysite)<br />[📖](https://github.com/tb/ng2-nouislider/commits?author=anysite "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/3389712?v=4" width="100px;"/><br /><sub>flmg</sub>](https://github.com/flmg)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=flmg "Code") | [<img src="https://avatars2.githubusercontent.com/u/8425921?v=4" width="100px;"/><br /><sub>SirWojtek</sub>](https://github.com/SirWojtek)<br />[📖](https://github.com/tb/ng2-nouislider/commits?author=SirWojtek "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/596580?v=4" width="100px;"/><br /><sub>Rubén Trujillo</sub>](http://bi4group.com)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=rubentrf "Code") |
+| [<img src="https://avatars1.githubusercontent.com/u/12625792?v=4" width="100px;"/><br /><sub>Olena Horal</sub>](https://github.com/sharlatta)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=sharlatta "Code") [💡](#example-sharlatta "Examples") | [<img src="https://avatars1.githubusercontent.com/u/316541?v=4" width="100px;"/><br /><sub>Jeremy Fry</sub>](http://www.jeremyfry.com)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=jeremyfry "Code") | [<img src="https://avatars0.githubusercontent.com/u/9978922?v=4" width="100px;"/><br /><sub>Tadeusz</sub>](https://github.com/mkp05)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=mkp05 "Code") | [<img src="https://avatars0.githubusercontent.com/u/2358714?v=4" width="100px;"/><br /><sub>Philippe Roy</sub>](http://philipperoy.github.io)<br />[💻](https://github.com/tb/ng2-nouislider/commits?author=PhilippeRoy "Code") |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.

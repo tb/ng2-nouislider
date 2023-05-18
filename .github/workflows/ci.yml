@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
 
 jobs:
@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: corepack enable
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: npm
-      - run: npm install
-      - run: npm test
-      - uses: codecov/codecov-action@v3
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm test
