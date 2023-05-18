@@ -1,33 +1,32 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "declaration": true,
-    "emitDecoratorMetadata": true,
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "module": "commonjs",
     "moduleResolution": "node",
-    "noImplicitAny": true,
-    "target": "es5",
+    "importHelpers": true,
+    "target": "es2020",
+    "module": "es2020",
     "lib": [
-      "es2015",
+      "es2020",
       "dom"
-    ],
-    "types": [
-      "jasmine",
-      "node"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
     ]
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "files": [
-    "src/public_api.ts"
-  ],
   "angularCompilerOptions": {
-    "genDir": "compiled"
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }
