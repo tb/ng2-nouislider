@@ -64,6 +64,7 @@
     "all-contributors-cli": "^4.4.0",
     "angular-cli-ghpages": "1.0.6",
     "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
