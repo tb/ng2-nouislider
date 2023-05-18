@@ -2,9 +2,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { Component, DebugElement } from '@angular/core';
-import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormsModule,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
-import { DefaultFormatter, NouisliderModule, NouisliderComponent } from '../src/public_api';
+import {
+  DefaultFormatter,
+  NouisliderModule,
+  NouisliderComponent,
+} from '../src/public_api';
 
 describe('Default Formatter', () => {
   let formatter: DefaultFormatter;
@@ -34,18 +43,14 @@ describe('Default Formatter', () => {
 describe('Nouislider Component', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        FormsModule,
-        NouisliderModule,
-        ReactiveFormsModule
-      ],
+      imports: [FormsModule, NouisliderModule, ReactiveFormsModule],
       declarations: [
         TestSingleSliderComponent,
         TestRangeSliderComponent,
         TestSingleFormSliderComponent,
         TestRangeFormSliderComponent,
-        TestRangeTooltipFormatterSliderComponent
-      ]
+        TestRangeTooltipFormatterSliderComponent,
+      ],
     });
   }));
 
@@ -59,7 +64,9 @@ describe('Nouislider Component', () => {
     beforeEach(async(() => {
       fixture = TestBed.createComponent(TestSingleSliderComponent);
       componentInstance = fixture.debugElement.componentInstance;
-      sliderDebugElement = fixture.debugElement.query(By.directive(NouisliderComponent));
+      sliderDebugElement = fixture.debugElement.query(
+        By.directive(NouisliderComponent)
+      );
       sliderNativeElement = sliderDebugElement.nativeElement;
       sliderInstance = sliderDebugElement.componentInstance;
       spyOn(componentInstance, 'onEvent');
@@ -72,26 +79,34 @@ describe('Nouislider Component', () => {
         step: 0.05,
         range: {
           min: -10,
-          max: 10
+          max: 10,
         },
         format: {
-          to: function (value: any) : any {
+          to: function (value: any): any {
             return value;
           },
-          from: function (value: any) : any {
+          from: function (value: any): any {
             return parseFloat(value);
-          }
+          },
         },
-        ariaFormat: {}
+        ariaFormat: {},
       };
 
-      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
-      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(
+        JSON.parse(JSON.stringify(defaultOptions))
+      );
+      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(
+        JSON.parse(JSON.stringify(defaultOptions))
+      );
     });
 
     it('should set default formatter', () => {
-      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
-      expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
+      expect(
+        sliderInstance['config'].format instanceof DefaultFormatter
+      ).toBeTruthy();
+      expect(
+        sliderInstance.slider.options.format instanceof DefaultFormatter
+      ).toBeTruthy();
     });
 
     it('should trigger events on model change', async () => {
@@ -106,14 +121,14 @@ describe('Nouislider Component', () => {
       await waitForNgModelChange();
 
       expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
-        ['ngModelChange', 6]
+        ['ngModelChange', 6],
       ]);
 
       await waitForAsynchronousEventEmitter();
 
       expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
         ['ngModelChange', 6],
-        ['set', 6]
+        ['set', 6],
       ]);
     });
 
@@ -129,14 +144,14 @@ describe('Nouislider Component', () => {
       expect(componentInstance.someValue).toEqual(4);
 
       expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
-        ['ngModelChange', 4]
+        ['ngModelChange', 4],
       ]);
 
       await waitForAsynchronousEventEmitter();
 
       expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
         ['ngModelChange', 4],
-        ['set', 4]
+        ['set', 4],
       ]);
     });
 
@@ -146,7 +161,7 @@ describe('Nouislider Component', () => {
         expect(componentInstance.someValue).toEqual(6);
         expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
           ['ngModelChange', 6],
-          ['set', 6]
+          ['set', 6],
         ]);
       });
     }));
@@ -161,7 +176,9 @@ describe('Nouislider Component', () => {
     beforeEach(async(() => {
       fixture = TestBed.createComponent(TestSingleFormSliderComponent);
       componentInstance = fixture.debugElement.componentInstance;
-      sliderDebugElement = fixture.debugElement.query(By.directive(NouisliderComponent));
+      sliderDebugElement = fixture.debugElement.query(
+        By.directive(NouisliderComponent)
+      );
       sliderInstance = sliderDebugElement.componentInstance;
       fixture.detectChanges();
     }));
@@ -172,30 +189,37 @@ describe('Nouislider Component', () => {
         step: 0.05,
         range: {
           min: 0,
-          max: 10
+          max: 10,
         },
         format: {
-          to: function (value: any) : any {
+          to: function (value: any): any {
             return value;
           },
-          from: function (value: any) : any {
+          from: function (value: any): any {
             return parseFloat(value);
-          }
+          },
         },
-        ariaFormat: {}
+        ariaFormat: {},
       };
 
-      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
-      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(
+        JSON.parse(JSON.stringify(defaultOptions))
+      );
+      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(
+        JSON.parse(JSON.stringify(defaultOptions))
+      );
     });
 
     it('should set default formatter', () => {
-      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
-      expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
+      expect(
+        sliderInstance['config'].format instanceof DefaultFormatter
+      ).toBeTruthy();
+      expect(
+        sliderInstance.slider.options.format instanceof DefaultFormatter
+      ).toBeTruthy();
     });
 
     it('should change the form value on slider set', async(() => {
-
       // Initial value
       expect(componentInstance.form.value).toEqual({ single: 8 });
 
@@ -215,7 +239,9 @@ describe('Nouislider Component', () => {
     beforeEach(async(() => {
       fixture = TestBed.createComponent(TestRangeSliderComponent);
       componentInstance = fixture.debugElement.componentInstance;
-      sliderDebugElement = fixture.debugElement.query(By.directive(NouisliderComponent));
+      sliderDebugElement = fixture.debugElement.query(
+        By.directive(NouisliderComponent)
+      );
       sliderNativeElement = sliderDebugElement.nativeElement;
       sliderInstance = sliderDebugElement.componentInstance;
       spyOn(componentInstance, 'onEvent');
@@ -228,29 +254,40 @@ describe('Nouislider Component', () => {
         step: 1,
         range: {
           min: 0,
-          max: 10
+          max: 10,
         },
         format: {
-          to: function (value: any) : any {
+          to: function (value: any): any {
             return value;
           },
-          from: function (value: any) : any {
+          from: function (value: any): any {
             return parseFloat(value);
-          }
+          },
         },
-        ariaFormat: {}
+        ariaFormat: {},
       };
-      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
-      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(
+        JSON.parse(JSON.stringify(defaultOptions))
+      );
+      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(
+        JSON.parse(JSON.stringify(defaultOptions))
+      );
     });
 
     it('should set default formatter', () => {
-      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
-      expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
+      expect(
+        sliderInstance['config'].format instanceof DefaultFormatter
+      ).toBeTruthy();
+      expect(
+        sliderInstance.slider.options.format instanceof DefaultFormatter
+      ).toBeTruthy();
     });
 
     it('should trigger events on model change', async () => {
-      componentInstance.someRange = [componentInstance.someRange[0] + 1, componentInstance.someRange[1]];
+      componentInstance.someRange = [
+        componentInstance.someRange[0] + 1,
+        componentInstance.someRange[1],
+      ];
       fixture.detectChanges();
       const isStable = await fixture.whenStable();
       fixture.detectChanges();
@@ -261,14 +298,14 @@ describe('Nouislider Component', () => {
       await waitForNgModelChange();
 
       expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
-        ['ngModelChange', [4, 7]]
+        ['ngModelChange', [4, 7]],
       ]);
 
       await waitForAsynchronousEventEmitter();
 
       expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
         ['ngModelChange', [4, 7]],
-        ['set', [4, 7]]
+        ['set', [4, 7]],
       ]);
     });
 
@@ -278,7 +315,7 @@ describe('Nouislider Component', () => {
         expect(componentInstance.someRange).toEqual([4, 7]);
         expect((<any>componentInstance.onEvent).calls.allArgs()).toEqual([
           ['ngModelChange', [4, 7]],
-          ['set', [4, 7]]
+          ['set', [4, 7]],
         ]);
       });
     }));
@@ -292,9 +329,13 @@ describe('Nouislider Component', () => {
     let sliderInstance: NouisliderComponent;
 
     beforeEach(async(() => {
-      fixture = TestBed.createComponent(TestRangeTooltipFormatterSliderComponent);
+      fixture = TestBed.createComponent(
+        TestRangeTooltipFormatterSliderComponent
+      );
       componentInstance = fixture.debugElement.componentInstance;
-      sliderDebugElement = fixture.debugElement.query(By.directive(NouisliderComponent));
+      sliderDebugElement = fixture.debugElement.query(
+        By.directive(NouisliderComponent)
+      );
       sliderNativeElement = sliderDebugElement.nativeElement;
       sliderInstance = sliderDebugElement.componentInstance;
       spyOn(componentInstance, 'onEvent');
@@ -305,7 +346,6 @@ describe('Nouislider Component', () => {
       expect(sliderInstance['config'].tooltips[0].to).toBeTruthy();
       expect(sliderInstance.slider.options.tooltips[0].to).toBeTruthy();
     });
-
   });
 
   describe('range slider (as form control)', () => {
@@ -317,7 +357,9 @@ describe('Nouislider Component', () => {
     beforeEach(async(() => {
       fixture = TestBed.createComponent(TestRangeFormSliderComponent);
       componentInstance = fixture.debugElement.componentInstance;
-      sliderDebugElement = fixture.debugElement.query(By.directive(NouisliderComponent));
+      sliderDebugElement = fixture.debugElement.query(
+        By.directive(NouisliderComponent)
+      );
       sliderInstance = sliderDebugElement.componentInstance;
       fixture.detectChanges();
     }));
@@ -328,27 +370,34 @@ describe('Nouislider Component', () => {
         step: 1,
         range: { min: 0, max: 10 },
         format: {
-          to: function (value: any) : any {
+          to: function (value: any): any {
             return value;
           },
-          from: function (value: any) : any {
+          from: function (value: any): any {
             return parseFloat(value);
-          }
+          },
         },
-        ariaFormat: {}
+        ariaFormat: {},
       };
 
-      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
-      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(JSON.parse(JSON.stringify(defaultOptions)));
+      expect(JSON.parse(JSON.stringify(sliderInstance['config']))).toEqual(
+        JSON.parse(JSON.stringify(defaultOptions))
+      );
+      expect(JSON.parse(JSON.stringify(sliderInstance.slider.options))).toEqual(
+        JSON.parse(JSON.stringify(defaultOptions))
+      );
     });
 
     it('should set default formatter', () => {
-      expect(sliderInstance['config'].format instanceof DefaultFormatter).toBeTruthy();
-      expect(sliderInstance.slider.options.format instanceof DefaultFormatter).toBeTruthy();
+      expect(
+        sliderInstance['config'].format instanceof DefaultFormatter
+      ).toBeTruthy();
+      expect(
+        sliderInstance.slider.options.format instanceof DefaultFormatter
+      ).toBeTruthy();
     });
 
     it('should change the form value on slider set', async(() => {
-
       // Initial value
       expect(componentInstance.form.value).toEqual({ range: [2, 8] });
 
@@ -376,7 +425,7 @@ describe('Nouislider Component', () => {
 class TestSingleSliderComponent {
   public someValue: number = 5;
   public someLimit: number = 10;
-  public onEvent(event: string, value: number) { };
+  public onEvent(event: string, value: number) {}
 }
 
 @Component({
@@ -394,8 +443,8 @@ class TestSingleSliderComponent {
 })
 class TestSingleFormSliderComponent {
   public form: FormGroup;
-  constructor (private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({ 'single': [ 8 ] });
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({ single: [8] });
   }
 }
 
@@ -415,7 +464,7 @@ class TestSingleFormSliderComponent {
 })
 class TestRangeSliderComponent {
   public someRange: number[] = [3, 7];
-  public onEvent(event: string, value: number[]) { };
+  public onEvent(event: string, value: number[]) {}
 }
 
 @Component({
@@ -435,10 +484,10 @@ class TestRangeSliderComponent {
 })
 class TestRangeTooltipFormatterSliderComponent {
   public someRange: number[] = [3, 7];
-  public onEvent(event: string, value: number[]) { };
+  public onEvent(event: string, value: number[]) {}
   public formatter = {
-    to: (value: number): number => value
-  }
+    to: (value: number): number => value,
+  };
 }
 
 @Component({
@@ -456,13 +505,13 @@ class TestRangeTooltipFormatterSliderComponent {
 })
 class TestRangeFormSliderComponent {
   public form: FormGroup;
-  constructor (private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({ 'range': [[2, 8]] });
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({ range: [[2, 8]] });
   }
 }
 
 function delay() {
-  return new Promise<void>(resolve => setTimeout(resolve));
+  return new Promise<void>((resolve) => setTimeout(resolve));
 }
 
 /**

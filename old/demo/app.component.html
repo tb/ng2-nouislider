@@ -2,31 +2,106 @@
   <h3>Single value</h3>
 </div>
 
-<pre>&lt;nouislider [min]=&quot;someMin&quot; [max]=&quot;someLimit&quot; [step]=&quot;someStep&quot; [(ngModel)]=&quot;someValue&quot; (ngModelChange)=&quot;onChange($event)&quot; [disabled]=&quot;disabled&quot;&gt;&lt;/nouislider&gt;</pre>
+<pre>
+&lt;nouislider [min]=&quot;someMin&quot; [max]=&quot;someLimit&quot; [step]=&quot;someStep&quot; [(ngModel)]=&quot;someValue&quot; (ngModelChange)=&quot;onChange($event)&quot; [disabled]=&quot;disabled&quot;&gt;&lt;/nouislider&gt;</pre
+>
 
-<code>someValue: {{ someValue | json }}, someMin: {{ someMin | json }}, someMax: {{ someMax | json }}, someStep: {{ someStep | json }}</code>
+<code
+  >someValue: {{ someValue | json }}, someMin: {{ someMin | json }}, someMax:
+  {{ someMax | json }}, someStep: {{ someStep | json }}</code
+>
 
-<nouislider [min]="someMin" [max]="someMax" [step]="someStep" [(ngModel)]="someValue" (ngModelChange)="onChange($event)" [disabled]="disabled"></nouislider>
-
-<div class="btn-group">
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeValue(-1)">-1</button>
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeValue(1)">+1</button>
-</div>
-<div class="btn-group">
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeMin(-1)">-1</button>
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeMin(1)">+1</button>
-</div>
-<div class="btn-group">
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeMax(-1)">-1</button>
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeMax(1)">+1</button>
-</div>
-<div class="btn-group">
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeStep(-1)">-1</button>
-  <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="changeSomeStep(1)">+1</button>
-</div>
+<nouislider
+  [min]="someMin"
+  [max]="someMax"
+  [step]="someStep"
+  [(ngModel)]="someValue"
+  (ngModelChange)="onChange($event)"
+  [disabled]="disabled"
+></nouislider>
 
 <div class="btn-group">
-  <button type="button" class="btn btn-primary" [class.active]="disabled" (click)="disabled=!disabled">Disable</button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="disabled"
+    (click)="changeSomeValue(-1)"
+  >
+    -1
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="disabled"
+    (click)="changeSomeValue(1)"
+  >
+    +1
+  </button>
+</div>
+<div class="btn-group">
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="disabled"
+    (click)="changeSomeMin(-1)"
+  >
+    -1
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="disabled"
+    (click)="changeSomeMin(1)"
+  >
+    +1
+  </button>
+</div>
+<div class="btn-group">
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="disabled"
+    (click)="changeSomeMax(-1)"
+  >
+    -1
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="disabled"
+    (click)="changeSomeMax(1)"
+  >
+    +1
+  </button>
+</div>
+<div class="btn-group">
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="disabled"
+    (click)="changeSomeStep(-1)"
+  >
+    -1
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="disabled"
+    (click)="changeSomeStep(1)"
+  >
+    +1
+  </button>
+</div>
+
+<div class="btn-group">
+  <button
+    type="button"
+    class="btn btn-primary"
+    [class.active]="disabled"
+    (click)="disabled = !disabled"
+  >
+    Disable
+  </button>
 </div>
 
 <div class="page-header">
@@ -40,32 +115,74 @@
 <code>form1.value: {{ form1.value | json }}</code>
 
 <form [formGroup]="form1">
-  <nouislider [min]="0" [max]="20" [step]="0.5" [formControl]="form1.controls.single"></nouislider>
+  <nouislider
+    [min]="0"
+    [max]="20"
+    [step]="0.5"
+    [formControl]="form1.controls.single"
+  ></nouislider>
 </form>
 
 <div class="btn-group">
-  <button type="button" class="btn btn-primary" (click)="changeSingleFormValue(-0.5)">-0.5</button>
-  <button type="button" class="btn btn-primary" (click)="changeSingleFormValue(0.5)">+0.5</button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="changeSingleFormValue(-0.5)"
+  >
+    -0.5
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="changeSingleFormValue(0.5)"
+  >
+    +0.5
+  </button>
 </div>
 
 <div class="page-header">
   <h3>Range</h3>
 </div>
 
-<pre>&lt;nouislider [connect]=&quot;true&quot; [min]=&quot;0&quot; [max]=&quot;15&quot; [step]=&quot;1&quot; [(ngModel)]=&quot;someRange&quot; (ngModelChange)=&quot;onChange($event)&quot;&gt;&lt;/nouislider&gt;</pre>
+<pre>
+&lt;nouislider [connect]=&quot;true&quot; [min]=&quot;0&quot; [max]=&quot;15&quot; [step]=&quot;1&quot; [(ngModel)]=&quot;someRange&quot; (ngModelChange)=&quot;onChange($event)&quot;&gt;&lt;/nouislider&gt;</pre
+>
 
 <code>someRange: {{ someRange | json }}</code>
 
-<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (ngModelChange)="onChange($event)"></nouislider>
+<nouislider
+  [connect]="true"
+  [min]="0"
+  [max]="15"
+  [step]="1"
+  [(ngModel)]="someRange"
+  (ngModelChange)="onChange($event)"
+></nouislider>
 
 <div class="btn-group">
-  <button type="button" class="btn btn-primary" (click)="changeSomeRange(0,-1)">-</button>
-  <button type="button" class="btn btn-primary" (click)="changeSomeRange(0,1)">+</button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="changeSomeRange(0, -1)"
+  >
+    -
+  </button>
+  <button type="button" class="btn btn-primary" (click)="changeSomeRange(0, 1)">
+    +
+  </button>
 </div>
 
 <div class="btn-group">
-  <button type="button" class="btn btn-primary" (click)="changeSomeRange(1,-1)">-</button>
-  <button type="button" class="btn btn-primary" (click)="changeSomeRange(1,1)">+</button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="changeSomeRange(1, -1)"
+  >
+    -
+  </button>
+  <button type="button" class="btn btn-primary" (click)="changeSomeRange(1, 1)">
+    +
+  </button>
 </div>
 
 <div class="page-header">
@@ -79,23 +196,54 @@
 <code>form2.value: {{ form2.value | json }}</code>
 
 <form [formGroup]="form2">
-  <nouislider [connect]="true" [min]="0" [max]="10" [step]="1" [formControl]="form2.controls.range"></nouislider>
+  <nouislider
+    [connect]="true"
+    [min]="0"
+    [max]="10"
+    [step]="1"
+    [formControl]="form2.controls.range"
+  ></nouislider>
 </form>
 
 <div class="btn-group">
-  <button type="button" class="btn btn-primary" (click)="changeRangeFormValue(0,-1)">-</button>
-  <button type="button" class="btn btn-primary" (click)="changeRangeFormValue(0,1)">+</button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="changeRangeFormValue(0, -1)"
+  >
+    -
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="changeRangeFormValue(0, 1)"
+  >
+    +
+  </button>
 </div>
 
 <div class="btn-group">
-  <button type="button" class="btn btn-primary" (click)="changeRangeFormValue(1,-1)">-</button>
-  <button type="button" class="btn btn-primary" (click)="changeRangeFormValue(1,1)">+</button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="changeRangeFormValue(1, -1)"
+  >
+    -
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="changeRangeFormValue(1, 1)"
+  >
+    +
+  </button>
 </div>
 <div class="page-header">
   <h3>Range with config</h3>
 </div>
 
-<pre>someRange2config: any = &#123;
+<pre>
+someRange2config: any = &#123;
   behaviour: 'drag',
   connect: true,
   margin: 1,
@@ -108,16 +256,24 @@
     mode: 'steps',
     density: 5
   &#125;
-&#125;;</pre>
+&#125;;</pre
+>
 
-<pre>&lt;nouislider [config]=&quot;someRange2config&quot; [limit]=&quot;10&quot; [(ngModel)]=&quot;someRange2&quot;&gt;&lt;/nouislider&gt;</pre>
+<pre>
+&lt;nouislider [config]=&quot;someRange2config&quot; [limit]=&quot;10&quot; [(ngModel)]=&quot;someRange2&quot;&gt;&lt;/nouislider&gt;</pre
+>
 
 <code>someRange2: {{ someRange2 | json }}</code>
 
-<nouislider [config]="someRange2config" [limit]="10" [(ngModel)]="someRange2" style="margin-bottom: 5rem"></nouislider>
+<nouislider
+  [config]="someRange2config"
+  [limit]="10"
+  [(ngModel)]="someRange2"
+  style="margin-bottom: 5rem"
+></nouislider>
 
 <div class="page-header">
-    <h3>Keyboard support</h3>
+  <h3>Keyboard support</h3>
 </div>
 <pre>
 someKeyboardConfig: any = &#123;
@@ -140,19 +296,31 @@ someKeyboardConfig: any = &#123;
 &#125;;
 </pre>
 
-<pre>&lt;nouislider [config]=&quot;someKeyboardConfig&quot; [(ngModel)]=&quot;someKeyboard&quot;&gt;&lt;/nouislider&gt;</pre>
+<pre>
+&lt;nouislider [config]=&quot;someKeyboardConfig&quot; [(ngModel)]=&quot;someKeyboard&quot;&gt;&lt;/nouislider&gt;</pre
+>
 Select a handle and use arrow keys or page up / page down.
 <div class="event-logger">
-    Keboard events (key up, key down):
-    <span class="h6 label label-default event-label" [ngClass]="{'label-info': keyupLabelOn}">keyup</span>
-    <span class="h6 label label-default event-label" [ngClass]="{'label-info': keydownLabelOn}">keydown</span>
+  Keboard events (key up, key down):
+  <span
+    class="h6 label label-default event-label"
+    [ngClass]="{ 'label-info': keyupLabelOn }"
+    >keyup</span
+  >
+  <span
+    class="h6 label label-default event-label"
+    [ngClass]="{ 'label-info': keydownLabelOn }"
+    >keydown</span
+  >
 </div>
 <code>someKeyboard: {{ someKeyboard | json }}</code>
-<nouislider [config]="someKeyboardConfig"
-            [(ngModel)]="someKeyboard"
-            (keyup)="blinkKeyupLabel()"
-            (keydown)="blinkKeydownLabel()"
-            style="margin-bottom: 5rem"></nouislider>
+<nouislider
+  [config]="someKeyboardConfig"
+  [(ngModel)]="someKeyboard"
+  (keyup)="blinkKeyupLabel()"
+  (keydown)="blinkKeydownLabel()"
+  style="margin-bottom: 5rem"
+></nouislider>
 
 <h4>With custom key handler:</h4>
 <pre>
@@ -202,25 +370,38 @@ public someKeyboardConfig2: any = &#123;
 <pre>
 &lt;nouislider [config]=&quot;someKeyboardConfig2&quot; [(ngModel)]=&quot;someKeyboard2&quot; &gt;&lt;/nouislider&gt;
 </pre>
-<nouislider [config]="someKeyboardConfig2"
-            [(ngModel)]="someKeyboard2"
-            style="margin-bottom: 5rem"></nouislider>
-
+<nouislider
+  [config]="someKeyboardConfig2"
+  [(ngModel)]="someKeyboard2"
+  style="margin-bottom: 5rem"
+></nouislider>
 
 <div class="page-header">
   <h3>Tooltips</h3>
 </div>
 
-<pre>&lt;nouislider[min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someRange3&quot; [tooltips]=&quot;[ false, true ]&quot; style=&quot;margin-top: 4em;&quot;&gt;&lt;/nouislider&gt;</pre>
+<pre>
+&lt;nouislider[min]=&quot;0&quot; [max]=&quot;10&quot; [step]=&quot;0.05&quot; [(ngModel)]=&quot;someRange3&quot; [tooltips]=&quot;[ false, true ]&quot; style=&quot;margin-top: 4em;&quot;&gt;&lt;/nouislider&gt;</pre
+>
 
-<nouislider [min]="0" [max]="10" [step]="0.05" [(ngModel)]="someRange3" [tooltips]="[ false, true ]" style="margin-top: 4em;"></nouislider>
+<nouislider
+  [min]="0"
+  [max]="10"
+  [step]="0.05"
+  [(ngModel)]="someRange3"
+  [tooltips]="[false, true]"
+  style="margin-top: 4em"
+></nouislider>
 
 <div class="page-header">
   <h3>With custom formatting</h3>
 </div>
 
-<nouislider [config]="someTimeConfig" [(ngModel)]="someTime" style="margin-bottom: 5rem"></nouislider>
-
+<nouislider
+  [config]="someTimeConfig"
+  [(ngModel)]="someTime"
+  style="margin-bottom: 5rem"
+></nouislider>
 
 <div class="page-header">
   <h3>Disable control (reactive forms)</h3>
@@ -235,14 +416,20 @@ public someKeyboardConfig2: any = &#123;
   {{ '}' }}
 </pre>
 
-<code>form3.controls.single.disabled: {{ form3.controls.single.disabled }}</code>
+<code
+  >form3.controls.single.disabled: {{ form3.controls.single.disabled }}</code
+>
 <form [formGroup]="form3">
-  <nouislider [min]="0" [max]="10" [step]="1" [formControl]="form3.controls.single"></nouislider>
+  <nouislider
+    [min]="0"
+    [max]="10"
+    [step]="1"
+    [formControl]="form3.controls.single"
+  ></nouislider>
 </form>
 
 <div class="btn-group">
   <button type="button" class="btn btn-primary" (click)="toggleDisabled()">
-    {{form3.controls.single.disabled ? 'Enable': 'Disable'}}
+    {{ form3.controls.single.disabled ? 'Enable' : 'Disable' }}
   </button>
 </div>
-

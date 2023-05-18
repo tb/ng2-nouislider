@@ -8,9 +8,8 @@ describe('Ng2NouisliderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ Ng2NouisliderComponent ]
-    })
-    .compileComponents();
+      declarations: [Ng2NouisliderComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Ng2NouisliderComponent);
     component = fixture.componentInstance;

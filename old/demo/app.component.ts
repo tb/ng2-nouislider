@@ -7,21 +7,21 @@ import { NouiFormatter } from '../src/public_api';
 export class TimeFormatter implements NouiFormatter {
   to(value: number): string {
     let h = Math.floor(value / 3600);
-    let m = Math.floor(value % 3600 / 60);
+    let m = Math.floor((value % 3600) / 60);
     let s = value - 60 * m - 3600 * h;
     let values = [h, m, s];
     let timeString: string = '';
     values.forEach((_, i) => {
-      if(values[i] < 10) {
+      if (values[i] < 10) {
         timeString += '0';
       }
       timeString += values[i].toFixed(0);
-      if(i < 2) {
+      if (i < 2) {
         timeString += ':';
       }
     });
     return timeString;
-  };
+  }
 
   from(value: string): number {
     let v = value.split(':').map(parseInt);
@@ -35,7 +35,7 @@ export class TimeFormatter implements NouiFormatter {
 
 @Component({
   selector: 'app',
-  template: require('./app.component.html')
+  template: require('./app.component.html'),
 })
 export class AppComponent implements OnInit {
   public disabled: boolean = false;
@@ -57,12 +57,12 @@ export class AppComponent implements OnInit {
     limit: 5,
     range: {
       min: 0,
-      max: 20
+      max: 20,
     },
     pips: {
       mode: 'steps',
-      density: 5
-    }
+      density: 5,
+    },
   };
 
   public someKeyboard: number[] = [1, 3];
@@ -72,36 +72,36 @@ export class AppComponent implements OnInit {
     start: [0, 5],
     keyboard: true,
     step: 0.1,
-    pageSteps: 10,  // number of page steps, defaults to 10
+    pageSteps: 10, // number of page steps, defaults to 10
     range: {
       min: 0,
-      max: 5
+      max: 5,
     },
     pips: {
       mode: 'count',
       density: 2,
       values: 6,
-      stepped: true
-    }
+      stepped: true,
+    },
   };
 
   public someKeyboard2: number[] = [1, 3];
   public someKeyboardConfig2: any = {
-      behaviour: 'drag',
-      connect: true,
-      start: [0, 5],
-      step: 0.1,
-      range: {
-          min: 0,
-          max: 5
-      },
-      pips: {
-          mode: 'count',
-          density: 2,
-          values: 6,
-          stepped: true
-      },
-      keyboard: true,
+    behaviour: 'drag',
+    connect: true,
+    start: [0, 5],
+    step: 0.1,
+    range: {
+      min: 0,
+      max: 5,
+    },
+    pips: {
+      mode: 'count',
+      density: 2,
+      values: 6,
+      stepped: true,
+    },
+    keyboard: true,
   };
 
   public form1: FormGroup;
@@ -112,25 +112,23 @@ export class AppComponent implements OnInit {
     start: 86400 / 2,
     range: {
       min: 0,
-      max: 86399
+      max: 86399,
     },
     tooltips: new TimeFormatter(),
-    step: 1
+    step: 1,
   };
 
-  constructor (
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(private formBuilder: FormBuilder) {}
 
-  public ngOnInit () {
+  public ngOnInit() {
     this.someKeyboardConfig2.onKeydown = this.someKeyboard2EventHandler;
-    this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
-    this.form2 = this.formBuilder.group({ 'range': [ [ 2, 8 ] ] });
-    this.form3 = this.formBuilder.group({ 'single': [ 3 ] });
+    this.form1 = this.formBuilder.group({ single: [10] });
+    this.form2 = this.formBuilder.group({ range: [[2, 8]] });
+    this.form3 = this.formBuilder.group({ single: [3] });
   }
 
   public someKeyboard2EventHandler = (e: KeyboardEvent) => {
-    console.log("overridden keyboard handler");
+    console.log('overridden keyboard handler');
 
     // determine which handle triggered the event
     let index = parseInt((<HTMLElement>e.target).getAttribute('data-handle'));
@@ -138,15 +136,15 @@ export class AppComponent implements OnInit {
     let multiplier: number = 0;
     let stepSize = 0.1;
 
-    switch ( e.which ) {
-      case 40:  // ArrowDown
-      case 37:  // ArrowLeft
+    switch (e.which) {
+      case 40: // ArrowDown
+      case 37: // ArrowLeft
         multiplier = -2;
         e.preventDefault();
         break;
 
-      case 38:  // ArrowUp
-      case 39:  // ArrowRight
+      case 38: // ArrowUp
+      case 39: // ArrowRight
         multiplier = 3;
         e.preventDefault();
         break;

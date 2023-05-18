@@ -12,9 +12,7 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "ng2-nouislider": [
-        "projects/ng2-nouislider/src/public-api.ts"
-      ]
+      "ng2-nouislider": ["projects/ng2-nouislider/src/public-api.ts"]
     },
     "declaration": false,
     "downlevelIteration": true,
@@ -23,10 +21,7 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ]
+    "lib": ["es2020", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

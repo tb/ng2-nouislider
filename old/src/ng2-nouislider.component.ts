@@ -10,12 +10,12 @@ import {
   Output,
   Renderer2,
   NgZone,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
-  NG_VALUE_ACCESSOR
+  NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 
 export interface NouiFormatter {
@@ -27,7 +27,7 @@ export class DefaultFormatter implements NouiFormatter {
   to(value: number): string {
     // formatting with http://stackoverflow.com/a/26463364/478584
     return String(parseFloat(parseFloat(String(value)).toFixed(2)));
-  };
+  }
 
   from(value: string): number {
     return parseFloat(value);
@@ -37,26 +37,29 @@ export class DefaultFormatter implements NouiFormatter {
 @Component({
   selector: 'nouislider',
   host: {
-    '[class.ng2-nouislider]': 'true'
+    '[class.ng2-nouislider]': 'true',
   },
   template: '<div [attr.disabled]="disabled ? true : undefined"></div>',
-  styles: [`
-    :host {
-      display: block;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-    }
-  `],
+  styles: [
+    `
+      :host {
+        display: block;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+    `,
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => NouisliderComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
-export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
-
+export class NouisliderComponent
+  implements ControlValueAccessor, OnInit, OnChanges, OnDestroy
+{
   public slider: any;
   public handles: any[];
   @Input() public disabled: boolean; // tslint:disable-line
@@ -87,7 +90,11 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   private onChange: any = Function.prototype;
   private cleanups: VoidFunction[] = [];
 
-  constructor(private ngZone: NgZone, private el: ElementRef, private renderer : Renderer2) { }
+  constructor(
+    private ngZone: NgZone,
+    private el: ElementRef,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit(): void {
     let inputsConfig = JSON.parse(
@@ -95,19 +102,24 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
         behaviour: this.behaviour,
         connect: this.connect,
         limit: this.limit,
-        start: this.formControl !== undefined ? this.formControl.value : this.ngModel,
+        start:
+          this.formControl !== undefined
+            ? this.formControl.value
+            : this.ngModel,
         step: this.step,
         pageSteps: this.pageSteps,
         keyboard: this.keyboard,
         onKeydown: this.onKeydown,
-        range: this.range || this.config.range || { min: this.min, max: this.max },
+        range: this.range ||
+          this.config.range || { min: this.min, max: this.max },
         tooltips: this.tooltips,
         snap: this.snap,
         animate: this.animate,
-      }),
+      })
     );
     inputsConfig.tooltips = this.tooltips || this.config.tooltips;
-    inputsConfig.format = this.format || this.config.format || new DefaultFormatter();
+    inputsConfig.format =
+      this.format || this.config.format || new DefaultFormatter();
 
     this.ngZone.runOutsideAngular(() => {
       this.slider = noUiSlider.create(
@@ -116,7 +128,9 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
       );
     });
 
-    this.handles = [].slice.call(this.el.nativeElement.querySelectorAll('.noUi-handle'));
+    this.handles = [].slice.call(
+      this.el.nativeElement.querySelectorAll('.noUi-handle')
+    );
 
     if (this.config.keyboard) {
       if (this.config.pageSteps === undefined) {
@@ -133,63 +147,88 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
             this.renderer.listen(handle, 'keydown', onKeydown),
             this.renderer.listen(handle, 'click', () => {
               handle.focus();
-            }),
+            })
           );
         });
       }
     }
 
-    this.slider.on('set', (values: string[], handle: number, unencoded: number[]) => {
-      this.eventHandler(this.set, values, handle, unencoded);
-    });
-
-    this.slider.on('update', (values: string[], handle: number, unencoded: number[]) => {
-      if (this.update.observers.length > 0) {
-        this.ngZone.run(() => {
-          this.update.emit(this.toValues(values));
-        });
+    this.slider.on(
+      'set',
+      (values: string[], handle: number, unencoded: number[]) => {
+        this.eventHandler(this.set, values, handle, unencoded);
       }
-    });
+    );
 
-    this.slider.on('change', (values: string[], handle: number, unencoded: number[]) => {
-      if (this.change.observers.length > 0) {
-        this.ngZone.run(() => {
-          this.change.emit(this.toValues(values));
-        });
+    this.slider.on(
+      'update',
+      (values: string[], handle: number, unencoded: number[]) => {
+        if (this.update.observers.length > 0) {
+          this.ngZone.run(() => {
+            this.update.emit(this.toValues(values));
+          });
+        }
       }
-    });
+    );
 
-    this.slider.on('slide', (values: string[], handle: number, unencoded: number[]) => {
-      this.eventHandler(this.slide, values, handle, unencoded);
-    });
-
-    this.slider.on('start', (values: string[], handle: number, unencoded: number[]) => {
-      if (this.start.observers.length > 0) {
-        this.ngZone.run(() => {
-          this.start.emit(this.toValues(values));
-        });
+    this.slider.on(
+      'change',
+      (values: string[], handle: number, unencoded: number[]) => {
+        if (this.change.observers.length > 0) {
+          this.ngZone.run(() => {
+            this.change.emit(this.toValues(values));
+          });
+        }
       }
-    });
+    );
 
-    this.slider.on('end', (values: string[], handle: number, unencoded: number[]) => {
-      if (this.end.observers.length > 0) {
-        this.ngZone.run(() => {
-          this.end.emit(this.toValues(values));
-        });
+    this.slider.on(
+      'slide',
+      (values: string[], handle: number, unencoded: number[]) => {
+        this.eventHandler(this.slide, values, handle, unencoded);
       }
-    });
+    );
+
+    this.slider.on(
+      'start',
+      (values: string[], handle: number, unencoded: number[]) => {
+        if (this.start.observers.length > 0) {
+          this.ngZone.run(() => {
+            this.start.emit(this.toValues(values));
+          });
+        }
+      }
+    );
+
+    this.slider.on(
+      'end',
+      (values: string[], handle: number, unencoded: number[]) => {
+        if (this.end.observers.length > 0) {
+          this.ngZone.run(() => {
+            this.end.emit(this.toValues(values));
+          });
+        }
+      }
+    );
   }
 
   ngOnChanges(changes: any) {
-    if (this.slider && (changes.min || changes.max || changes.step || changes.range)) {
+    if (
+      this.slider &&
+      (changes.min || changes.max || changes.step || changes.range)
+    ) {
       this.ngZone.runOutsideAngular(() => {
         setTimeout(() => {
           this.slider.updateOptions({
-            range: Object.assign({}, {
-              min: this.min,
-              max: this.max
-            }, this.range || {}),
-            step: this.step
+            range: Object.assign(
+              {},
+              {
+                min: this.min,
+                max: this.max,
+              },
+              this.range || {}
+            ),
+            step: this.step,
           });
         });
       });
@@ -206,7 +245,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
 
   toValues(values: string[]): any | any[] {
     let v = values.map(this.config.format.from);
-    return (v.length == 1 ? v[0] : v);
+    return v.length == 1 ? v[0] : v;
   }
 
   writeValue(value: any): void {
@@ -227,24 +266,36 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
 
   setDisabledState(isDisabled: boolean): void {
     isDisabled
-      ? this.renderer.setAttribute(this.el.nativeElement.childNodes[0], 'disabled', 'true')
-      : this.renderer.removeAttribute(this.el.nativeElement.childNodes[0], 'disabled');
+      ? this.renderer.setAttribute(
+          this.el.nativeElement.childNodes[0],
+          'disabled',
+          'true'
+        )
+      : this.renderer.removeAttribute(
+          this.el.nativeElement.childNodes[0],
+          'disabled'
+        );
   }
 
-  private eventHandler = (emitter: EventEmitter<any>, values: string[], handle: number, unencoded: number[]) => {
+  private eventHandler = (
+    emitter: EventEmitter<any>,
+    values: string[],
+    handle: number,
+    unencoded: number[]
+  ) => {
     let v = this.toValues(values);
     let emitEvents = false;
-    if(this.value === undefined) {
+    if (this.value === undefined) {
       this.value = v;
       return;
     }
-    if(Array.isArray(v) && this.value[handle] != v[handle]) {
+    if (Array.isArray(v) && this.value[handle] != v[handle]) {
       emitEvents = true;
     }
-    if(!Array.isArray(v) && this.value != v) {
+    if (!Array.isArray(v) && this.value != v) {
       emitEvents = true;
     }
-    if(emitEvents) {
+    if (emitEvents) {
       this.ngZone.run(() => {
         if (emitter.observers.length > 0) {
           emitter.emit(v);
@@ -252,12 +303,12 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
         this.onChange(v);
       });
     }
-    if(Array.isArray(v)) {
+    if (Array.isArray(v)) {
       this.value[handle] = v[handle];
     } else {
       this.value = v;
     }
-  }
+  };
 
   private defaultKeyHandler = (e: KeyboardEvent) => {
     let stepSize: any[] = this.slider.steps();
@@ -267,20 +318,20 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     let step = 0;
     let delta = 0;
 
-    switch ( e.which ) {
-      case 34:  // PageDown
+    switch (e.which) {
+      case 34: // PageDown
         multiplier = this.config.pageSteps;
-      case 40:  // ArrowDown
-      case 37:  // ArrowLeft
+      case 40: // ArrowDown
+      case 37: // ArrowLeft
         sign = -1;
         step = stepSize[index][0];
         e.preventDefault();
         break;
 
-      case 33:  // PageUp
+      case 33: // PageUp
         multiplier = this.config.pageSteps;
-      case 38:  // ArrowUp
-      case 39:  // ArrowRight
+      case 38: // ArrowUp
+      case 39: // ArrowRight
         step = stepSize[index][1];
         e.preventDefault();
         break;
@@ -292,7 +343,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     delta = sign * multiplier * step;
     let newValue: number | number[];
 
-    if(Array.isArray(this.value)) {
+    if (Array.isArray(this.value)) {
       newValue = [].concat(this.value);
       newValue[index] = newValue[index] + delta;
     } else {
@@ -300,5 +351,5 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
     }
 
     this.slider.set(newValue);
-  }
+  };
 }
