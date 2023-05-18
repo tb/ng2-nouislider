@@ -96,6 +96,15 @@
             "styles": ["projects/demo/src/styles.scss"],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/demo/**/*.ts",
+              "projects/demo/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -126,6 +135,15 @@
             "main": "projects/ng2-nouislider/src/test.ts",
             "tsConfig": "projects/ng2-nouislider/tsconfig.spec.json",
             "karmaConfig": "projects/ng2-nouislider/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ng2-nouislider/**/*.ts",
+              "projects/ng2-nouislider/**/*.html"
+            ]
           }
         }
       }
