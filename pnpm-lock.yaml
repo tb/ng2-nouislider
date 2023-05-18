@@ -73,6 +73,9 @@ devDependencies:
   all-contributors-cli:
     specifier: ^4.4.0
     version: 4.4.0
+  angular-cli-ghpages:
+    specifier: 1.0.6
+    version: 1.0.6(@angular-devkit/architect@0.1402.11)(@angular-devkit/core@14.2.11)(@angular-devkit/schematics@14.2.11)
   eslint:
     specifier: ^8.28.0
     version: 8.40.0
@@ -4185,6 +4188,25 @@ packages:
       yargs: 4.8.1
     dev: true
 
+  /angular-cli-ghpages@1.0.6(@angular-devkit/architect@0.1402.11)(@angular-devkit/core@14.2.11)(@angular-devkit/schematics@14.2.11):
+    resolution:
+      {
+        integrity: sha512-CMX7Z9fTzW1MSO2ypJDKmxfenb5m56SzCSeGDdD4faiOU5tV6PoUaMhramIHK3WAJZBOb69kNBh8/ALWq/0ilA==,
+      }
+    hasBin: true
+    peerDependencies:
+      '@angular-devkit/architect': '>= 0.900 < 0.1600'
+      '@angular-devkit/core': ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+      '@angular-devkit/schematics': ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+    dependencies:
+      '@angular-devkit/architect': 0.1402.11
+      '@angular-devkit/core': 14.2.11
+      '@angular-devkit/schematics': 14.2.11
+      commander: 3.0.2
+      fs-extra: 9.1.0
+      gh-pages: 3.2.3
+    dev: true
+
   /ansi-colors@4.1.3:
     resolution:
       {
@@ -4372,12 +4394,30 @@ packages:
       }
     dev: true
 
+  /array-union@1.0.2:
+    resolution:
+      {
+        integrity: sha512-Dxr6QJj/RdU/hCaBjOfxW+q6lyuVE6JFWIrAUpuOOhoJJoQ99cUn3igRaHVB5P9WrgFVN0FfArM3x0cueOU8ng==,
+      }
+    engines: { node: '>=0.10.0' }
+    dependencies:
+      array-uniq: 1.0.3
+    dev: true
+
   /array-union@2.1.0:
     resolution:
       {
         integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==,
       }
     engines: { node: '>=8' }
+    dev: true
+
+  /array-uniq@1.0.3:
+    resolution:
+      {
+        integrity: sha512-MNha4BWQ6JbwhFhj03YK552f7cb3AzoE8SzeljgChvL1dl3IcvggXVz1DilzySZkCja+CXuZbdW7yATchWn8/Q==,
+      }
+    engines: { node: '>=0.10.0' }
     dev: true
 
   /arrify@1.0.1:
@@ -4427,6 +4467,14 @@ packages:
       {
         integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==,
       }
+    dev: true
+
+  /at-least-node@1.0.0:
+    resolution:
+      {
+        integrity: sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==,
+      }
+    engines: { node: '>= 4.0.0' }
     dev: true
 
   /atob@2.1.2:
@@ -5183,6 +5231,13 @@ packages:
     resolution:
       {
         integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==,
+      }
+    dev: true
+
+  /commander@3.0.2:
+    resolution:
+      {
+        integrity: sha512-Gar0ASD4BDyKC4hl4DwHqDrmvjoxWKZigVnAbn5H1owvm4CxCPdb0HQDehwNYMJpla5+M2tPmPARzhtYuwpHow==,
       }
     dev: true
 
@@ -6246,6 +6301,13 @@ packages:
     resolution:
       {
         integrity: sha512-Lsvf7cvwbIxCfB8VqbnVtEsjGi3+48ejDiQZfWo5gkT+1vQ2DHQI5pl0nUvPD6z1IQk6JgFeMC5ZQJqVhalEHg==,
+      }
+    dev: true
+
+  /email-addresses@3.1.0:
+    resolution:
+      {
+        integrity: sha512-k0/r7GrWVL32kZlGwfPNgB2Y/mMXVTq/decgLczm/j34whdaspNrZO8CnXPf1laaHxI6ptUlsnAxN+UAPw+fzg==,
       }
     dev: true
 
@@ -7409,6 +7471,26 @@ packages:
       flat-cache: 3.0.4
     dev: true
 
+  /filename-reserved-regex@2.0.0:
+    resolution:
+      {
+        integrity: sha512-lc1bnsSr4L4Bdif8Xb/qrtokGbq5zlsms/CYH8PP+WtCkGNF65DPiQY8vG3SakEdRn8Dlnm+gW/qWKKjS5sZzQ==,
+      }
+    engines: { node: '>=4' }
+    dev: true
+
+  /filenamify@4.3.0:
+    resolution:
+      {
+        integrity: sha512-hcFKyUG57yWGAzu1CMt/dPzYZuv+jAJUT85bL8mrXvNe6hWj6yEHEc4EdcgiA6Z3oi1/9wXJdZPXF2dZNgwgOg==,
+      }
+    engines: { node: '>=8' }
+    dependencies:
+      filename-reserved-regex: 2.0.0
+      strip-outer: 1.0.1
+      trim-repeated: 1.0.0
+    dev: true
+
   /fill-range@7.0.1:
     resolution:
       {
@@ -7626,6 +7708,19 @@ packages:
       universalify: 0.1.2
     dev: true
 
+  /fs-extra@9.1.0:
+    resolution:
+      {
+        integrity: sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==,
+      }
+    engines: { node: '>=10' }
+    dependencies:
+      at-least-node: 1.0.0
+      graceful-fs: 4.2.11
+      jsonfile: 6.1.0
+      universalify: 2.0.0
+    dev: true
+
   /fs-minipass@2.1.0:
     resolution:
       {
@@ -7774,6 +7869,23 @@ packages:
       }
     dependencies:
       assert-plus: 1.0.0
+    dev: true
+
+  /gh-pages@3.2.3:
+    resolution:
+      {
+        integrity: sha512-jA1PbapQ1jqzacECfjUaO9gV8uBgU6XNMV0oXLtfCX3haGLe5Atq8BxlrADhbD6/UdG9j6tZLWAkAybndOXTJg==,
+      }
+    engines: { node: '>=10' }
+    hasBin: true
+    dependencies:
+      async: 2.6.4
+      commander: 2.20.3
+      email-addresses: 3.1.0
+      filenamify: 4.3.0
+      find-cache-dir: 3.3.2
+      fs-extra: 8.1.0
+      globby: 6.1.0
     dev: true
 
   /git-raw-commits@2.0.11:
@@ -7947,6 +8059,20 @@ packages:
       ignore: 5.2.4
       merge2: 1.4.1
       slash: 4.0.0
+    dev: true
+
+  /globby@6.1.0:
+    resolution:
+      {
+        integrity: sha512-KVbFv2TQtbzCoxAnfD6JcHZTYCzyliEaaeM/gH8qQdkKr5s0OP9scEgvdcngyk7AVdY6YVW/TJHd+lQ/Df3Daw==,
+      }
+    engines: { node: '>=0.10.0' }
+    dependencies:
+      array-union: 1.0.2
+      glob: 7.2.3
+      object-assign: 4.1.1
+      pify: 2.3.0
+      pinkie-promise: 2.0.1
     dev: true
 
   /gopd@1.0.1:
@@ -13736,6 +13862,16 @@ packages:
     engines: { node: '>=8' }
     dev: true
 
+  /strip-outer@1.0.1:
+    resolution:
+      {
+        integrity: sha512-k55yxKHwaXnpYGsOzg4Vl8+tDrWylxDEpknGjhTiZB8dFRU5rTo9CAzeycivxV3s+zlTKwrs6WxMxR95n26kwg==,
+      }
+    engines: { node: '>=0.10.0' }
+    dependencies:
+      escape-string-regexp: 1.0.5
+    dev: true
+
   /stylus-loader@7.0.0(stylus@0.59.0)(webpack@5.76.1):
     resolution:
       {
@@ -14025,6 +14161,16 @@ packages:
         integrity: sha512-c1PTsA3tYrIsLGkJkzHF+w9F2EyxfXGo4UyJc4pFL++FMjnq0HJS69T3M7d//gKrFKwy429bouPescbjecU+Zw==,
       }
     engines: { node: '>=8' }
+    dev: true
+
+  /trim-repeated@1.0.0:
+    resolution:
+      {
+        integrity: sha512-pkonvlKk8/ZuR0D5tLW8ljt5I8kmxp2XKymhepUeOdCEfKpZaktSArkLHZt76OB1ZvO9bssUsDty4SWhLvZpLg==,
+      }
+    engines: { node: '>=0.10.0' }
+    dependencies:
+      escape-string-regexp: 1.0.5
     dev: true
 
   /ts-node@10.9.1(@types/node@20.2.1)(typescript@4.7.2):
