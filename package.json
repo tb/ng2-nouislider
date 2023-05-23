@@ -26,7 +26,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --browsers=ChromeHeadless",
+    "test": "ng test --browsers=ChromeHeadless ng2-nouislider",
     "contributors": "all-contributors generate",
     "prepare": "husky install",
     "lint": "ng lint",
