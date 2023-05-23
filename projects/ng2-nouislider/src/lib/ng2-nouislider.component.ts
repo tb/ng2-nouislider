@@ -58,7 +58,7 @@ export class DefaultFormatter implements NouiFormatter {
   ],
 })
 export class NouisliderComponent
-  implements ControlValueAccessor, OnInit, OnChanges, OnDestroy
+  implements ControlValueAccessor, OnChanges, OnDestroy
 {
   public slider: any;
   public handles: any[] = [];
@@ -75,10 +75,8 @@ export class NouisliderComponent
   @Input() public format!: NouiFormatter;
   @Input() public pageSteps!: number;
   @Input() public config: any = {};
-  @Input() public ngModel!: number | number[];
   @Input() public keyboard!: boolean;
   @Input() public onKeydown: any;
-  @Input() public formControl!: FormControl;
   @Input() public tooltips!: Array<any>;
   @Output() public change: EventEmitter<any> = new EventEmitter(true);
   @Output() public update: EventEmitter<any> = new EventEmitter(true);
@@ -96,16 +94,160 @@ export class NouisliderComponent
     private renderer: Renderer2
   ) {}
 
-  ngOnInit(): void {
+  ngOnChanges(changes: any) {
+    if (
+      this.slider &&
+      (changes.min || changes.max || changes.step || changes.range)
+    ) {
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          this.slider.updateOptions({
+            range: Object.assign(
+              {},
+              {
+                min: this.min,
+                max: this.max,
+              },
+              this.range || {}
+            ),
+            step: this.step,
+          });
+        });
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.slider.destroy();
+
+    while (this.cleanups.length) {
+      this.cleanups.pop()?.();
+    }
+  }
+
+  toValues(values: string[]): any | any[] {
+    let v = values.map(this.config.format.from);
+    return v.length == 1 ? v[0] : v;
+  }
+
+  writeValue(value: any): void {
+    if (this.slider) {
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          this.slider.set(value);
+        });
+      });
+    } else {
+      this.createSlider(value);
+    }
+  }
+
+  registerOnChange(fn: (value: any) => void) {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => {}): void {}
+
+  setDisabledState(isDisabled: boolean): void {
+    isDisabled
+      ? this.renderer.setAttribute(
+          this.el.nativeElement.childNodes[0],
+          'disabled',
+          'true'
+        )
+      : this.renderer.removeAttribute(
+          this.el.nativeElement.childNodes[0],
+          'disabled'
+        );
+  }
+
+  private eventHandler = (
+    emitter: EventEmitter<any>,
+    values: string[],
+    handle: number,
+    unencoded: number[]
+  ) => {
+    let v = this.toValues(values);
+    let emitEvents = false;
+    if (this.value === undefined) {
+      this.value = v;
+      return;
+    }
+    if (Array.isArray(v) && this.value[handle] != v[handle]) {
+      emitEvents = true;
+    }
+    if (!Array.isArray(v) && this.value != v) {
+      emitEvents = true;
+    }
+    if (emitEvents) {
+      this.ngZone.run(() => {
+        if (emitter.observers.length > 0) {
+          emitter.emit(v);
+        }
+        this.onChange(v);
+      });
+    }
+    if (Array.isArray(v)) {
+      this.value[handle] = v[handle];
+    } else {
+      this.value = v;
+    }
+  };
+
+  private defaultKeyHandler = (e: KeyboardEvent) => {
+    let stepSize: any[] = this.slider.steps();
+    let index = parseInt(
+      (e.target as HTMLElement).getAttribute('data-handle') as string
+    );
+    let sign = 1;
+    let multiplier: number = 1;
+    let step = 0;
+    let delta = 0;
+
+    switch (e.which) {
+      case 34: // PageDown
+        multiplier = this.config.pageSteps;
+        break;
+      case 40: // ArrowDown
+      case 37: // ArrowLeft
+        sign = -1;
+        step = stepSize[index][0];
+        e.preventDefault();
+        break;
+
+      case 33: // PageUp
+        multiplier = this.config.pageSteps;
+        break;
+      case 38: // ArrowUp
+      case 39: // ArrowRight
+        step = stepSize[index][1];
+        e.preventDefault();
+        break;
+
+      default:
+        break;
+    }
+
+    delta = sign * multiplier * step;
+    let newValue: number | number[];
+
+    if (Array.isArray(this.value)) {
+      newValue = [...this.value];
+      newValue[index] = newValue[index] + delta;
+    } else {
+      newValue = this.value + delta;
+    }
+
+    this.slider.set(newValue);
+  };
+
+  private createSlider(initialValue: any): void {
     let inputsConfig = JSON.parse(
       JSON.stringify({
         behaviour: this.behaviour,
         connect: this.connect,
         limit: this.limit,
-        start:
-          this.formControl !== undefined
-            ? this.formControl.value
-            : this.ngModel,
+        start: initialValue,
         step: this.step,
         pageSteps: this.pageSteps,
         keyboard: this.keyboard,
@@ -211,149 +353,4 @@ export class NouisliderComponent
       }
     );
   }
-
-  ngOnChanges(changes: any) {
-    if (
-      this.slider &&
-      (changes.min || changes.max || changes.step || changes.range)
-    ) {
-      this.ngZone.runOutsideAngular(() => {
-        setTimeout(() => {
-          this.slider.updateOptions({
-            range: Object.assign(
-              {},
-              {
-                min: this.min,
-                max: this.max,
-              },
-              this.range || {}
-            ),
-            step: this.step,
-          });
-        });
-      });
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.slider.destroy();
-
-    while (this.cleanups.length) {
-      this.cleanups.pop()?.();
-    }
-  }
-
-  toValues(values: string[]): any | any[] {
-    let v = values.map(this.config.format.from);
-    return v.length == 1 ? v[0] : v;
-  }
-
-  writeValue(value: any): void {
-    if (this.slider) {
-      this.ngZone.runOutsideAngular(() => {
-        setTimeout(() => {
-          this.slider.set(value);
-        });
-      });
-    }
-  }
-
-  registerOnChange(fn: (value: any) => void) {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => {}): void {}
-
-  setDisabledState(isDisabled: boolean): void {
-    isDisabled
-      ? this.renderer.setAttribute(
-          this.el.nativeElement.childNodes[0],
-          'disabled',
-          'true'
-        )
-      : this.renderer.removeAttribute(
-          this.el.nativeElement.childNodes[0],
-          'disabled'
-        );
-  }
-
-  private eventHandler = (
-    emitter: EventEmitter<any>,
-    values: string[],
-    handle: number,
-    unencoded: number[]
-  ) => {
-    let v = this.toValues(values);
-    let emitEvents = false;
-    if (this.value === undefined) {
-      this.value = v;
-      return;
-    }
-    if (Array.isArray(v) && this.value[handle] != v[handle]) {
-      emitEvents = true;
-    }
-    if (!Array.isArray(v) && this.value != v) {
-      emitEvents = true;
-    }
-    if (emitEvents) {
-      this.ngZone.run(() => {
-        if (emitter.observers.length > 0) {
-          emitter.emit(v);
-        }
-        this.onChange(v);
-      });
-    }
-    if (Array.isArray(v)) {
-      this.value[handle] = v[handle];
-    } else {
-      this.value = v;
-    }
-  };
-
-  private defaultKeyHandler = (e: KeyboardEvent) => {
-    let stepSize: any[] = this.slider.steps();
-    let index = parseInt(
-      (e.target as HTMLElement).getAttribute('data-handle') as string
-    );
-    let sign = 1;
-    let multiplier: number = 1;
-    let step = 0;
-    let delta = 0;
-
-    switch (e.which) {
-      case 34: // PageDown
-        multiplier = this.config.pageSteps;
-        break;
-      case 40: // ArrowDown
-      case 37: // ArrowLeft
-        sign = -1;
-        step = stepSize[index][0];
-        e.preventDefault();
-        break;
-
-      case 33: // PageUp
-        multiplier = this.config.pageSteps;
-        break;
-      case 38: // ArrowUp
-      case 39: // ArrowRight
-        step = stepSize[index][1];
-        e.preventDefault();
-        break;
-
-      default:
-        break;
-    }
-
-    delta = sign * multiplier * step;
-    let newValue: number | number[];
-
-    if (Array.isArray(this.value)) {
-      newValue = [...this.value];
-      newValue[index] = newValue[index] + delta;
-    } else {
-      newValue = this.value + delta;
-    }
-
-    this.slider.set(newValue);
-  };
 }

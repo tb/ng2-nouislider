@@ -32,7 +32,7 @@ export class TimeFormatter implements NouiFormatter {
 }
 
 @Component({
-  selector: 'app',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
