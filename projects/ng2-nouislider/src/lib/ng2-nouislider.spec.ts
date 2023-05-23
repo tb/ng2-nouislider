@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { Component, DebugElement } from '@angular/core';
@@ -13,12 +13,12 @@ import {
   DefaultFormatter,
   NouisliderModule,
   NouisliderComponent,
-} from '../src/public_api';
+} from '../public-api';
 
 describe('Default Formatter', () => {
   let formatter: DefaultFormatter;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     formatter = new DefaultFormatter();
   }));
 
@@ -41,7 +41,7 @@ describe('Default Formatter', () => {
 });
 
 describe('Nouislider Component', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NouisliderModule, ReactiveFormsModule],
       declarations: [
@@ -61,7 +61,7 @@ describe('Nouislider Component', () => {
     let sliderNativeElement: HTMLElement;
     let sliderInstance: NouisliderComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       fixture = TestBed.createComponent(TestSingleSliderComponent);
       componentInstance = fixture.debugElement.componentInstance;
       sliderDebugElement = fixture.debugElement.query(
@@ -155,7 +155,7 @@ describe('Nouislider Component', () => {
       ]);
     });
 
-    it('should trigger events on slider set', async(() => {
+    it('should trigger events on slider set', waitForAsync(() => {
       sliderInstance.slider.set('6');
       setTimeout(() => {
         expect(componentInstance.someValue).toEqual(6);
@@ -173,7 +173,7 @@ describe('Nouislider Component', () => {
     let sliderDebugElement: DebugElement;
     let sliderInstance: NouisliderComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       fixture = TestBed.createComponent(TestSingleFormSliderComponent);
       componentInstance = fixture.debugElement.componentInstance;
       sliderDebugElement = fixture.debugElement.query(
@@ -219,7 +219,7 @@ describe('Nouislider Component', () => {
       ).toBeTruthy();
     });
 
-    it('should change the form value on slider set', async(() => {
+    it('should change the form value on slider set', waitForAsync(() => {
       // Initial value
       expect(componentInstance.form.value).toEqual({ single: 8 });
 
@@ -236,7 +236,7 @@ describe('Nouislider Component', () => {
     let sliderNativeElement: HTMLElement;
     let sliderInstance: NouisliderComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       fixture = TestBed.createComponent(TestRangeSliderComponent);
       componentInstance = fixture.debugElement.componentInstance;
       sliderDebugElement = fixture.debugElement.query(
@@ -309,7 +309,7 @@ describe('Nouislider Component', () => {
       ]);
     });
 
-    it('should trigger events on slider set', async(() => {
+    it('should trigger events on slider set', waitForAsync(() => {
       sliderInstance.slider.set(['4', '7']);
       setTimeout(() => {
         expect(componentInstance.someRange).toEqual([4, 7]);
@@ -328,7 +328,7 @@ describe('Nouislider Component', () => {
     let sliderNativeElement: HTMLElement;
     let sliderInstance: NouisliderComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       fixture = TestBed.createComponent(
         TestRangeTooltipFormatterSliderComponent
       );
@@ -354,7 +354,7 @@ describe('Nouislider Component', () => {
     let sliderDebugElement: DebugElement;
     let sliderInstance: NouisliderComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       fixture = TestBed.createComponent(TestRangeFormSliderComponent);
       componentInstance = fixture.debugElement.componentInstance;
       sliderDebugElement = fixture.debugElement.query(
@@ -397,7 +397,7 @@ describe('Nouislider Component', () => {
       ).toBeTruthy();
     });
 
-    it('should change the form value on slider set', async(() => {
+    it('should change the form value on slider set', waitForAsync(() => {
       // Initial value
       expect(componentInstance.form.value).toEqual({ range: [2, 8] });
 
