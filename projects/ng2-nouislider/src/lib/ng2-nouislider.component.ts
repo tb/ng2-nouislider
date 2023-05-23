@@ -61,25 +61,25 @@ export class NouisliderComponent
   implements ControlValueAccessor, OnInit, OnChanges, OnDestroy
 {
   public slider: any;
-  public handles: any[];
-  @Input() public disabled: boolean; // tslint:disable-line
-  @Input() public behaviour: string;
-  @Input() public connect: boolean[];
-  @Input() public limit: number;
-  @Input() public min: number;
-  @Input() public max: number;
-  @Input() public snap: boolean;
-  @Input() public animate: boolean | boolean[];
-  @Input() public range: any;
-  @Input() public step: number;
-  @Input() public format: NouiFormatter;
-  @Input() public pageSteps: number;
+  public handles: any[] = [];
+  @Input() public disabled!: boolean;
+  @Input() public behaviour!: string;
+  @Input() public connect!: boolean[] | boolean;
+  @Input() public limit!: number;
+  @Input() public min!: number;
+  @Input() public max!: number;
+  @Input() public snap!: boolean;
+  @Input() public animate!: boolean | boolean[];
+  @Input() public range!: any;
+  @Input() public step!: number;
+  @Input() public format!: NouiFormatter;
+  @Input() public pageSteps!: number;
   @Input() public config: any = {};
-  @Input() public ngModel: number | number[];
-  @Input() public keyboard: boolean;
+  @Input() public ngModel!: number | number[];
+  @Input() public keyboard!: boolean;
   @Input() public onKeydown: any;
-  @Input() public formControl: FormControl;
-  @Input() public tooltips: Array<any>;
+  @Input() public formControl!: FormControl;
+  @Input() public tooltips!: Array<any>;
   @Output() public change: EventEmitter<any> = new EventEmitter(true);
   @Output() public update: EventEmitter<any> = new EventEmitter(true);
   @Output() public slide: EventEmitter<any> = new EventEmitter(true);
@@ -312,7 +312,9 @@ export class NouisliderComponent
 
   private defaultKeyHandler = (e: KeyboardEvent) => {
     let stepSize: any[] = this.slider.steps();
-    let index = parseInt((<HTMLElement>e.target).getAttribute('data-handle'));
+    let index = parseInt(
+      (e.target as HTMLElement).getAttribute('data-handle') as string
+    );
     let sign = 1;
     let multiplier: number = 1;
     let step = 0;
@@ -321,6 +323,7 @@ export class NouisliderComponent
     switch (e.which) {
       case 34: // PageDown
         multiplier = this.config.pageSteps;
+        break;
       case 40: // ArrowDown
       case 37: // ArrowLeft
         sign = -1;
@@ -330,6 +333,7 @@ export class NouisliderComponent
 
       case 33: // PageUp
         multiplier = this.config.pageSteps;
+        break;
       case 38: // ArrowUp
       case 39: // ArrowRight
         step = stepSize[index][1];
@@ -344,7 +348,7 @@ export class NouisliderComponent
     let newValue: number | number[];
 
     if (Array.isArray(this.value)) {
-      newValue = [].concat(this.value);
+      newValue = [...this.value];
       newValue[index] = newValue[index] + delta;
     } else {
       newValue = this.value + delta;

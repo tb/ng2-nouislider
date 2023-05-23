@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { NouiFormatter } from 'ng2-nouislider';
 
 export class TimeFormatter implements NouiFormatter {
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
   public someRange: number[] = [3, 7];
   public someRange2: number[] = [10, 15];
   public someRange3: number[] = [2, 8];
-  public simeTime: number = 0;
+  public someTime: number = 0;
   public someRange2config: any = {
     behaviour: 'drag',
     connect: true,
@@ -104,9 +104,9 @@ export class AppComponent implements OnInit {
     keyboard: true,
   };
 
-  public form1: FormGroup;
-  public form2: FormGroup;
-  public form3: FormGroup;
+  public form1 = this.formBuilder.group({ single: [10] });
+  public form2 = this.formBuilder.group({ range: [[2, 8]] });
+  public form3 = this.formBuilder.group({ single: [3] });
 
   public someTimeConfig: any = {
     start: 86400 / 2,
@@ -122,16 +122,15 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.someKeyboardConfig2.onKeydown = this.someKeyboard2EventHandler;
-    this.form1 = this.formBuilder.group({ single: [10] });
-    this.form2 = this.formBuilder.group({ range: [[2, 8]] });
-    this.form3 = this.formBuilder.group({ single: [3] });
   }
 
   public someKeyboard2EventHandler = (e: KeyboardEvent) => {
     console.log('overridden keyboard handler');
 
     // determine which handle triggered the event
-    let index = parseInt((<HTMLElement>e.target).getAttribute('data-handle'));
+    let index = parseInt(
+      (<HTMLElement>e.target).getAttribute('data-handle') as string
+    );
 
     let multiplier: number = 0;
     let stepSize = 0.1;
@@ -154,7 +153,7 @@ export class AppComponent implements OnInit {
     }
 
     let delta = multiplier * stepSize;
-    let newValue = [].concat(this.someKeyboard2);
+    let newValue = [...this.someKeyboard2];
     newValue[index] += delta;
     this.someKeyboard2 = newValue;
   };
