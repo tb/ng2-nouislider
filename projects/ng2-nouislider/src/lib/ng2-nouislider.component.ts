@@ -11,6 +11,7 @@ import {
   Renderer2,
   NgZone,
   OnDestroy,
+  SimpleChanges,
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -94,7 +95,7 @@ export class NouisliderComponent
     private renderer: Renderer2
   ) {}
 
-  ngOnChanges(changes: any) {
+  ngOnChanges(changes: SimpleChanges) {
     if (
       this.slider &&
       (changes.min || changes.max || changes.step || changes.range)
