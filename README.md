@@ -1,6 +1,6 @@
 # ng2-nouislider
 
-[![Build Status](https://travis-ci.org/tb/ng2-nouislider.svg?branch=master)](https://travis-ci.org/tb/ng2-nouislider)
+[![CI](https://github.com/tb/ng2-nouislider/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/tb/ng2-nouislider/actions/workflows/ci.yml)
 [![npm version](https://badge.fury.io/js/ng2-nouislider.svg)](http://badge.fury.io/js/ng2-nouislider)
 [![Downloads](http://img.shields.io/npm/dm/ng2-nouislider.svg)](https://npmjs.org/package/ng2-nouislider)
 [![All Contributors](https://img.shields.io/badge/all_contributors-18-orange.svg?style=flat-square)](#contributors)
