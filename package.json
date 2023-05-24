@@ -21,16 +21,29 @@
     "url": "https://github.com/tb/ng2-nouislider/issues"
   },
   "scripts": {
-    "ng": "ng",
-    "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html,component.html}\"",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test --browsers=ChromeHeadless ng2-nouislider",
-    "contributors": "all-contributors generate",
-    "prepare": "husky install",
+    "start": "concurrently --raw \"ng serve --open\" \"pnpm test:watch\"",
+    "build:demo": "ng build",
+    "build:lib": "copyfiles package.json projects/ng2-nouislider && ng build ng2-nouislider && pnpm copyfiles",
+    "build:clean": "del dist",
+    "copyfiles": "copyfiles CHANGELOG.md README.md LICENSE dist/ng2-nouislider",
+    "test": "pnpm lint && ng test ng2-nouislider --watch=false --code-coverage && pnpm build:lib && pnpm build:clean",
+    "test:watch": "ng test ng2-nouislider",
     "lint": "ng lint",
-    "test:ci": "ng lint && ng test --watch=false"
+    "commit": "git-cz",
+    "prerelease": "pnpm test",
+    "release:git": "standard-version && git push --follow-tags origin master",
+    "release:npm": "pnpm build:lib && pnpm publish dist/ng2-nouislider",
+    "release": "pnpm release:git && pnpm release:npm",
+    "postrelease": "pnpm gh-pages",
+    "gh-pages": "pnpm build:clean && pnpm build:demo && ng deploy && pnpm build:clean",
+    "prepare": "husky install",
+    "contributors": "all-contributors generate",
+    "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html,component.html}\""
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   },
   "peerDependencies": {
     "@angular/common": ">=14.x",
@@ -63,6 +76,11 @@
     "@typescript-eslint/parser": "5.43.0",
     "all-contributors-cli": "^4.4.0",
     "angular-cli-ghpages": "1.0.6",
+    "commitizen": "^4.3.0",
+    "concurrently": "^8.0.1",
+    "copyfiles": "^2.4.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "del-cli": "^5.0.0",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.0",
@@ -80,6 +98,7 @@
     "standard-version": "^9.5.0",
     "tslib": "^2.3.0",
     "typescript": "~4.7.2",
+    "validate-commit-msg": "^2.14.0",
     "zone.js": "~0.11.4"
   },
   "packageManager": "pnpm@8.5.1"
