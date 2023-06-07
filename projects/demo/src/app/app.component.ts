@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
   public someRange: number[] = [3, 7];
   public someRange2: number[] = [10, 15];
   public someRange3: number[] = [2, 8];
-  public someTime: number = 0;
+  public someTime: number = 86400 / 2;
   public someRange2config: any = {
     behaviour: 'drag',
     connect: true,
@@ -109,7 +109,6 @@ export class AppComponent implements OnInit {
   public form3 = this.formBuilder.group({ single: [3] });
 
   public someTimeConfig: any = {
-    start: 86400 / 2,
     range: {
       min: 0,
       max: 86399,
