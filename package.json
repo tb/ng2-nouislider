@@ -35,7 +35,7 @@
     "release:npm": "pnpm build:lib && pnpm publish dist/ng2-nouislider",
     "release": "pnpm release:git && pnpm release:npm",
     "postrelease": "pnpm gh-pages",
-    "gh-pages": "pnpm build:clean && pnpm build:demo && ng deploy && pnpm build:clean",
+    "gh-pages": "pnpm build:clean && pnpm build:demo && ng deploy demo && pnpm build:clean",
     "prepare": "husky install",
     "contributors": "all-contributors generate",
     "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html,component.html}\""
