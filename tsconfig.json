@@ -1,33 +1,32 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "declaration": true,
-    "emitDecoratorMetadata": true,
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "paths": {
+      "ng2-nouislider": ["projects/ng2-nouislider/src/public-api.ts"]
+    },
+    "declaration": false,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "module": "commonjs",
     "moduleResolution": "node",
-    "noImplicitAny": true,
-    "target": "es5",
-    "lib": [
-      "es2015",
-      "dom"
-    ],
-    "types": [
-      "jasmine",
-      "node"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "importHelpers": true,
+    "target": "es2020",
+    "module": "es2020",
+    "lib": ["es2020", "dom"]
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "files": [
-    "src/public_api.ts"
-  ],
   "angularCompilerOptions": {
-    "genDir": "compiled"
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "preserveWhitespaces": true
   }
 }

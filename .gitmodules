@@ -1,4 +1,0 @@
-[submodule "demo"]
-	path = demo
-	url = https://github.com/tb/ng2-nouislider.git
-	branch = gh-pages
