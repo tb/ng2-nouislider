@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "concurrently --raw \"ng serve --open\" \"pnpm test:watch\"",
-    "build:demo": "ng build",
+    "build:demo": "ng build demo",
     "build:lib": "copyfiles package.json projects/ng2-nouislider && ng build ng2-nouislider && pnpm copyfiles",
     "build:clean": "del dist",
     "copyfiles": "copyfiles CHANGELOG.md README.md LICENSE dist/ng2-nouislider",
