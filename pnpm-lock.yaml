@@ -76,6 +76,9 @@ devDependencies:
   angular-cli-ghpages:
     specifier: 1.0.6
     version: 1.0.6(@angular-devkit/architect@0.1502.8)(@angular-devkit/core@16.0.2)(@angular-devkit/schematics@16.0.2)
+  bootstrap-css-only:
+    specifier: ^3.3.7
+    version: 3.3.7
   commitizen:
     specifier: ^4.3.0
     version: 4.3.0
@@ -3724,6 +3727,10 @@ packages:
 
   /boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
+    dev: true
+
+  /bootstrap-css-only@3.3.7:
+    resolution: {integrity: sha512-H1tAsOoU8mW7h6ca4gM9yDNiXbcY7HYKiO8Yre2bsFS1haFnAZleWGuFnXxOMoerZRRJnRW+gzdJmtoK3PE9/Q==}
     dev: true
 
   /brace-expansion@1.1.11:

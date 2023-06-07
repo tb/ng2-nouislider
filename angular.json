@@ -27,7 +27,10 @@
               "projects/demo/src/favicon.ico",
               "projects/demo/src/assets"
             ],
-            "styles": ["projects/demo/src/styles.scss"],
+            "styles": [
+              "node_modules/bootstrap-css-only/css/bootstrap.css",
+              "projects/demo/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
