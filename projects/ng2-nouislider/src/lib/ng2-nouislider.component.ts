@@ -5,7 +5,6 @@ import {
   EventEmitter,
   forwardRef,
   Input,
-  OnInit,
   OnChanges,
   Output,
   Renderer2,
@@ -13,11 +12,7 @@ import {
   OnDestroy,
   SimpleChanges,
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export interface NouiFormatter {
   to(value: number): string;
