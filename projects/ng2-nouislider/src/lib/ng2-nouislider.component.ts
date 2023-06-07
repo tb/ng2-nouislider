@@ -52,6 +52,7 @@ export class DefaultFormatter implements NouiFormatter {
       multi: true,
     },
   ],
+  standalone: true,
 })
 export class NouisliderComponent
   implements ControlValueAccessor, OnChanges, OnDestroy
