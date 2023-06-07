@@ -3,6 +3,6 @@ import { NouisliderComponent } from './ng2-nouislider.component';
 
 @NgModule({
   exports: [NouisliderComponent],
-  declarations: [NouisliderComponent],
+  imports: [NouisliderComponent],
 })
 export class NouisliderModule {}
