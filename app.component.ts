@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import './app.component.scss';
 
-import { NouiFormatter } from '../src/nouislider';
+import { NouiFormatter } from '../src/public_api';
 
 export class TimeFormatter implements NouiFormatter {
   to(value: number): string {
@@ -102,11 +102,11 @@ export class AppComponent implements OnInit {
           stepped: true
       },
       keyboard: true,
-      onKeydown: this.someKeyboard2EventHandler,
   };
 
   public form1: FormGroup;
   public form2: FormGroup;
+  public form3: FormGroup;
 
   public someTimeConfig: any = {
     start: 86400 / 2,
@@ -123,8 +123,10 @@ export class AppComponent implements OnInit {
   ) {}
 
   public ngOnInit () {
+    this.someKeyboardConfig2.onKeydown = this.someKeyboard2EventHandler;
     this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
     this.form2 = this.formBuilder.group({ 'range': [ [ 2, 8 ] ] });
+    this.form3 = this.formBuilder.group({ 'single': [ 3 ] });
   }
 
   public someKeyboard2EventHandler = (e: KeyboardEvent) => {
@@ -209,5 +211,10 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       this.keydownLabelOn = false;
     }, 450);
+  }
+
+  toggleDisabled() {
+    const control = this.form3.controls.single;
+    control.enabled ? control.disable() : control.enable();
   }
 }
