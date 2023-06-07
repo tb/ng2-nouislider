@@ -19,7 +19,7 @@ See [demos](http://tb.github.io/ng2-nouislider/)
 
 ### Styles
 
-    @import "~nouislider/distribute/nouislider.min.css";
+    @import "nouislider/dist/nouislider.css";
 
 ## Usage
 
