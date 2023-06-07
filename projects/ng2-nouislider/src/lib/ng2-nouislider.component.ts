@@ -138,7 +138,8 @@ export class NouisliderComponent
           this.slider.set(value);
         });
       });
-    } else {
+    } else if (value !== null) {
+      this.value = value;
       this.createSlider(value);
     }
   }
