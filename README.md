@@ -1,15 +1,17 @@
 # ng2-nouislider
 
 [![CI](https://github.com/tb/ng2-nouislider/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/tb/ng2-nouislider/actions/workflows/ci.yml)
-[![npm version](https://badge.fury.io/js/ng2-nouislider.svg)](http://badge.fury.io/js/ng2-nouislider)
-[![Downloads](http://img.shields.io/npm/dm/ng2-nouislider.svg)](https://npmjs.org/package/ng2-nouislider)
+[![npm version](https://badge.fury.io/js/ng2-nouislider.svg)](https://badge.fury.io/js/ng2-nouislider)
+[![Downloads](https://img.shields.io/npm/dm/ng2-nouislider.svg)](https://npmjs.org/package/ng2-nouislider)
 [![All Contributors](https://img.shields.io/badge/all_contributors-18-orange.svg?style=flat-square)](#contributors)
 
 Angular2 nouislider component
 
-See [demos](http://tb.github.io/ng2-nouislider/)
+See [demos](https://tb.github.io/ng2-nouislider/)
 
 ## Install
+
+> Requires Angular 14 or higher
 
     npm i nouislider ng2-nouislider
 
@@ -48,7 +50,6 @@ This component is based on [nouislider](https://refreshless.com/nouislider/). Do
     corepack enable
     pnpm i
     pnpm start
-    open http://localhost:4200
 
 ## Contributors
 
